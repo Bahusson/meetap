@@ -3,7 +3,7 @@ from django.shortcuts import (render, get_object_or_404 as G404)
 from .models import (PageSkin as S, Blog as B, Info as In)
 from strona.models import Pageitem as P
 from meetap.settings import LANGUAGES as L
-from meetap.special.classes import (PageElement as pe, PageLoad, ActivePageItems)
+from meetap.core.classes import (PageElement as pe, PageLoad, ActivePageItems)
 import pytz
 import datetime
 

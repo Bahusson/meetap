@@ -30,30 +30,16 @@ class User(AbstractBaseUser, PermissionsMixin):
      (FEMALE, 'female'),
     )
     email = models.EmailField(_('email address'), unique=True)
-    first_name = models.CharField(_('first name'), max_length=30, blank=True)
-    last_name = models.CharField(_('last name'), max_length=30, blank=True)
+    nickname = models.CharField(_('last name'), max_length=30, blank=True)
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
     is_staff = models.BooleanField(_('staff status'), default=False,)
     is_active = models.BooleanField(_('active'), default=True)
-    is_translator = models.BooleanField(_('translator'), default=False)
-    is_hotel = models.BooleanField(_('hotel'), default=False)
     role_council = models.PositiveSmallIntegerField(
         choices=ROLE_CHOICES, null=True, blank=True, default=1)
     avatar = models.ImageField(upload_to='avatars', null=True, blank=True)
-    quarter = models.CharField(_('quarter'), max_length=2, blank=True)
     gender = models.PositiveSmallIntegerField(
         choices=GENDERS, null=True, blank=True)
-    citizenship = models.CharField(_('citizenship'), max_length=40, blank=True)
-    dowod = models.CharField(_('dowod'), max_length=20, blank=True)
-    passport = models.CharField(_('passport'), max_length=20, blank=True)
-    telephone = models.CharField(_('telephone'), max_length=20, blank=True)
-    street = models.CharField(_('street'), max_length=30, blank=True)
-    building_no = models.CharField(_('building_no'), max_length=15, blank=True)
-    local_no = models.CharField(_('local_no'), max_length=10, blank=True)
-    postcode = models.CharField(_('postcode'), max_length=7, blank=True)
-    city = models.CharField(_('city'), max_length=25, blank=True)
-    album = models.CharField(_('album'), max_length=25, blank=True)
-    language = models.CharField(_('album'), max_length=2, blank=True)
+    age = models.DateTimeField(blank=True, null=True)
 
     objects = UserManager()
 

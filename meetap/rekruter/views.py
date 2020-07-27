@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from .models import FormItems
 from strona.models import Pageitem as P
 from meetap.settings import LANGUAGES as L
-from meetap.special.classes import PageLoad
+from meetap.core.classes import PageLoad
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import ExtendedCreationForm
 

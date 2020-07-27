@@ -1,5 +1,5 @@
 from django.db import models
-from esks.settings import AUTH_USER_MODEL
+from meetap.settings import AUTH_USER_MODEL
 
 
 class Pageitem(models.Model):
@@ -70,3 +70,47 @@ class Info (models.Model):
 
     def pubdate_short(self):
         return self.pubdate.strftime('%a %d %b %Y')
+
+
+# Klasa skórek do naszej apki. Pola nienulowalne.
+class PageSkin(models.Model):
+    themetitle = models.CharField(max_length=200)
+    position = models.IntegerField()
+    blogimagedefault = models.ImageField(
+     upload_to='skins', blank=True, null=True)
+    infoimagedefault = models.ImageField(
+     upload_to='skins', blank=True, null=True)
+    fileimagedefault = models.ImageField(
+     upload_to='skins', blank=True, null=True)
+    infosideimage = models.ImageField(
+     upload_to='skins', blank=True, null=True)
+    filesideimage = models.ImageField(
+     upload_to='skins', blank=True, null=True)
+    welcomebanner = models.ImageField(
+     upload_to='skins', blank=True, null=True)
+    welcomebanner_small = models.ImageField(
+     upload_to='skins', blank=True, null=True)
+    eskslogo_main = models.ImageField(
+     upload_to='skins', blank=True, null=True)
+
+    class Meta:
+        ordering = ['position']
+
+    def __str__(self):
+        return self.themetitle
+
+
+# klasa tłumaczeniowa dla Blog, Info, Fileserve.
+class FormElement(models.Model):
+    title = models.CharField(max_length=200)
+    pubdate = models.CharField(max_length=200)
+    body = models.CharField(max_length=200)
+    image = models.CharField(max_length=200)
+    video = models.CharField(max_length=200)
+    lastmod = models.CharField(max_length=200)
+    by = models.CharField(max_length=200)
+    blog = models.CharField(max_length=200)
+    info = models.CharField(max_length=200)
+    file = models.CharField(max_length=200)
+    new = models.CharField(max_length=200)
+    change = models.CharField(max_length=200)
