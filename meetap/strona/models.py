@@ -28,33 +28,10 @@ class Pageitem(models.Model):
 # Aktualności widoczne na głównych kafelkach na stronie.
 class Blog(models.Model):
     title = models.CharField(max_length=200)
-    pubdate = models.DateTimeField(blank=True, null=True)  # Data widoczności w publikacji
+    pubdate = models.DateTimeField(blank=True, null=True)  # Data publikacji
     body = models.TextField()
     image = models.ImageField(upload_to='images', blank=True, null=True)
     video = models.CharField(max_length=500, blank=True, null=True)
-    lastmod = models.DateTimeField(blank=True, null=True)
-    owner = models.ForeignKey(
-     AUTH_USER_MODEL, on_delete=models.CASCADE)
-
-    class Meta:
-        ordering = ['-pubdate']
-
-    def __str__(self):
-        return self.title
-
-    def summary(self):
-        return self.body[:150]
-
-    def pubdate_short(self):
-        return self.pubdate.strftime('%a %d %b %Y')
-
-
-# Bardziej permanentne "ważne informacje" ze strony E-SKS.
-class Info (models.Model):
-    title = models.CharField(max_length=200)
-    pubdate = models.DateTimeField(blank=True, null=True)  # Data widoczności w publikacji
-    body = models.TextField()
-    image = models.ImageField(upload_to='images', blank=True, null=True)
     lastmod = models.DateTimeField(blank=True, null=True)
     owner = models.ForeignKey(
      AUTH_USER_MODEL, on_delete=models.CASCADE)

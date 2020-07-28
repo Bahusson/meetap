@@ -9,16 +9,18 @@ from meetap.settings import AUTH_USER_MODEL
 import uuid
 
 
-# Klasa zmienia autentykację Usera na email jak w Core2.
+# Klasa zmienia autentykację Usera na email
 class User(AbstractBaseUser, PermissionsMixin):
-    USER = 1
-    COUNCIL = 2
-    COUNCIL_ADMIN = 3
-    SUPERUSER = 4
+    MINOR = 1
+    ADULT = 2
+    ADULT_MEMBER = 3
+    ADULT_COUNCIL_MEMBER = 4
+    SUPERUSER = 5
     ROLE_CHOICES = (
-     (USER, 'User'),
-     (COUNCIL, 'Council'),
-     (COUNCIL_ADMIN, 'Council Admin'),
+     (MINOR, 'User minor'),
+     (ADULT, 'User Adult'),
+     (ADULT_MEMBER, 'User Adult Member'),
+     (ADULT_COUNCIL_MEMBER, 'User Adult Council Member'),
      (SUPERUSER, 'Superuser'),
     )
     OTHER = 0
@@ -40,6 +42,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     gender = models.PositiveSmallIntegerField(
         choices=GENDERS, null=True, blank=True)
     age = models.DateTimeField(blank=True, null=True)
+    mnemo_login = ""
 
     objects = UserManager()
 
