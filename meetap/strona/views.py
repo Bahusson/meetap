@@ -20,3 +20,31 @@ def home(request):
      skins=S, context=context)
     template = 'strona/home.html'
     return render(request, template, context_lazy)
+
+
+# Wszystkie aktualności.
+def allblogs(request):
+    # pe_b = pe(B)
+    api = ActivePageItems(request, B, pytz, datetime)
+    active_blogs = api.active_items
+    context = {
+     'blogs': active_blogs, }
+    pl = PageLoad(P, L)
+    context_lazy = pl.lazy_context(
+     skins=S, context=context)
+    template = 'strona/allblogs.html'
+    return render(request, template, context_lazy)
+
+
+# Pojedyńcze aktualności w zbliżeniu.
+def blog(request, blog_id):
+    pe_b = pe(B)
+    pe_b_id = pe_b.by_id(
+     G404=G404, id=blog_id)
+    context = {
+     'blog': pe_b_id, }
+    pl = PageLoad(P, L)
+    context_lazy = pl.lazy_context(
+     skins=S, context=context)
+    template = 'strona/blog.html'
+    return render(request, template, context_lazy)
