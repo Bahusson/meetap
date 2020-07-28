@@ -1,9 +1,11 @@
 from modeltranslation.translator import translator, TranslationOptions
 from strona.models import Pageitem, Blog
+from meetap.core.snippets import all_names
 
 
 class PageitemsTranslate(TranslationOptions):
-    fields = '__all__'
+    allfields = all_names(Pageitem)
+    fields = allfields
 
 
 translator.register(Pageitem, PageitemsTranslate)

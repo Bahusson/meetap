@@ -25,8 +25,8 @@ class Pageitem(models.Model):
     friends = models.CharField(max_length=200)
     rules = models.CharField(max_length=200)
 
-    def mainpage_c(self):
-        return self.mainpage.upper()
+    #def mainpage_c(self):
+    #    return self.mainpage.upper()
 
 
 # Aktualności widoczne na głównych kafelkach na stronie.

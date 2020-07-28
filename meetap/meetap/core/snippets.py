@@ -35,3 +35,13 @@ def gen_login():
 
     fulllogin = L1 + L2 + L3 + L4 + L5 + L6 + L7 + L8 + L9
     return fulllogin
+
+
+# Wyciąga naszy wszystkich atrybutów modelu i zamyka je w funkcji.
+def all_names(classname):
+    itemlist = []
+    for item in classname.__dict__:
+        itemlist.append(item)
+    itemlist2 = itemlist[5:-2]
+    itemtuple = tuple(itemlist2)
+    return itemtuple
