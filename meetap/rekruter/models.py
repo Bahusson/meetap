@@ -43,6 +43,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         choices=GENDERS, null=True, blank=True)
     age = models.DateTimeField(blank=True, null=True)
     mnemo_login = models.CharField(_('mnemo_login'), unique=True)
+    karma = models.IntegerField(default=0)
+    
 
     objects = UserManager()
 

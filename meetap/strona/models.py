@@ -17,9 +17,13 @@ class Pageitem(models.Model):
     panel_staff = models.CharField(max_length=200)
     backtouserpanel = models.CharField(max_length=200)
     see_more = models.CharField(max_length=200)
-    addblog = models.CharField(max_length=200)
-    addinfo = models.CharField(max_length=200)
     editme = models.CharField(max_length=200)
+    faq = models.CharField(max_length=200)
+    settings = models.CharField(max_length=200)
+    myprofile = models.CharField(max_length=200)
+    events = models.CharField(max_length=200)
+    friends = models.CharField(max_length=200)
+    rules = models.CharField(max_length=200)
 
     def mainpage_c(self):
         return self.mainpage.upper()
