@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+<title>Wszystkie aktualności - Roboczy</title>
+{% endblock %}
+
+ <!-- Nullifikator bocznego menu z base.html Nie ruszaj tego, jak i end-taga!-->
+{% block aside %}
+<!-- Null -->
+{% block body %}
+
+    <main role="main kol">
+      <div class="row kol">
+        <div class="container kol">
+        {% for blog in blogs %}
+          <hr class="featurette-divider">
+           <div class="row featurette kol">
+             <div class="col-md-5 kol">
+               {% if blog.image %}
+               <!-- Jeśli nie ma obrazka zwróć default ze skórki Usera -->
+               <a href="{% url 'blog' blog.id %}"><img class="img-fluid allimg" src="{{ blog.image.url }}" /></a>
+               {% else %}
+               <a href="{% url 'blog' blog.id %}"><img class="img-fluid allimg" src="{{ skin.blogimagedefault.url }}" /></a>
+               {% endif %}
+             </div>
+             <div class="col-md-7 kol">
+               <a href="{% url 'blog' blog.id %}"><h2 class="featurette-heading title">{{ blog.title }}</h2></a> <h5 class="text-muted">{{ blog.pubdate_short }}</h5>
+               <p class="lead">{{ blog.summary }}</p> <a href="{% url 'blog' blog.id %}">Czytaj dalej...-roboczy</a>
+             </div>
+           </div>
+        {% endfor %}
+        </div>
+      </div><!-- /.row -->
+    </main>
+    <!-- empty div -->
+      <div class="top-content">
+        <div class="container">
+      <div class="row">	<div class="col-sm-12 text wow fadeInLeft"></div></div>
+
+
+    </div>
+    </div>
+    <!-- end of empty div -->
+{% endblock %}
+{% endblock aside %}

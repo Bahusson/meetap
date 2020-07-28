@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+<title>{{ blog.title }}</title>
+{% endblock %}
+
+ <!-- Nullifikator bocznego menu z base.html Nie ruszaj tego, jak i end-taga!-->
+{% block aside %}
+<!-- Null -->
+{% block body %}
+<br>
+<br>
+<br>
+    <main role="main">
+      <div class="row">
+        <div class="col-md-7 blog-main">
+          <div class="container">
+            <h1 class="text-center pt-3 ">{{ blog.title }}</h1>
+            <h4 class="pt-2">{{ blog.pubdate_short }}</h4>
+            <hr />
+            {% if blog.video %}<!--jeśli jest link to go wyświetl -->
+                <br />
+                {% with blog as b %}
+                <iframe width="560" height="315" src="{{ b.video }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                {% endwith %}
+            {% endif %}
+            {% if blog.image %}<!--jeśli jest link to go wyświetl -->
+                <br/>
+                {% with blog as b %}
+                <img class="img-fluid" src="{{ b.image.url }}" width=50% height=auto />
+                {% endwith %}
+            {% endif %}
+            <br />
+            <br />
+            {{ blog.body|linebreaksbr }}
+          </div>
+        </div>
+      </div><!-- /.row -->
+
+    </main>
+    <!-- empty div -->
+      <div class="top-content">
+        <div class="container">
+      <div class="row">	<div class="col-sm-12 text wow fadeInLeft"></div></div>
+
+
+    </div>
+    </div>
+    <!-- end of empty div -->
+{% endblock %}
+{% endblock aside %}

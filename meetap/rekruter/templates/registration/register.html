@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  {% load staticfiles %}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>E-SKS - REGISTER</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Dodatkowy CSS idzie do podmianki jak ustalimy dokładnie co ma być w stylach
+    Ogólnie Bootstrap, ale inne kolorki itp...
+    <link href="{% static 'langcss.css' %}" rel="stylesheet">-->
+  </head>
+
+  <body>
+    <main role="main">
+      <section class="jumbotron text-center">
+        <div class="container">
+          <form method="post">
+            {% csrf_token %}
+
+            {% if form.errors %}
+            <p>Formularz zawiera błędy! Hasło nie może być zbyt proste.</p>
+            {% endif %}
+
+            <P>{{ item.nickname }} {{ form.nickname }}</p>
+            <p>{{ item.email }} {{ form.email }}</p>
+            <p>{{ item.password }} {{ form.password1 }}</p>
+            <p>{{ item.re_password }} {{ form.password2 }}</p>
+            <!--Weź zrób tak, żeby się nie dało zarejestrować jak masz poniżej 15 rż. -->
+            <p>{{ item.age }} {{ form.age }}</p>
+
+            <p>{{ item.gender }}  <select id="Genderselector">
+              <option value ="None" disabled>{{ item.list_select }}:</option>
+              <option value ="0">{{ item.other }}</option>
+              <option value ="1">{{ item.male }}</option>
+              <option value ="2">{{ item.female }}</option>
+            </select></p>
+
+            <p>{{ form.gender }}</p>
+            <input id="send" class="button" type="submit" value="{{ item.register }}">
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="text-muted">
+      <div class="container text-center">
+        <p>*docelowo będzie formularz logowania do Core2</p>
+        <p> &copy; Jakub Kozdrowicz {% now "Y" %}</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static "assets/js/jquery.js" %}"></script>
+  <!--  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!--My Javascript-->
+    <script src="{% static "genderchange.js" %}"></script>
+  <!--  <script src="{% static "langjs.js" %}"></script> -->
+  </body>
+</html>
