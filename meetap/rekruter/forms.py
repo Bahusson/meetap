@@ -1,6 +1,7 @@
 from django import forms
 from rekruter.models import User
 from django.contrib.auth.forms import UserCreationForm
+from meetap.core.snippets import gen_login
 from meetap.core.classes import checkifnull as cn
 import datetime
 
@@ -28,6 +29,7 @@ class ExtendedCreationForm(UserCreationForm):
         user.nickname = self.cleaned_data["nickname"]
         user.gender = int(self.cleaned_data["gender"])
         user.age = self.cleaned_data["age"]
+        user.mnemo_login = gen_login()
 
         if commit:
             user.save()

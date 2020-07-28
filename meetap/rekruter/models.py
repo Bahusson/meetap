@@ -42,7 +42,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     gender = models.PositiveSmallIntegerField(
         choices=GENDERS, null=True, blank=True)
     age = models.DateTimeField(blank=True, null=True)
-    mnemo_login = ""
+    mnemo_login = models.CharField(_('mnemo_login'), unique=True)
 
     objects = UserManager()
 
