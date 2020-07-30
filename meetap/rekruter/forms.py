@@ -7,7 +7,7 @@ import datetime
 
 
 class ExtendedCreationForm(UserCreationForm):
-    nickname = forms.CharField(max_length=30)
+    first_name = forms.CharField(max_length=30)
     email = forms.EmailField(max_length=75)
     gender = forms.CharField(widget=forms.HiddenInput(), required=False)
     age = forms.DateTimeField(input_formats=['%d.%m.%Y'])
@@ -18,7 +18,7 @@ class ExtendedCreationForm(UserCreationForm):
             'email',
             'password1',
             'password2',
-            'nickname',
+            'first_name',
             'gender',
             'age',
         )
@@ -26,7 +26,7 @@ class ExtendedCreationForm(UserCreationForm):
     def save(self, commit=True):
         user = super(ExtendedCreationForm, self).save(commit=False)
         user.email = self.cleaned_data["email"]
-        user.nickname = self.cleaned_data["nickname"]
+        user.first_name = self.cleaned_data["first_name"]
         user.gender = int(self.cleaned_data["gender"])
         user.age = self.cleaned_data["age"]
         user.mnemo_login = gen_login()

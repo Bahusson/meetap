@@ -27,6 +27,9 @@ class PageNames(models.Model):
     rules = models.CharField(max_length=200)
     register = models.CharField(max_length=50)
 
+    class Meta:
+        verbose_name_plural = 'PageNames'
+
     # def mainpage_c(self):
     #    return self.mainpage.upper()
     # Wycięte, bo by się zesrało z funkcją all_names w translatorze
@@ -63,19 +66,13 @@ class PageSkin(models.Model):
     position = models.IntegerField()
     blogimagedefault = models.ImageField(
      upload_to='skins', blank=True, null=True)
-    infoimagedefault = models.ImageField(
-     upload_to='skins', blank=True, null=True)
-    fileimagedefault = models.ImageField(
-     upload_to='skins', blank=True, null=True)
-    infosideimage = models.ImageField(
-     upload_to='skins', blank=True, null=True)
-    filesideimage = models.ImageField(
+    avatarimagedefault = models.ImageField(
      upload_to='skins', blank=True, null=True)
     welcomebanner = models.ImageField(
      upload_to='skins', blank=True, null=True)
     welcomebanner_small = models.ImageField(
      upload_to='skins', blank=True, null=True)
-    eskslogo_main = models.ImageField(
+    meetaplogo_main = models.ImageField(
      upload_to='skins', blank=True, null=True)
 
     class Meta:
@@ -98,6 +95,9 @@ class BlogNames(models.Model):
     new = models.CharField(max_length=200)
     change = models.CharField(max_length=200)
 
+    class Meta:
+        verbose_name_plural = 'BlogNames'
+
 
 # Klasa tłumaczeniowa dla Login/Register.
 class RegNames(models.Model):
@@ -111,3 +111,6 @@ class RegNames(models.Model):
     male = models.CharField(max_length=50)
     female = models.CharField(max_length=50)
     other = models.CharField(max_length=50)
+
+    class Meta:
+        verbose_name_plural = 'RegNames'

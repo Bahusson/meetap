@@ -32,7 +32,7 @@ class User(AbstractBaseUser, PermissionsMixin):
      (FEMALE, 'female'),
     )
     email = models.EmailField(_('email address'), unique=True)
-    nickname = models.CharField(_('last name'), max_length=30, blank=True)
+    first_name = models.CharField(_('first_name'), max_length=30, blank=True)
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
     is_staff = models.BooleanField(_('staff status'), default=False,)
     is_active = models.BooleanField(_('active'), default=True)
@@ -44,6 +44,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     age = models.DateTimeField(blank=True, null=True)
     mnemo_login = models.CharField(_('mnemo_login'), max_length=11, unique=True)
     karma = models.IntegerField(default=0)
+
 
 
     objects = UserManager()
