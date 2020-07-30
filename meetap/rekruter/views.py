@@ -31,8 +31,8 @@ def register(request):
     items1 = locations1[0]
     items = locations[0]
     context = {'form': form,
-               'item': items,
-               'item1': items1, }
+               'items': items1,
+               'item': items, }
     template = 'registration/register.html'
     return render(request, template, context)
 
@@ -57,7 +57,7 @@ def logger(request):
     template = 'registration/login.html'
     context = {'form': form,
                'item': items,
-               'item1': items1, }
+               'items': items1, }
     return render(request, template, context)
 
 # def unlogger(request):
