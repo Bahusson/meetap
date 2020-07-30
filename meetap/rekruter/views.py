@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 # from django.contrib import messages
-from strona.models import RegNames
-from strona.models import PageNames as P
+from strona.models import (PageNames as P, PageSkin as S, RegNames)
 from meetap.settings import LANGUAGES as L
 from meetap.core.classes import PageLoad
 from django.contrib.auth.forms import AuthenticationForm
@@ -27,14 +26,14 @@ def register(request):
     else:
         form = ExtendedCreationForm()
     locations = list(RegNames.objects.all())
-    locations1 = list(P.objects.all())
-    items1 = locations1[0]
-    items = locations[0]
+    item = locations[0]
     context = {'form': form,
-               'items': items1,
-               'item': items, }
+               'item': item, }
+    pl = PageLoad(P, L)
+    context_lazy = pl.lazy_context(
+     skins=S, context=context)
     template = 'registration/register.html'
-    return render(request, template, context)
+    return render(request, template, context_lazy)
 
 
 # Formularz logowania.
@@ -51,13 +50,13 @@ def logger(request):
     else:
         form = AuthenticationForm()
     locations = list(RegNames.objects.all())
-    items = locations[0]
-    locations1 = list(P.objects.all())
-    items1 = locations1[0]
-    template = 'registration/login.html'
+    item = locations[0]
     context = {'form': form,
-               'item': items,
-               'items': items1, }
-    return render(request, template, context)
+               'item': item, }
+    pl = PageLoad(P, L)
+    context_lazy = pl.lazy_context(
+     skins=S, context=context)
+    template = 'registration/login.html'
+    return render(request, template, context_lazy)
 
 # def unlogger(request):
