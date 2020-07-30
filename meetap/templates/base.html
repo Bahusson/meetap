@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-{% load staticfiles %}
+{% load static %}
 
 <head>
     <meta charset="utf-8">
@@ -35,7 +35,7 @@
 <body>
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="{% url 'home' %}"> <img src="https://images.tinypic.pl/i/00987/ife9ep2mrlac.png"></a>
+      <a class="navbar-brand" href="{% url 'home' %}"> <img src="{{ skin.meetaplogo_main.url }}"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -47,10 +47,10 @@
           </li>
           {% if user.role_council > 1 %}
           <!-- Warunkowy dostęp do panelu użytkownika lub admina -->
-            <li class="nav-item active"><a class="nav-link" href="{% url 'staffpanel_c' %}">{{ items.panel_council }}</a></li>
+            <li class="nav-item active"><a class="nav-link" href="">{{ items.panel_council }}</a></li>
           {% endif %}
           {% if user.is_authenticated %}
-            <li class="nav-item active"><a class="nav-link" href="{% url 'userpanel' %}">{{ items.panel_user }}</a></li>
+            <li class="nav-item active"><a class="nav-link" href="">{{ items.panel_user }}</a></li>
           {% endif %}
     <!-- Koniec warunkowania dostępu do panelu użytkownika lub admina -->
             <li class="nav-item active"><a class="nav-link" href="">{{ items.faq }}</a></li>
@@ -138,8 +138,8 @@
                 <!-- koniec pusty DIV -->
                 <div class="col-lg-3 col-xs-12 head-foot">
                   <br>
-                    <p class="head-foot"><a href="{% url 'rules' %}">{{ items.rules }}</a></p>
-                    <p class="head-foot"><a href="{% url 'home' %}">{{ items.mainpage_c }}</a></p>
+                    <p class="head-foot"><a href="">{{ items.rules }}</a></p>
+                    <p class="head-foot"><a href="{% url 'home' %}">{{ items.mainpage }}</a></p>
                 </div>
                 <div class="col-lg-4 col-xs-12 location head-foot2 nopadding">
                   <br>

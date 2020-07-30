@@ -8,7 +8,7 @@ jak się ustawi nowy język.*/
 
 function setCookie(cvalue)
 {
-  document.cookie = "esks_language = " + cvalue + ";domain=" + ";path=/";
+  document.cookie = "meetapp_language = " + cvalue + ";domain=" + ";path=/";
   location.reload();
 }
 

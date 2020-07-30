@@ -169,7 +169,7 @@ LANGUAGES = (
 LANGUAGE_COOKIE_AGE = 31449600  # Około rok ważności ciacha w sekundach.
 # Ustaw None jeśli chcesz, żeby się zerowały po każdym wyłączeniu przeglądarki.
 
-LANGUAGE_COOKIE_NAME = 'meetap_language'  # Nazwa ciacha językowego.
+LANGUAGE_COOKIE_NAME = 'meetapp_language'  # Nazwa ciacha językowego.
 
 LANGUAGE_COOKIE_PATH = '/'  # Domyślna ścieżka ciastków.
 
