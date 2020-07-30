@@ -1,14 +1,14 @@
 from modeltranslation.translator import translator, TranslationOptions
-from strona.models import Pageitem, Blog
+from strona.models import PageNames, Blog, BlogNames, RegNames
 from meetap.core.snippets import all_names
 
 
-class PageitemsTranslate(TranslationOptions):
-    allfields = all_names(Pageitem)
+class PageNamesTranslate(TranslationOptions):
+    allfields = all_names(PageNames)
     fields = allfields
 
 
-translator.register(Pageitem, PageitemsTranslate)
+translator.register(PageNames, PageNamesTranslate)
 
 
 class BlogsTranslate(TranslationOptions):
@@ -16,3 +16,19 @@ class BlogsTranslate(TranslationOptions):
 
 
 translator.register(Blog, BlogsTranslate)
+
+
+class BlogNamesTranslate(TranslationOptions):
+    allfields = all_names(BlogNames)
+    fields = allfields
+
+
+translator.register(BlogNames, BlogNamesTranslate)
+
+
+class RegNamesTranslate(TranslationOptions):
+    allfields = all_names(RegNames)
+    fields = allfields
+
+
+translator.register(RegNames, RegNamesTranslate)

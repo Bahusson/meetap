@@ -1,14 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 # from django.contrib import messages
-from .models import FormItems
-from strona.models import Pageitem as P
+from strona.models import RegNames
+from strona.models import PageNames as P
 from meetap.settings import LANGUAGES as L
 from meetap.core.classes import PageLoad
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import ExtendedCreationForm
 
 # TODO: Zrób tłumaczenia strony logowania/rejestracji.
+
 
 # Formularz rejestracji.
 def register(request):
@@ -25,7 +26,7 @@ def register(request):
             # Przekierowuje na stronę główną zalogowanego usera.
     else:
         form = ExtendedCreationForm()
-    locations = list(FormItems.objects.all())
+    locations = list(RegNames.objects.all())
     items = locations[0]
     context = {'form': form,
                'item': items, }
@@ -46,7 +47,7 @@ def logger(request):
 
     else:
         form = AuthenticationForm()
-    locations = list(FormItems.objects.all())
+    locations = list(RegNames.objects.all())
     items = locations[0]
     locations1 = list(P.objects.all())
     items1 = locations1[0]

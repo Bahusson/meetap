@@ -2,10 +2,11 @@ from django.contrib import admin
 
 
 # Register your models here.
-from .models import Pageitem, Blog, PageSkin, FormElement
+from .models import PageNames, Blog, PageSkin, BlogNames, RegNames
 
 
-admin.site.register(Pageitem)
+admin.site.register(PageNames)
 admin.site.register(Blog)
 admin.site.register(PageSkin)
-admin.site.register(FormElement)
+admin.site.register(BlogNames)
+admin.site.register(RegNames)

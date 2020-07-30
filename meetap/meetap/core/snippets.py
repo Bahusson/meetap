@@ -37,7 +37,8 @@ def gen_login():
     return fulllogin
 
 
-# Wyciąga naszy wszystkich atrybutów modelu i zamyka je w funkcji.
+# Wyciąga nazwy wszystkich atrybutów modelu
+# i zamyka je w tupli do użycia w translatorze.
 def all_names(classname):
     itemlist = []
     for item in classname.__dict__:

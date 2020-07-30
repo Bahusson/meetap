@@ -73,19 +73,3 @@ class User(AbstractBaseUser, PermissionsMixin):
         Sends an email to this User.
         '''
         send_mail(subject, message, from_email, [self.email], **kwargs)
-
-
-# Klasa zawierająca tłumaczenia podstawowych elementów formularzy.
-class FormItems(models.Model):
-    login = models.CharField(max_length=50, null=True)
-    password = models.CharField(max_length=50, null=True)
-    re_password = models.CharField(max_length=50, null=True)
-    name = models.CharField(max_length=50, null=True)
-    email = models.CharField(max_length=50, null=True)
-    register = models.CharField(max_length=50, null=True)
-    gender = models.CharField(max_length=50)
-    birthday = models.CharField(max_length=50)
-    agree_to_rules = models.CharField(max_length=50)
-    male = models.CharField(max_length=50)
-    female = models.CharField(max_length=50)
-    other = models.CharField(max_length=50)

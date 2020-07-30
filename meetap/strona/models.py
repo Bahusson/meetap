@@ -2,7 +2,8 @@ from django.db import models
 from meetap.settings import AUTH_USER_MODEL
 
 
-class Pageitem(models.Model):
+# Klasa tłumaczeniowa dla "core"
+class PageNames(models.Model):
     lang_flag = models.ImageField(upload_to='images')  # Mały obrazek języka
     headtitle = models.CharField(max_length=200)  # Nagłówek strony w tym j
     mainpage = models.CharField(max_length=200)  # Strona główna w tym języku
@@ -24,9 +25,12 @@ class Pageitem(models.Model):
     events = models.CharField(max_length=200)
     friends = models.CharField(max_length=200)
     rules = models.CharField(max_length=200)
+    register = models.CharField(max_length=50)
 
-    #def mainpage_c(self):
+    # def mainpage_c(self):
     #    return self.mainpage.upper()
+    # Wycięte, bo by się zesrało z funkcją all_names w translatorze
+    # Puszczaj takie rzeczy przez dodatkowe funkcje lub templatetagi.
 
 
 # Aktualności widoczne na głównych kafelkach na stronie.
@@ -81,8 +85,8 @@ class PageSkin(models.Model):
         return self.themetitle
 
 
-# klasa tłumaczeniowa dla Blog, Info, Fileserve.
-class FormElement(models.Model):
+# klasa tłumaczeniowa dla Bloga i forum Mecenasów
+class BlogNames(models.Model):
     title = models.CharField(max_length=200)
     pubdate = models.CharField(max_length=200)
     body = models.CharField(max_length=200)
@@ -91,7 +95,19 @@ class FormElement(models.Model):
     lastmod = models.CharField(max_length=200)
     by = models.CharField(max_length=200)
     blog = models.CharField(max_length=200)
-    info = models.CharField(max_length=200)
-    file = models.CharField(max_length=200)
     new = models.CharField(max_length=200)
     change = models.CharField(max_length=200)
+
+
+# Klasa tłumaczeniowa dla Login/Register.
+class RegNames(models.Model):
+    password = models.CharField(max_length=50, null=True)
+    re_password = models.CharField(max_length=50, null=True)
+    name = models.CharField(max_length=50, null=True)
+    email = models.CharField(max_length=50, null=True)
+    gender = models.CharField(max_length=50)
+    age = models.CharField(max_length=50)
+    agree_to_rules = models.CharField(max_length=50)
+    male = models.CharField(max_length=50)
+    female = models.CharField(max_length=50)
+    other = models.CharField(max_length=50)

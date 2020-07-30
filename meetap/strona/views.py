@@ -1,7 +1,7 @@
 from django.shortcuts import (render, get_object_or_404 as G404)
 # from rekruter.models import User
 from .models import (PageSkin as S, Blog as B)
-from strona.models import Pageitem as P
+from .models import PageNames as P
 from meetap.settings import LANGUAGES as L
 from meetap.core.classes import (PageElement as pe, PageLoad, ActivePageItems)
 import pytz
