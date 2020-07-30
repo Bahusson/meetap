@@ -31,9 +31,8 @@
 
             <input class="btn btn-primary my-2" type="submit" value="{{ item1.login }}">
             <input type="hidden" name="next" value="{{ next }}">
-            <a class="btn btn-secondary my-2" href="{% url 'home' %}">{{ item.back }}</a>
+            <a class="btn btn-secondary my-2" href="{% url 'register' %}">{{ item1.register }}</a>
           </form>
-          <p><a href="{% url 'register' %}">{{ item.register }}</a></p>
         </div>
       </section>
     </main>

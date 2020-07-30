@@ -27,9 +27,12 @@ def register(request):
     else:
         form = ExtendedCreationForm()
     locations = list(RegNames.objects.all())
+    locations1 = list(P.objects.all())
+    items1 = locations1[0]
     items = locations[0]
     context = {'form': form,
-               'item': items, }
+               'item': items,
+               'item1': items1, }
     template = 'registration/register.html'
     return render(request, template, context)
 

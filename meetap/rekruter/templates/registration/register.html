@@ -26,7 +26,7 @@
             <p>Formularz zawiera błędy! Hasło nie może być zbyt proste.</p>
             {% endif %}
 
-            <P>{{ item.nickname }} {{ form.nickname }}</p>
+            <P>{{ item.name }} {{ form.first_name }}</p>
             <p>{{ item.email }} {{ form.email }}</p>
             <p>{{ item.password }} {{ form.password1 }}</p>
             <p>{{ item.re_password }} {{ form.password2 }}</p>
@@ -41,7 +41,7 @@
             </select></p>
 
             <p>{{ form.gender }}</p>
-            <input id="send" class="button" type="submit" value="{{ item.register }}">
+            <input id="send" class="button" type="submit" value="{{ item1.register }}">
           </form>
         </div>
       </section>
