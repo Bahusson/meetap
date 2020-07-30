@@ -10,7 +10,7 @@ class ExtendedCreationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30)
     email = forms.EmailField(max_length=75)
     gender = forms.CharField(widget=forms.HiddenInput(), required=False)
-    age = forms.DateTimeField(input_formats=['%d.%m.%Y %H:%M:%S'])
+    age = forms.DateField(input_formats=['%d.%m.%Y'])
 
     class Meta:
         model = User
@@ -30,6 +30,7 @@ class ExtendedCreationForm(UserCreationForm):
         user.gender = int(self.cleaned_data["gender"])
         user.age = self.cleaned_data["age"]
         user.mnemo_login = gen_login()
+        user.date_joined = datetime.datetime.now()
 
         if commit:
             user.save()

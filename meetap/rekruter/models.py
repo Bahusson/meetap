@@ -33,7 +33,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(_('first_name'), max_length=30, blank=True)
-    date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
+    date_joined = models.DateTimeField(_('date joined'))
     is_staff = models.BooleanField(_('staff status'), default=False,)
     is_active = models.BooleanField(_('active'), default=True)
     role_council = models.PositiveSmallIntegerField(
@@ -41,7 +41,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     avatar = models.ImageField(upload_to='avatars', null=True, blank=True)
     gender = models.PositiveSmallIntegerField(
         choices=GENDERS, null=True, blank=True)
-    age = models.DateTimeField(blank=True, null=True)
+    age = models.DateField(blank=True, null=True)
     mnemo_login = models.CharField(_('mnemo_login'), max_length=11, unique=True)
     karma = models.IntegerField(default=0)
 
