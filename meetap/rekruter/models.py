@@ -65,7 +65,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(_('first_name'), max_length=30)
-    date_joined = models.DateTimeField(_('date joined'))
+    date_joined = models.DateTimeField(_('date joined'), null=True)
     is_staff = models.BooleanField(_('staff status'), default=False,)
     is_active = models.BooleanField(_('active'), default=True)
     role_council = models.PositiveSmallIntegerField(
@@ -73,18 +73,18 @@ class User(AbstractBaseUser, PermissionsMixin):
     avatar = models.ImageField(upload_to='avatars', null=True, blank=True)
     gender = models.PositiveSmallIntegerField(
         choices=GENDERS, null=True, blank=True)
-    age = models.DateField()
-    mnemo_login = models.CharField(_('mnemo_login'), max_length=11, unique=True, blank=True)
+    age = models.DateField(null=True)
+    mnemo_login = models.CharField(_('mnemo_login'), max_length=11, unique=True)
     karma = models.IntegerField(default=0)
-    sex_orientation = models.PositiveSmallIntegerField(
-        choices=SEX_CHOICES, null=True)
-    other_orientation = models.CharField(_('other_orientation'), max_length=30, blank=True)
+    sex_preference = models.PositiveSmallIntegerField(
+        choices=SEX_CHOICES, null=True, blank=True)
+    other_preference = models.CharField(_('other_preference'), max_length=30, blank=True)
     sex_role_activity = models.IntegerField(null=True, blank=True)  # 0-100
     sex_role_dominance = models.IntegerField(null=True, blank=True)  # 0-100
     alcohol = models.PositiveSmallIntegerField(
-        choices=ALCOHOL_CHOICES, null=True)
+        choices=ALCOHOL_CHOICES, null=True, blank=True)
     tobacco = models.PositiveSmallIntegerField(
-        choices=TOBACCO_CHOICES, null=True)
+        choices=TOBACCO_CHOICES, null=True, blank=True)
     # Inne używki - nie podlega wyszukiwaniu.
     other_drugs = models.CharField(_('other_drugs'), max_length=300, blank=True)
     # Numer telefonu. Opcjonalny
