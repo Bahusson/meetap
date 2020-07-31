@@ -75,12 +75,12 @@ class User(AbstractBaseUser, PermissionsMixin):
         choices=GENDERS, null=True, blank=True)
     age = models.DateField(null=True)
     mnemo_login = models.CharField(_('mnemo_login'), max_length=11, unique=True)
-    karma = models.IntegerField(default=0)
+    experience = models.IntegerField(default=0)  # na ile poszedł imprez
     sex_preference = models.PositiveSmallIntegerField(
         choices=SEX_CHOICES, null=True, blank=True)
     other_preference = models.CharField(_('other_preference'), max_length=30, blank=True)
-    sex_role_activity = models.IntegerField(null=True, blank=True)  # 0-100
-    sex_role_dominance = models.IntegerField(null=True, blank=True)  # 0-100
+    sex_role_activity = models.CharField(max_length=3, null=True, blank=True)  # 0-100
+    sex_role_dominance = models.CharField(max_length=3, null=True, blank=True)  # 0-100
     alcohol = models.PositiveSmallIntegerField(
         choices=ALCOHOL_CHOICES, null=True, blank=True)
     tobacco = models.PositiveSmallIntegerField(
@@ -120,6 +120,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     # location = Tutaj wstaw pole geolokalizacji. Do ogarnięcia.
     # search_radius = integer field? do powyższego. W km. Domyślne 5
+    # last_login = models.DateTimeField - od tego liczymy czas do skasowania konta.
 
     objects = UserManager()
 
@@ -129,19 +130,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')
-
-    def get_full_name(self):
-        '''
-        Returns the first_name plus the last_name, with a space in between.
-        '''
-        full_name = '%s %s' % (self.first_name, self.last_name)
-        return full_name.strip()
-
-    def get_short_name(self):
-        '''
-        Returns the short name for the user.
-        '''
-        return self.first_name
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         '''

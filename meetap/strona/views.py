@@ -1,9 +1,11 @@
-from django.shortcuts import (render, get_object_or_404 as G404)
+from django.shortcuts import (render, redirect, get_object_or_404 as G404)
 from rekruter.models import User
 from .models import (PageSkin as S, Blog as B)
 from .models import PageNames as P
+from .forms import ProfileForm
 from meetap.settings import LANGUAGES as L
-from meetap.core.classes import (PageElement as pe, PageLoad, ActivePageItems)
+from meetap.core.classes import (
+ PageElement as pe, PageLoad, ActivePageItems)
 import pytz
 import datetime
 
@@ -56,16 +58,16 @@ def myprofile(request):
     userdata = User.objects.get(
      id=request.user.id)
     if request.method == 'POST':
-        form = PartyForm(request.POST)
+        form = ProfileForm(request.POST)
         if form.is_valid():
             form.save(userdata)
-            return redirect('staffpanel_c')
+            return redirect('myprofile')
     else:
-        form = PartyForm()
+        form = ProfileForm()
         context = {
          'udata': userdata,
          }
-        pl = PortalLoad(P, L, Pbi, 1, Cmi, Cli, )
+        pl = PageLoad(P, L)
         context_lazy = pl.lazy_context(skins=S, context=context)
-        template = 'forms/partymaker.html'
+        template = 'forms/myprofile.html'
         return render(request, template, context_lazy)
