@@ -1,6 +1,6 @@
 from django import forms
 from rekruter.models import User
-#import datetime
+# import datetime
 
 
 # Zmienia ustawienia profilu użytkownika.
@@ -45,7 +45,29 @@ class ProfileForm(forms.ModelForm):
         user = super(ProfileForm, self).save(commit=False)
         user.first_name = self.cleaned_data["first_name"]
         user.avatar = self.cleaned_data["avatar"]
-        
+        user.gender = self.cleaned_data["gender"]
+        user.age = self.cleaned_data["age"]
+        user.sex_preference = self.cleaned_data['sex_preference']
+        user.sex_role_activity = self.cleaned_data['sex_role_activity']
+        user.sex_role_dominance = self.cleaned_data['sex_role_dominance']
+        user.alcohol = self.cleaned_data['alcohol']
+        user.tobacco = self.cleaned_data['tobacco']
+        user.other_drugs = self.cleaned_data['other_drugs']
+        user.telephone = self.cleaned_data['telephone']
+        user.other_contact = self.cleaned_data['other_contact']
+        user.about_me = self.cleaned_data['about_me']
+        user.interests = self.cleaned_data['interests']
+        user.showme_adultcontent = self.cleaned_data['showme_adultcontent']
+        user.showmy_sexorientation = self.cleaned_data['showmy_sexorientation']
+        user.showmy_sexrole = self.cleaned_data['showmy_sexrole']
+        user.showme_commercial = self.cleaned_data['showme_commercial']
+        user.showme_massevents = self.cleaned_data['showme_massevents']
+        user.sendme_inv_status_me = self.cleaned_data['sendme_inv_status_me']
+        user.sendme_inv_status_others = self.cleaned_data['sendme_inv_status_others']
+        user.sendme_invitations = self.cleaned_data['sendme_invitations']
+        user.sendme_friend_events = self.cleaned_data['sendme_friend_events']
+        user.sendme_join_request = self.cleaned_data['sendme_join_request']
+
         if commit:
             user.save()
         return user
