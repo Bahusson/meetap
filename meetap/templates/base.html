@@ -55,7 +55,6 @@
     <!-- Koniec warunkowania dostępu do panelu użytkownika lub admina -->
             <li class="nav-item active"><a class="nav-link" href="">{{ items.faq }}</a></li>
           {% if user.is_authenticated %}
-            <li class="nav-item active"><a class="nav-link" href="">{{ items.settings }}</a></li>
             <li class="nav-item active"><a class="nav-link" href="">{{ items.myprofile }}</a></li>
             <li class="nav-item active"><a class="nav-link" href="">{{ items.events }}</a></li>
             <li class="nav-item active"><a class="nav-link" href="">{{ items.friends }}</a></li>
