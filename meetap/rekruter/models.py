@@ -70,7 +70,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(_('active'), default=True)
     role_council = models.PositiveSmallIntegerField(
         choices=ROLE_CHOICES, default=1)
-    avatar = models.ImageField(upload_to='avatars', null=True, blank=True)
+    avatar1 = models.ImageField(upload_to='avatars', null=True, blank=True)
     gender = models.PositiveSmallIntegerField(
         choices=GENDERS, null=True, blank=True)
     age = models.DateField(null=True)
@@ -115,6 +115,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     sendme_friend_events = models.BooleanField(_('sendme_invitations'), default=True,)
     # Wysyłaj mi informację o tym, że ktoś poprosił o dołączenie do mojego wyd.
     sendme_join_request = models.BooleanField(_('sendme_invitations'), default=True,)
+    avatar2 = models.ImageField(upload_to='avatars', null=True, blank=True)
+    avatar3 = models.ImageField(upload_to='avatars', null=True, blank=True)
 
 
 

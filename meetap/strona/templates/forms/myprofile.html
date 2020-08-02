@@ -11,6 +11,12 @@
 <!-- Null -->
 {% block body %}
 
+<div class="card cardio">
+<div class="maintitle">{{ profileitem.profile_settings }}</div>
+<div class="card-body">
+<p class ="userdata"><b class="bolder">{{ regitem.name }}: </b> <b class="bolder2"> {{ form.first_name }} </b>
+<p class ="userdata"><b class="bolder">{{ profileitem.avatar }}:  </b><b class="bolder2"> {{ form.avatar1 }}  </b>
+</div>
 
 {% endblock body %}
 

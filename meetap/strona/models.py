@@ -148,6 +148,7 @@ class ProfileNames(models.Model):
     contact_settings = models.CharField(max_length=50, null=True)
     adult_settings = models.CharField(max_length=50, null=True)
     mailing_settings = models.CharField(max_length=50, null=True)
+    avatar = models.CharField(max_length=50, null=True)
 
     class Meta:
         verbose_name_plural = 'ProfileNames'

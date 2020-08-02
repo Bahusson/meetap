@@ -6,7 +6,9 @@ from rekruter.models import User
 # Zmienia ustawienia profilu użytkownika.
 class ProfileForm(forms.ModelForm):
     first_name = forms.CharField(max_length=30)
-    avatar = forms.ImageField(required=False)
+    avatar1 = forms.ImageField(required=False)
+    avatar2 = forms.ImageField(required=False)
+    avatar3 = forms.ImageField(required=False)
     gender = forms.CharField(widget=forms.HiddenInput(), required=False)
     age = forms.DateField(input_formats=['%d.%m.%Y'])
     sex_preference = forms.CharField(widget=forms.HiddenInput(), required=False)
@@ -33,18 +35,21 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = User
         fields = (
-         'first_name', 'avatar', 'gender', 'age', 'sex_preference',
-         'sex_role_activity', 'sex_role_dominance', 'alcohol', 'tobacco',
-         'other_drugs', 'about_me', 'interests', 'showme_adultcontent',
-         'showmy_sexorientation', 'showmy_sexrole', 'showme_commercial',
-         'showme_massevents', 'sendme_inv_status_me', 'sendme_inv_status_others',
-         'sendme_invitations', 'sendme_friend_events', 'sendme_join_request'
+         'first_name', 'avatar1', 'avatar2', 'avatar3', 'gender', 'age',
+         'sex_preference', 'sex_role_activity', 'sex_role_dominance',
+         'alcohol', 'tobacco', 'other_drugs', 'about_me', 'interests',
+         'showme_adultcontent', 'showmy_sexorientation', 'showmy_sexrole',
+         'showme_commercial', 'showme_massevents', 'sendme_inv_status_me',
+         'sendme_inv_status_others', 'sendme_invitations',
+         'sendme_friend_events', 'sendme_join_request'
          )
 
     def save(self, commit=True):
         user = super(ProfileForm, self).save(commit=False)
         user.first_name = self.cleaned_data["first_name"]
-        user.avatar = self.cleaned_data["avatar"]
+        user.avatar1 = self.cleaned_data["avatar1"]
+        user.avatar2 = self.cleaned_data["avatar1"]
+        user.avatar3 = self.cleaned_data["avatar1"]
         user.gender = self.cleaned_data["gender"]
         user.age = self.cleaned_data["age"]
         user.sex_preference = self.cleaned_data['sex_preference']
