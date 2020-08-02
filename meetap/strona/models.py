@@ -99,7 +99,7 @@ class BlogNames(models.Model):
         verbose_name_plural = 'BlogNames'
 
 
-# Klasa tłumaczeniowa dla Login/Register.
+# Klasa tłumaczeniowa dla Login/Register i myprofile.
 class RegNames(models.Model):
     password = models.CharField(max_length=50, null=True)
     re_password = models.CharField(max_length=50, null=True)
@@ -114,3 +114,40 @@ class RegNames(models.Model):
 
     class Meta:
         verbose_name_plural = 'RegNames'
+
+
+# Klasa tłumaczeniowa dla myprofile.
+class ProfileNames(models.Model):
+    sex_preference = models.CharField(max_length=50, null=True)
+    sex_role_activity = models.CharField(max_length=50, null=True)
+    sex_role_dominance = models.CharField(max_length=50, null=True)
+    alcohol = models.CharField(max_length=50, null=True)
+    tobacco = models.CharField(max_length=50, null=True)
+    other_drugs = models.CharField(max_length=50, null=True)
+    telephone = models.CharField(max_length=50, null=True)
+    other_contact = models.CharField(max_length=50, null=True)
+    about_me = models.CharField(max_length=50, null=True)
+    interests = models.CharField(max_length=50, null=True)
+    showme_adultcontent = models.CharField(max_length=50, null=True)
+    showmy_sexorientation = models.CharField(max_length=50, null=True)
+    showmy_sexrole = models.CharField(max_length=50, null=True)
+    showme_commercial = models.CharField(max_length=50, null=True)
+    showme_massevents = models.CharField(max_length=50, null=True)
+    sendme_inv_status_me = models.CharField(max_length=150, null=True)
+    sendme_inv_status_others = models.CharField(max_length=150, null=True)
+    sendme_invitations = models.CharField(max_length=150, null=True)
+    sendme_friend_events = models.CharField(max_length=150, null=True)
+    sendme_join_request = models.CharField(max_length=150, null=True)
+    active = models.CharField(max_length=50, null=True)
+    passive = models.CharField(max_length=50, null=True)
+    neutral = models.CharField(max_length=50, null=True)
+    dominant = models.CharField(max_length=50, null=True)
+    submissive = models.CharField(max_length=50, null=True)
+    profile_settings = models.CharField(max_length=50, null=True)
+    general_settings = models.CharField(max_length=50, null=True)
+    contact_settings = models.CharField(max_length=50, null=True)
+    adult_settings = models.CharField(max_length=50, null=True)
+    mailing_settings = models.CharField(max_length=50, null=True)
+
+    class Meta:
+        verbose_name_plural = 'ProfileNames'

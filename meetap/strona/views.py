@@ -66,6 +66,7 @@ def myprofile(request):
         form = ProfileForm()
         context = {
          'udata': userdata,
+         'form': form,
          }
         pl = PageLoad(P, L)
         context_lazy = pl.lazy_context(skins=S, context=context)

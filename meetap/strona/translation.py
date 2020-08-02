@@ -1,5 +1,5 @@
 from modeltranslation.translator import translator, TranslationOptions
-from strona.models import PageNames, Blog, BlogNames, RegNames
+from strona.models import PageNames, Blog, BlogNames, RegNames, ProfileNames
 from meetap.core.snippets import all_names
 
 
@@ -32,3 +32,11 @@ class RegNamesTranslate(TranslationOptions):
 
 
 translator.register(RegNames, RegNamesTranslate)
+
+
+class ProfileNamesTranslate(TranslationOptions):
+    allfields = all_names(ProfileNames)
+    fields = allfields
+
+
+translator.register(ProfileNames, ProfileNamesTranslate)
