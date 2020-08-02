@@ -58,12 +58,12 @@ def myprofile(request):
     userdata = User.objects.get(
      id=request.user.id)
     if request.method == 'POST':
-        form = ProfileForm(request.POST)
+        form = ProfileForm(request.POST, instance=userdata)
         if form.is_valid():
-            form.save(userdata)
+            form.save()
             return redirect('myprofile')
     else:
-        form = ProfileForm()
+        form = ProfileForm(instance=userdata)
         context = {
          'udata': userdata,
          'form': form,
