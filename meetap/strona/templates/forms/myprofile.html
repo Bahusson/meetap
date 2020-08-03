@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+-+**--*--//{% extends 'base.html' %}
 
 {% block title %}
 <title>Ustawienia i edycja profilu</title>
@@ -14,21 +14,32 @@
 <div class="card cardio">
 <div class="maintitle">{{ profileitem.profile_settings }}</div>
 <div class="card-body">
-<p class ="userdata"><b class="bolder">{{ profileitem.mnemo_login }}: </b> <span title="{{ profileitem.mnemo_explanation }}"><b class="bolder2">{{ udata.mnemo_login }}</b></span>
-<p class ="userdata"><b class="bolder">{{ regitem.name }}: </b> <b class="bolder2"> {{ form.first_name }} </b>
-<p class ="userdata"><b class="bolder">{{ profileitem.avatar }}:  </b><b class="bolder2"> {{ form.avatar1 }}  </b>
+<p class="maintitle">{{ profileitem.general_settings }}</p>
+<p class ="userdata"><span title="{{ profileitem.mnemo_explanation }}"><b class="bolder">{{ profileitem.mnemo_login }}: </b> <b class="bolder2">{{ udata.mnemo_login }}</b></span></p>
+<p class ="userdata"><b class="bolder">{{ regitem.name }}: </b> <b class="bolder2"> {{ form.first_name }} </b></p>
+<p class ="userdata"><b class="bolder">{{ profileitem.avatar }}:  </b><b class="bolder2"> {{ form.avatar1 }}  </b></p>
 {% if user.role_council > 3 %}
  <!-- Dodatkowe dwa awatary dla patronów -->
- <p class ="userdata"><b class="bolder">{{ profileitem.avatar }} #2:  </b><b class="bolder2"> {{ form.avatar2 }}  </b>
- <p class ="userdata"><b class="bolder">{{ profileitem.avatar }} #3:  </b><b class="bolder2"> {{ form.avatar3 }}  </b>
+ <p class ="userdata"><b class="bolder">{{ profileitem.avatar }} #2:  </b><b class="bolder2"> {{ form.avatar2 }}  </b></p>
+ <p class ="userdata"><b class="bolder">{{ profileitem.avatar }} #3:  </b><b class="bolder2"> {{ form.avatar3 }}  </b></p>
 {% endif %}
 <p class ="userdata"><b class="bolder">{{ regitem.gender }}:  <select id="Genderselector">
   <option {% if user.gender == 0 %} selected="selected" {% endif %} value ="0">{{ regitem.other }}</option>
   <option {% if user.gender == 1 %} selected="selected" {% endif %} value ="1">{{ regitem.male }}</option>
   <option {% if user.gender == 2 %} selected="selected" {% endif %} value ="2">{{ regitem.female }}</option>
 </select></p>
-<p class ="userdata"><b class="bolder">{{ regitem.age }}: </b> <b class="bolder2"> {{ form.age }} </b>
+<p class ="userdata"><span title="{{ profileitem.age_explanation }}"><b class="bolder">{{ regitem.age }}: </b> <b class="bolder2"> {{ form.age }} </b></span></p>
+<p class ="userdata"><span title="{{ profileitem.contact_explanation }}"><b class="bolder">{{ profileitem.telephone }}: </b><b class="bolder2"> {{ form.telephone }}</b></span></p>
+<p class ="userdata"><span title="{{ profileitem.contact_explanation }}"><b class="bolder">{{ profileitem.other_contact }}: </b><b class="bolder2"> {{ form.other_contact }}</b></span></p>
 
+
+{% if user.is_adult %}
+ <p class ="userdata"><b class="bolder">{{ profileitem.showme_adultcontent }}:  </b><b class="bolder2"> {{ form.showme_adultcontent }}  </b></p>
+{% if user.showme_adultcontent %}
+
+
+{% endif %}
+{% endif %}
 
 </div>
 

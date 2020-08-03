@@ -41,7 +41,8 @@ class ProfileForm(forms.ModelForm):
          'showme_adultcontent', 'showmy_sexorientation', 'showmy_sexrole',
          'showme_commercial', 'showme_massevents', 'sendme_inv_status_me',
          'sendme_inv_status_others', 'sendme_invitations',
-         'sendme_friend_events', 'sendme_join_request'
+         'sendme_friend_events', 'sendme_join_request', 'telephone',
+         'other_contact',
          )
 
     def save(self, commit=True):

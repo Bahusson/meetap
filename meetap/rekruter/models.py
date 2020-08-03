@@ -66,7 +66,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(_('first_name'), max_length=30)
     date_joined = models.DateTimeField(_('date joined'), null=True)
-    is_staff = models.BooleanField(_('staff status'), default=False,)
+    is_staff = models.BooleanField(_('staff status'), default=False)
     is_active = models.BooleanField(_('active'), default=True)
     role_council = models.PositiveSmallIntegerField(
         choices=ROLE_CHOICES, default=1)
@@ -92,9 +92,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     # Inne formy kontaktu ze mną.
     other_contact = models.CharField(_('other_contact'), max_length=300, blank=True)
     # Sekcja "O mnie"
-    about_me = models.CharField(_('other_contact'), max_length=1500, blank=True)
+    about_me = models.CharField(_('about_me'), max_length=1500, blank=True)
     # Zainteresowania w formacie csv
-    interests = models.CharField(_('other_contact'), max_length= 500, blank=True)
+    interests = models.CharField(_('interests'), max_length= 500, blank=True)
     # Pokaż mi treści dla dorosłych.
     showme_adultcontent = models.BooleanField(_('showme_adultcontent'), default=False,)
     # Pokaż moją orientację seksualną.
@@ -117,7 +117,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     sendme_join_request = models.BooleanField(_('sendme_invitations'), default=True,)
     avatar2 = models.ImageField(upload_to='avatars', null=True, blank=True)
     avatar3 = models.ImageField(upload_to='avatars', null=True, blank=True)
-
+    is_adult = models.BooleanField(_('is adult'), default=False)
 
 
     # location = Tutaj wstaw pole geolokalizacji. Do ogarnięcia.

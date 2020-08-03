@@ -151,6 +151,8 @@ class ProfileNames(models.Model):
     avatar = models.CharField(max_length=50, null=True)
     mnemo_login = models.CharField(max_length=50, null=True)
     mnemo_explanation = models.CharField(max_length=150, null=True)
+    age_explanation = models.CharField(max_length=150, null=True)
+    contact_explanation = models.CharField(max_length=150, null=True)
 
     class Meta:
         verbose_name_plural = 'ProfileNames'
