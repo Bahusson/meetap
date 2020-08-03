@@ -111,6 +111,7 @@ class RegNames(models.Model):
     male = models.CharField(max_length=50)
     female = models.CharField(max_length=50)
     other = models.CharField(max_length=50)
+    send_me = models.CharField(max_length=50)
 
     class Meta:
         verbose_name_plural = 'RegNames'

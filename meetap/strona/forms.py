@@ -1,5 +1,6 @@
 from django import forms
 from rekruter.models import User
+from meetap.core.classes import checkifnull as cn
 # import datetime
 
 
