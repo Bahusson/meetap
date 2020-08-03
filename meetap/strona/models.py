@@ -149,6 +149,8 @@ class ProfileNames(models.Model):
     adult_settings = models.CharField(max_length=50, null=True)
     mailing_settings = models.CharField(max_length=50, null=True)
     avatar = models.CharField(max_length=50, null=True)
+    mnemo_login = models.CharField(max_length=50, null=True)
+    mnemo_explanation = models.CharField(max_length=150, null=True)
 
     class Meta:
         verbose_name_plural = 'ProfileNames'
