@@ -153,6 +153,18 @@ class ProfileNames(models.Model):
     mnemo_explanation = models.CharField(max_length=150, null=True)
     age_explanation = models.CharField(max_length=150, null=True)
     contact_explanation = models.CharField(max_length=150, null=True)
+    other_preference = models.CharField(max_length=50, null=True)
+    straight = models.CharField(max_length=50, null=True)
+    gay = models.CharField(max_length=50, null=True)
+    bi = models.CharField(max_length=50, null=True)
+    trans = models.CharField(max_length=50, null=True)
+    other = models.CharField(max_length=50, null=True)
+    dominant = models.CharField(max_length=50, null=True)
+    submissive = models.CharField(max_length=50, null=True)
+    switch = models.CharField(max_length=50, null=True)
+    rather = models.CharField(max_length=50, null=True)
+    active = models.CharField(max_length=50, null=True)
+    passive = models.CharField(max_length=50, null=True)
 
     class Meta:
         verbose_name_plural = 'ProfileNames'

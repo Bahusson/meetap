@@ -42,7 +42,7 @@ class ProfileForm(forms.ModelForm):
          'showme_commercial', 'showme_massevents', 'sendme_inv_status_me',
          'sendme_inv_status_others', 'sendme_invitations',
          'sendme_friend_events', 'sendme_join_request', 'telephone',
-         'other_contact',
+         'other_contact', 'other_preference',
          )
 
     def save(self, commit=True):

@@ -11,16 +11,14 @@ import uuid
 
 # Klasa zmienia autentykację Usera na email
 class User(AbstractBaseUser, PermissionsMixin):
-    MINOR = 1
-    ADULT = 2
-    ADULT_MEMBER = 3
-    ADULT_COUNCIL_MEMBER = 4
-    SUPERUSER = 5
+    USER = 1
+    MEMBER = 2
+    COUNCIL_MEMBER = 3
+    SUPERUSER = 4
     ROLE_CHOICES = (
-     (MINOR, 'User minor'),
-     (ADULT, 'User Adult'),
-     (ADULT_MEMBER, 'User Adult Member'),
-     (ADULT_COUNCIL_MEMBER, 'User Adult Council Member'),
+     (USER, 'User Regular'),
+     (MEMBER, 'User Member'),
+     (COUNCIL_MEMBER, 'User Council Member'),
      (SUPERUSER, 'Superuser'),
     )
     OTHER = 0
@@ -63,6 +61,38 @@ class User(AbstractBaseUser, PermissionsMixin):
         (SMOKES_SOME, "Smokes sometimes"),
         (HEAVY_SMOKER, "Smokes heavily"),
     )
+    UNDERAGE = 0
+    MINOR = 1
+    ADULT = 2
+    AGE_CHOICES = (
+        (UNDERAGE, "Małoletni"),
+        (MINOR, "Niepełnoletni"),
+        (ADULT, "Pełnoletni")
+    )
+    PASSIVE = 1
+    R_PASSIVE =2
+    SWITCH = 3
+    R_ACTIVE = 4
+    ACTIVE = 5
+    ACTIVE_CHOICES = (
+        (PASSIVE, "Pasywny"),
+        (R_ACTIVE, "Raczej Pasywny"),
+        (SWITCH, "Zmienny"),
+        (R_ACTIVE, "Raczej Aktywny"),
+        (ACTIVE, "Aktywny"),
+    )
+    SUBMISSIVE = 1
+    R_SUBMISSIVE = 2
+    NEUTRAL = 3
+    R_DOMINANT = 4
+    DOMINANT = 5
+    DOMINANCE_CHOICES = (
+        (SUBMISSIVE, "Uległy"),
+        (R_SUBMISSIVE, "Raczej Uległy"),
+        (NEUTRAL, "Neutralny"),
+        (R_DOMINANT, "Raczej Dominujący"),
+        (DOMINANT, "Dominujący"),
+    )
     email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(_('first_name'), max_length=30)
     date_joined = models.DateTimeField(_('date joined'), null=True)
@@ -79,8 +109,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     sex_preference = models.PositiveSmallIntegerField(
         choices=SEX_CHOICES, null=True, blank=True)
     other_preference = models.CharField(_('other_preference'), max_length=30, blank=True)
-    sex_role_activity = models.CharField(max_length=3, null=True, blank=True)  # 0-100
-    sex_role_dominance = models.CharField(max_length=3, null=True, blank=True)  # 0-100
+    sex_role_activity = models.PositiveSmallIntegerField(
+        choices=ACTIVE_CHOICES, default=3)
+    sex_role_dominance = models.PositiveSmallIntegerField(
+        choices=DOMINANCE_CHOICES, default=3)
     alcohol = models.PositiveSmallIntegerField(
         choices=ALCOHOL_CHOICES, null=True, blank=True)
     tobacco = models.PositiveSmallIntegerField(
@@ -117,7 +149,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     sendme_join_request = models.BooleanField(_('sendme_invitations'), default=True,)
     avatar2 = models.ImageField(upload_to='avatars', null=True, blank=True)
     avatar3 = models.ImageField(upload_to='avatars', null=True, blank=True)
-    is_adult = models.BooleanField(_('is adult'), default=False)
+    is_adult = models.PositiveSmallIntegerField(
+        choices=AGE_CHOICES, null=True, blank=True)
 
 
     # location = Tutaj wstaw pole geolokalizacji. Do ogarnięcia.
