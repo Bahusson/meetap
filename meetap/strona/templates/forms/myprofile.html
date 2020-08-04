@@ -103,13 +103,22 @@
     </select></p>
      <p>{{ form.tobacco }}</p>
     <p class ="userdata"><b class="bolder">{{ profileitem.other_drugs }}:  </b><b class="bolder2"> {{ form.other_drugs }}  </b></p>
-
     <!--Koniec Używki-->
-
   {% endif %}
   {% endif %}
-<!-- KONIEC DOROSŁE OPCJE -->
+  <!-- KONIEC DOROSŁE OPCJE -->
+  <!-- Start Mailing -->
+  <div class="maintitle">{{ profileitem.mailing_settings }}</div>
+  <p class ="userdata"><b class="bolder">{{ profileitem.showme_commercial }}: </b> <b class="bolder2"> {{ form.showme_commercial }} </b></p>
+  <p class ="userdata"><b class="bolder">{{ profileitem.showme_massevents }}: </b> <b class="bolder2"> {{ form.showme_massevents }} </b></p>
+  <p class ="userdata"><b class="bolder">{{ profileitem.sendme_inv_status_me }}: </b> <b class="bolder2"> {{ form.sendme_inv_status_me }} </b></p>
+  <p class ="userdata"><b class="bolder">{{ profileitem.sendme_inv_status_others }}: </b> <b class="bolder2"> {{ form.sendme_inv_status_others }} </b></p>
+  <p class ="userdata"><b class="bolder">{{ profileitem.sendme_invitations }}: </b> <b class="bolder2"> {{ form.sendme_invitations }} </b></p>
+  <p class ="userdata"><b class="bolder">{{ profileitem.sendme_friend_events }}: </b> <b class="bolder2"> {{ form.sendme_friend_events }} </b></p>
+  <p class ="userdata"><b class="bolder">{{ profileitem.sendme_join_request }}: </b> <b class="bolder2"> {{ form.sendme_join_request }} </b></p>
 
+
+  <!-- Koniec Mailing -->
   {% csrf_token %}
     <button id="send" class="btn btn-dark btn-sm btn-block" name="subbutton" type="submit" value="{{ regitem.send_me }}">{{ regitem.send_me }}</button>
 </form>

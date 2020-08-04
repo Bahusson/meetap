@@ -27,13 +27,13 @@ class ProfileForm(forms.ModelForm):
     showme_adultcontent = forms.BooleanField(required=False)
     showmy_sexorientation = forms.BooleanField(required=False)
     showmy_sexrole = forms.BooleanField(required=False)
-    #showme_commercial = forms.BooleanField(required=True)
-    #showme_massevents = forms.BooleanField(required=True)
-    #sendme_inv_status_me = forms.BooleanField(required=True)
-    #sendme_inv_status_others = forms.BooleanField(required=True)
-    #sendme_invitations = forms.BooleanField(required=True)
-    #sendme_friend_events = forms.BooleanField(required=True)
-    #sendme_join_request = forms.BooleanField(required=True)
+    showme_commercial = forms.BooleanField(required=False)
+    showme_massevents = forms.BooleanField(required=False)
+    sendme_inv_status_me = forms.BooleanField(required=False)
+    sendme_inv_status_others = forms.BooleanField(required=False)
+    sendme_invitations = forms.BooleanField(required=False)
+    sendme_friend_events = forms.BooleanField(required=False)
+    sendme_join_request = forms.BooleanField(required=False)
 
     class Meta:
         model = User
@@ -44,9 +44,9 @@ class ProfileForm(forms.ModelForm):
          'sex_role_dominance', 'alcohol', 'tobacco', 'other_drugs',
          'about_me', 'interests',
          'showme_adultcontent', 'showmy_sexorientation', 'showmy_sexrole',
-        # 'showme_commercial', 'showme_massevents', 'sendme_inv_status_me',
-        # 'sendme_inv_status_others', 'sendme_invitations',
-        # 'sendme_friend_events', 'sendme_join_request'
+         'showme_commercial', 'showme_massevents', 'sendme_inv_status_me',
+         'sendme_inv_status_others', 'sendme_invitations',
+         'sendme_friend_events', 'sendme_join_request',
          )
 
     def save(self, commit=True):
@@ -71,13 +71,13 @@ class ProfileForm(forms.ModelForm):
         user.showme_adultcontent = cn(self.cleaned_data['showme_adultcontent'], False)
         user.showmy_sexorientation = cn(self.cleaned_data['showmy_sexorientation'], False)
         user.showmy_sexrole = cn(self.cleaned_data['showmy_sexrole'], False)
-        #user.showme_commercial = self.cleaned_data['showme_commercial']
-        #user.showme_massevents = self.cleaned_data['showme_massevents']
-        #user.sendme_inv_status_me = self.cleaned_data['sendme_inv_status_me']
-        #user.sendme_inv_status_others = self.cleaned_data['sendme_inv_status_others']
-        #user.sendme_invitations = self.cleaned_data['sendme_invitations']
-        #user.sendme_friend_events = self.cleaned_data['sendme_friend_events']
-        #user.sendme_join_request = self.cleaned_data['sendme_join_request']
+        user.showme_commercial = self.cleaned_data['showme_commercial']
+        user.showme_massevents = self.cleaned_data['showme_massevents']
+        user.sendme_inv_status_me = self.cleaned_data['sendme_inv_status_me']
+        user.sendme_inv_status_others = self.cleaned_data['sendme_inv_status_others']
+        user.sendme_invitations = self.cleaned_data['sendme_invitations']
+        user.sendme_friend_events = self.cleaned_data['sendme_friend_events']
+        user.sendme_join_request = self.cleaned_data['sendme_join_request']
 
         if commit:
             user.save()
