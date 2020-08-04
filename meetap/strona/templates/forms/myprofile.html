@@ -89,17 +89,17 @@
    <!--Koniec Rola w Seksie -->
    <!--Start Używki -->
    <p class ="userdata"><b class="bolder">{{ profileitem.alcohol }}:  <select id="Alcohol_selector">
-     <option {% if user.sex_role_dominance == 0 %} selected="selected" {% endif %} value ="0">{{ profileitem.no_tolerance }}</option>
-     <option {% if user.sex_role_dominance == 1 %} selected="selected" {% endif %} value ="1">{{ profileitem.with_others }}</option>
-     <option {% if user.sex_role_dominance == 2 %} selected="selected" {% endif %} value ="2">{{ profileitem.occasionally }}</option>
-     <option {% if user.sex_role_dominance == 3 %} selected="selected" {% endif %} value ="3">{{ profileitem.heavily }}</option>
+     <option {% if user.alcohol == 0 %} selected="selected" {% endif %} value ="0">{{ profileitem.no_tolerance }}</option>
+     <option {% if user.alcohol == 1 %} selected="selected" {% endif %} value ="1">{{ profileitem.with_others }}</option>
+     <option {% if user.alcohol == 2 %} selected="selected" {% endif %} value ="2">{{ profileitem.occasionally }}</option>
+     <option {% if user.alcohol == 3 %} selected="selected" {% endif %} value ="3">{{ profileitem.heavily }}</option>
    </select></p>
     <p>{{ form.alcohol }}</p>
     <p class ="userdata"><b class="bolder">{{ profileitem.tobacco }}:  <select id="Tobacco_selector">
-      <option {% if user.sex_role_dominance == 0 %} selected="selected" {% endif %} value ="0">{{ profileitem.no_tolerance }}</option>
-      <option {% if user.sex_role_dominance == 1 %} selected="selected" {% endif %} value ="1">{{ profileitem.with_others }}</option>
-      <option {% if user.sex_role_dominance == 2 %} selected="selected" {% endif %} value ="2">{{ profileitem.occasionally }}</option>
-      <option {% if user.sex_role_dominance == 3 %} selected="selected" {% endif %} value ="3">{{ profileitem.heavily }}</option>
+      <option {% if user.tobacco == 0 %} selected="selected" {% endif %} value ="0">{{ profileitem.no_tolerance }}</option>
+      <option {% if user.tobacco == 1 %} selected="selected" {% endif %} value ="1">{{ profileitem.with_others }}</option>
+      <option {% if user.tobacco == 2 %} selected="selected" {% endif %} value ="2">{{ profileitem.occasionally }}</option>
+      <option {% if user.tobacco == 3 %} selected="selected" {% endif %} value ="3">{{ profileitem.heavily }}</option>
     </select></p>
      <p>{{ form.tobacco }}</p>
     <p class ="userdata"><b class="bolder">{{ profileitem.other_drugs }}:  </b><b class="bolder2"> {{ form.other_drugs }}  </b></p>
