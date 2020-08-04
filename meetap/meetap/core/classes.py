@@ -282,4 +282,4 @@ def checkifnull(x, y):
     if x == '':
         return y
     else:
-        return int(x)
+        return x

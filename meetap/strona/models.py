@@ -166,6 +166,11 @@ class ProfileNames(models.Model):
     rather = models.CharField(max_length=50, null=True)
     active = models.CharField(max_length=50, null=True)
     passive = models.CharField(max_length=50, null=True)
+    nochoice = models.CharField(max_length=50, null=True)
+    no_tolerance = models.CharField(max_length=50, null=True)
+    with_others = models.CharField(max_length=50, null=True)
+    occasionally = models.CharField(max_length=50, null=True)
+    heavily = models.CharField(max_length=50, null=True)
 
     class Meta:
         verbose_name_plural = 'ProfileNames'

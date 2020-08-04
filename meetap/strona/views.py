@@ -58,7 +58,7 @@ def myprofile(request):
     userdata = User.objects.get(
      id=request.user.id)
     if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=userdata)
+        form = ProfileForm(request.POST, request.FILES, instance=userdata)
         if form.is_valid():
             form.save()
             return redirect('myprofile')

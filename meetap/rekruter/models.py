@@ -29,12 +29,14 @@ class User(AbstractBaseUser, PermissionsMixin):
      (MALE, 'male'),
      (FEMALE, 'female'),
     )
-    STRAIGHT = 0
-    GAY = 1
-    BI = 2
-    TRANS = 3
-    OTHER = 4
+    NONE = 0
+    STRAIGHT = 1
+    GAY = 2
+    BI = 3
+    TRANS = 4
+    OTHER = 5
     SEX_CHOICES = (
+        (NONE, "Brak"),
         (STRAIGHT, "Straight"),
         (GAY, "Gay"),
         (BI, "Bi"),
@@ -69,24 +71,28 @@ class User(AbstractBaseUser, PermissionsMixin):
         (MINOR, "Niepełnoletni"),
         (ADULT, "Pełnoletni")
     )
+    NONE = 0
     PASSIVE = 1
     R_PASSIVE =2
     SWITCH = 3
     R_ACTIVE = 4
     ACTIVE = 5
     ACTIVE_CHOICES = (
+        (NONE, "Brak"),
         (PASSIVE, "Pasywny"),
         (R_ACTIVE, "Raczej Pasywny"),
         (SWITCH, "Zmienny"),
         (R_ACTIVE, "Raczej Aktywny"),
         (ACTIVE, "Aktywny"),
     )
+    NONE = 0
     SUBMISSIVE = 1
     R_SUBMISSIVE = 2
     NEUTRAL = 3
     R_DOMINANT = 4
     DOMINANT = 5
     DOMINANCE_CHOICES = (
+        (NONE, "Brak"),
         (SUBMISSIVE, "Uległy"),
         (R_SUBMISSIVE, "Raczej Uległy"),
         (NEUTRAL, "Neutralny"),
@@ -110,9 +116,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         choices=SEX_CHOICES, null=True, blank=True)
     other_preference = models.CharField(_('other_preference'), max_length=30, blank=True)
     sex_role_activity = models.PositiveSmallIntegerField(
-        choices=ACTIVE_CHOICES, default=3)
+        choices=ACTIVE_CHOICES, default=0)
     sex_role_dominance = models.PositiveSmallIntegerField(
-        choices=DOMINANCE_CHOICES, default=3)
+        choices=DOMINANCE_CHOICES, default=0)
     alcohol = models.PositiveSmallIntegerField(
         choices=ALCOHOL_CHOICES, null=True, blank=True)
     tobacco = models.PositiveSmallIntegerField(
