@@ -1,10 +1,4 @@
 // Prosta funkcja przerzucająca wartość listy rozwijanej do ukrytego formularza.
-function gender_set()
-{
-  var x = document.getElementById("Genderselector").value;
-  document.getElementById("id_gender").value = x;
-}
-
 function sex_preference_set()
 {
   var x = document.getElementById("Sex_preference_selector").value;
@@ -39,11 +33,10 @@ $(document).ready(function()
 {
   $('#send').click(function()
  {
-  gender_set()
-  sex_preference_set()
-  sex_activity_set()
-  sex_dominance_set()
-  alcohol_set()
-  tobacco_set()
+  sex_preference_set();
+  sex_activity_set();
+  sex_dominance_set();
+  alcohol_set();
+  tobacco_set();
   });
 });
