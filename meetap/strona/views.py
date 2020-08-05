@@ -76,3 +76,25 @@ def myprofile(request):
         context_lazy = pl.lazy_context(skins=S, context=context)
         template = 'forms/myprofile.html'
         return render(request, template, context_lazy)
+
+
+def myprofiledelete(request):
+    userdata = User.objects.get(
+     id=request.user.id)
+    if request.method == 'POST':
+        userdata.delete()
+        return redirect('home')
+    else:
+        form = ProfileForm(instance=userdata)
+        regitem = pe(RegNames).baseattrs
+        profileitem = pe(ProfileNames).baseattrs
+        context = {
+         'udata': userdata,
+         'form': form,
+         'regitem': regitem,
+         'profileitem': profileitem,
+         }
+        pl = PageLoad(P, L)
+        context_lazy = pl.lazy_context(skins=S, context=context)
+        template = 'forms/myprofiledelete.html'
+        return render(request, template, context_lazy)

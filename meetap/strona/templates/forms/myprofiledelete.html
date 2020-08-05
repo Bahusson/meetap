@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Ustawienia i edycja profilu</title>
+{% endblock %}
+
+{% load static %}
+
+<!-- Nullifikator bocznego menu z base.html Nie ruszaj tego, jak i end-taga!-->
+{% block aside %}
+<!-- Null -->
+{% block body %}
+<div class="card cardio">
+<div class="maintitle">{{ profileitem.myprofiledelete }}</div>
+<div class="card-body">
+<p class ="userdata"><b class="bolder">{{ profileitem.profiledelete_explain }}</b> </p>
+
+<br>
+<form name="AccountDeleteForm" method="post" class="form form-inline">
+  {% csrf_token %}
+<button class="btn btn-link-3 btn-light" name="killswitch" type="submit">{{ profileitem.myprofiledelete }}</button>
+</form>
+</div>
+</div>
+</div>
+
+
+{% endblock body %}
+{% endblock aside %}

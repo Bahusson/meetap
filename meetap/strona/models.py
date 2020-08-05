@@ -171,6 +171,9 @@ class ProfileNames(models.Model):
     with_others = models.CharField(max_length=50, null=True)
     occasionally = models.CharField(max_length=50, null=True)
     heavily = models.CharField(max_length=50, null=True)
+    underage_warning = models.CharField(max_length=250, null=True)
+    myprofiledelete = models.CharField(max_length=50, null=True)
+    profiledelete_explain = models.CharField(max_length=250, null=True)
 
     class Meta:
         verbose_name_plural = 'ProfileNames'

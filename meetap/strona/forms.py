@@ -59,7 +59,7 @@ class ProfileForm(forms.ModelForm):
         user.avatar1 = self.cleaned_data["avatar1"]
         # user.avatar2 = cn(self.cleaned_data["avatar1"], "")
         # user.avatar3 = cn(self.cleaned_data["avatar1"], "")
-        user.gender = self.cleaned_data["gender"]
+        user.gender = cn(self.cleaned_data["gender"], 5)
         user.age = self.cleaned_data["age"]
         user.telephone = self.cleaned_data['telephone']
         user.other_contact = self.cleaned_data['other_contact']
