@@ -66,7 +66,6 @@ def myprofile(request):
         form = ProfileForm(instance=userdata)
         regitem = pe(RegNames).baseattrs
         profileitem = pe(ProfileNames).baseattrs
-        print("age: " + str(userdata.age))
         context = {
          'udata': userdata,
          'form': form,

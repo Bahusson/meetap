@@ -1,8 +1,7 @@
 from django import forms
 from rekruter.models import User
 from django.contrib.auth.forms import UserCreationForm
-from meetap.core.snippets import gen_login
-from meetap.core.classes import checkifnull as cn
+from meetap.core.snippets import gen_login, calculateAge as ca
 import datetime
 
 
@@ -31,6 +30,14 @@ class ExtendedCreationForm(UserCreationForm):
         user.age = self.cleaned_data["age"]
         user.mnemo_login = gen_login()
         user.date_joined = datetime.datetime.now()
+        userage = ca(user.age)
+        if userage >= 18:
+            user.is_adult = 2
+        elif userage >= 15:
+            user.is_adult = 1
+        else:
+            user.is_adult = 0
+
 
         if commit:
             user.save()
