@@ -38,7 +38,6 @@ class ExtendedCreationForm(UserCreationForm):
         else:
             user.is_adult = 0
 
-
         if commit:
             user.save()
         return user
