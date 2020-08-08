@@ -120,8 +120,10 @@
 
 
   <!-- Koniec Mailing -->
-{% endif %} <!-- Koniec blokady małoletnich-->
+{% else %}
 <p>{{ profileitem.underage_warning }}</p>
+{% endif %} <!-- Koniec blokady małoletnich-->
+
   {% csrf_token %}
     <button id="send" class="btn btn-dark btn-sm btn-block" name="subbutton" type="submit" value="{{ regitem.send_me }}">{{ regitem.send_me }}</button>
 </form>
