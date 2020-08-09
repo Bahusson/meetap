@@ -174,6 +174,7 @@ class ProfileNames(models.Model):
     underage_warning = models.CharField(max_length=250, null=True)
     myprofiledelete = models.CharField(max_length=50, null=True)
     profiledelete_explain = models.CharField(max_length=250, null=True)
+    showme_sexevents = models.CharField(max_length=50, null=True)
 
     class Meta:
         verbose_name_plural = 'ProfileNames'

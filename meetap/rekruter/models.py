@@ -73,7 +73,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     NONE = 0
     PASSIVE = 1
-    R_PASSIVE =2
+    R_PASSIVE = 2
     SWITCH = 3
     R_ACTIVE = 4
     ACTIVE = 5
@@ -153,10 +153,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     sendme_friend_events = models.BooleanField(_('sendme_invitations'), default=True,)
     # Wysyłaj mi informację o tym, że ktoś poprosił o dołączenie do mojego wyd.
     sendme_join_request = models.BooleanField(_('sendme_invitations'), default=True,)
+    # Dodatkowe dwa awatary dla patronów.
     avatar2 = models.ImageField(upload_to='avatars', null=True, blank=True)
     avatar3 = models.ImageField(upload_to='avatars', null=True, blank=True)
+    # Poziom dostępu na postawie wieku.
     is_adult = models.PositiveSmallIntegerField(
         choices=AGE_CHOICES, null=True, blank=True)
+    # Pokazuj seksimprezy.
+    showme_sexevents = models.BooleanField(_('showme_sexevents'), default=False,)
 
 
     # location = Tutaj wstaw pole geolokalizacji. Do ogarnięcia.

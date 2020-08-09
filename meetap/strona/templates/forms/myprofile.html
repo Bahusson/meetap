@@ -88,6 +88,8 @@
    <p>{{ form.sex_role_dominance }}</p>
    <p class ="userdata"><b class="bolder">{{ profileitem.showmy_sexrole }}:  </b><b class="bolder2"> {{ form.showmy_sexrole }}  </b></p>
    <!--Koniec Rola w Seksie -->
+   <p class ="userdata"><b class="bolder">{{ profileitem.showme_sexevents }}:  </b><b class="bolder2"> {{ form.showme_sexevents }}  </b></p>
+
    <!--Start Używki -->
    <p class ="userdata"><b class="bolder">{{ profileitem.alcohol }}:  <select id="Alcohol_selector">
      <option {% if user.alcohol == 0 %} selected="selected" {% endif %} value ="0">{{ profileitem.no_tolerance }}</option>

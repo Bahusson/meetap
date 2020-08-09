@@ -31,6 +31,7 @@ class ProfileForm(forms.ModelForm):
     showme_adultcontent = forms.BooleanField(required=False)
     showmy_sexorientation = forms.BooleanField(required=False)
     showmy_sexrole = forms.BooleanField(required=False)
+    showme_sexevents = forms.BooleanField(required=False)
     showme_commercial = forms.BooleanField(required=False)
     showme_massevents = forms.BooleanField(required=False)
     sendme_inv_status_me = forms.BooleanField(required=False)
@@ -46,7 +47,7 @@ class ProfileForm(forms.ModelForm):
          'gender', 'age',  'telephone', 'other_contact',
          'sex_preference', 'other_preference', 'sex_role_activity',
          'sex_role_dominance', 'alcohol', 'tobacco', 'other_drugs',
-         'about_me', 'interests',
+         'about_me', 'interests', 'showme_sexevents',
          'showme_adultcontent', 'showmy_sexorientation', 'showmy_sexrole',
          'showme_commercial', 'showme_massevents', 'sendme_inv_status_me',
          'sendme_inv_status_others', 'sendme_invitations',
@@ -78,6 +79,8 @@ class ProfileForm(forms.ModelForm):
         user.showmy_sexorientation = cn(
          self.cleaned_data['showmy_sexorientation'], False)
         user.showmy_sexrole = cn(self.cleaned_data['showmy_sexrole'], False)
+        user.showme_sexevents = cn(
+         self.cleaned_data['showme_sexevents'], False)
         user.showme_commercial = self.cleaned_data['showme_commercial']
         user.showme_massevents = self.cleaned_data['showme_massevents']
         user.sendme_inv_status_me = self.cleaned_data['sendme_inv_status_me']
