@@ -1,4 +1,4 @@
-# from django.shortcuts import redirect
+
 
 class PageLoad(object):
     ''' Zwraca tyle języków ile mamy zainstalowane
@@ -123,14 +123,8 @@ class PageElement(object):
 class PortalLoad(PageLoad):
     def __init__(self, *args):
         super().__init__(*args)
-        d = args[2]
-        place = args[3]
-        menus = args[4]
-        links = args[5]
-        loc_d = list(d.objects.all())
-        self.portal = loc_d[place]
-        self.menu = list(menus.objects.all())
-        self.link = list(links.objects.all())
+        menus = args[2]
+        self.menu = list(menus.objects.all())[0]
 
     def page_dress(self, **kwargs):
         super().page_dress(**kwargs)
@@ -139,9 +133,8 @@ class PortalLoad(PageLoad):
         self.context = {
          'items': self.items,
          'langs': self.langs,
-         'portals': self.portal,
          'menu': self.menu,
-         'link': self.link, }
+         }
         if 'skins' in kwargs:
             self.page_dress(**kwargs)
             self.context.update(self.skinctx)

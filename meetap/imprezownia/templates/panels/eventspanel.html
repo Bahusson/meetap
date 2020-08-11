@@ -1,0 +1,31 @@
+<!-- Goły panel rady. Na początku nic się nie wyświetla. A mogłoby -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>{{ menu.maintitle }}</title>
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+{% block css2 %}
+{% endblock %}
+
+<!--Zwraca oryginalną kompozycję menu z bazy. Potem podstawiasz zmienne,-->
+{% block aside %}
+ {{ block.super }}
+{% endblock aside %}
+
+{% block menu %}
+  {% include 'menus/eventsmenu.html' %} <!-- Menu z opcjami -->
+{% endblock menu %}
+
+{% block body %}
+ <!-- Tu mają się wyświetlać dane z różnych opcji po kliknięciu -->
+{% endblock body %}
+
+
+{% block scripts %}
+{% endblock %}
+{% block scripts2 %}
+{% endblock %}

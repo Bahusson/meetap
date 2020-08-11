@@ -1,0 +1,26 @@
+[
+{
+  "model": "imprezownia.eventsmenunames",
+  "pk": 1,
+  "fields": {
+    "maintitle": "Menu Wydarze\u0144",
+    "maintitle_pl": "Menu Wydarze\u0144",
+    "maintitle_en": "Events Menu",
+    "new_event": "Utw\u00f3rz Nowe Wydarzenie",
+    "new_event_pl": "Utw\u00f3rz Nowe Wydarzenie",
+    "new_event_en": "Create New Event",
+    "my_events": "Moje Wydarzenia",
+    "my_events_pl": "Moje Wydarzenia",
+    "my_events_en": "My Events",
+    "edit_event": "Edycja Wydarzenia",
+    "edit_event_pl": "Edycja Wydarzenia",
+    "edit_event_en": "Editing Event",
+    "search_events": "Wyszukaj Wydarzenie",
+    "search_events_pl": "Wyszukaj Wydarzenie",
+    "search_events_en": "Search Events",
+    "my_templates": "Moje Wzorniki",
+    "my_templates_pl": "Moje Wzorniki",
+    "my_templates_en": "My Templates"
+  }
+}
+]

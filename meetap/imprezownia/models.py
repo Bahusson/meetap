@@ -80,3 +80,16 @@ class Event(models.Model):
 
     def pubdate_short(self):
         return self.pubdate.strftime('%a %d %b %Y')
+
+
+# Klasa tłumaczeniowa dla menu wydarzeń
+class EventsMenuNames(models.Model):
+    maintitle = models.CharField(max_length=50)  # Menu wydarzeń
+    new_event = models.CharField(max_length=50)  # Nowe wydarzenie
+    my_events = models.CharField(max_length=50)  # Moje wydarzenie
+    edit_event = models.CharField(max_length=50)  # Edytuj wydarzenie
+    search_events = models.CharField(max_length=50)  # Wyszukaj wydarzenie
+    my_templates = models.CharField(max_length=50)  # Moje wzorniki
+
+    class Meta:
+        verbose_name_plural = 'EventsMenuNames'

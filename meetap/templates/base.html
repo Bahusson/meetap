@@ -58,7 +58,7 @@
              <li class="nav-item active"><a class="nav-link" href="{% url 'myprofile' %}">{{ items.myprofile }}</a></li>
           {% endif %}
           {% if user.is_adult > 0 %}
-             <li class="nav-item active"><a class="nav-link" href="">{{ items.events }}</a></li>
+             <li class="nav-item active"><a class="nav-link" href="{% url "events_panel" %}">{{ items.events }}</a></li>
              <li class="nav-item active"><a class="nav-link" href="">{{ items.friends }}</a></li>
           {% endif %}
         <li>
@@ -97,12 +97,6 @@
 
         <aside class="col-md-4 blog-sidebar nopadding"> <!-- Start bocznego menu -->
           <br>
-            <div class="alert alert-secondary alert-dismissible fade show">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
-
-            <h4 class="font-italic">{{ portals.title }}</h4>
-            <p class="mb-0">{{ portals.descr }}</p>
-          </div>
       {% block menu %} <!--Ten blok wyświetli się tylko w panelach Akademika-->
       {% endblock menu %}
 
