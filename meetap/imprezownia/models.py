@@ -105,12 +105,48 @@ class PartyDivider(models.Model):
     image = models.ImageField(upload_to='images', blank=True, null=True)
     from_event = models.ForeignKey('Event', on_delete=models.CASCADE,)
 
+
+# Klasa Roli usera na wydarzeniu.
 class UserRole(models.Model):
     title = models.CharField(max_length=150)
-    body = models.CharField(max_length=1500, blank=True, null=True)
-    from_event = models.ForeignKey('PartyDivider', on_delete=models.CASCADE,)
     role_descr = models.CharField(max_length=600, blank=True, null=True)
+    # "Dziecko" klasy dzielącej wydarzenie na strefy.
+    from_event = models.ForeignKey('PartyDivider', on_delete=models.CASCADE,)
+    # Użytkownik może być przydzielony z bazy danych lub nie.
+    assigned_user = models.ForeignKey(
+     AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    # Jesli Użytkownika nie ma na portalu to tutaj wpisuje się jego nazwę.
+    # Wyświetla się tylko wtedy gdy powyższe jest puste.
+    alt_user = models.CharField(max_length=150, blank=True, null=True)
     # Czy zwolniony ze składek?
     tax_free = models.BooleanField(default=False)
     # Czy koordynator pomocniczy?
     aux_coordinator = models.BooleanField(default=False)
+
+
+# Klasa panelu składki. Rodzic "Składek"
+class TaxPanel(models.Model):
+    AND = 0
+    OR = 1
+    OPTIONAL = 2
+    EVERYONE = 3
+    TAX_CHOICES = (
+        (AND, "i"),
+        (OR, "lub"),
+        (OPTIONAL, "opcjonalnie"),
+        (EVERYONE, "każdy"),
+        )
+    title = models.CharField(max_length=50)
+    descr = models.CharField(max_length=200, blank=True, null=True)
+    tax_type = models.PositiveSmallIntegerField(
+            choices=TAX_CHOICES, default=0)
+    from_event = models.ForeignKey('Event', on_delete=models.CASCADE,)
+
+
+# Klasa składki. Dziecko "Panelu składki"
+class Tax(models.Model):
+    title = models.CharField(max_length=50)
+    # Opis składki pojawiający się jako onhover ikony "informacja".
+    descr = models.CharField(max_length=500, blank=True, null=True)
+    image = models.ImageField(upload_to='images', blank=True, null=True)
+    from_event = models.ForeignKey('TaxPanel', on_delete=models.CASCADE,)
