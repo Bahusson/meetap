@@ -2,6 +2,8 @@ from django.db import models
 from meetap.settings import AUTH_USER_MODEL
 
 
+# Klasa główna wydarzenia.
+# Najwyższy "Rodzic" spośród klas podległych "wydarzeniom".
 class Event(models.Model):
     NONE = 0
     STRAIGHT = 1
@@ -93,3 +95,22 @@ class EventsMenuNames(models.Model):
 
     class Meta:
         verbose_name_plural = 'EventsMenuNames'
+
+
+# Klasa pozwala dzielić wydarzenie na różne pomniejsze "działy".
+# Np. "pokład", "zaplecze", "udźwiękownienie", itp.
+class PartyDivider(models.Model):
+    title = models.CharField(max_length=150)
+    descr = models.CharField(max_length=500, blank=True, null=True)
+    image = models.ImageField(upload_to='images', blank=True, null=True)
+    from_event = models.ForeignKey('Event', on_delete=models.CASCADE,)
+
+class UserRole(models.Model):
+    title = models.CharField(max_length=150)
+    body = models.CharField(max_length=1500, blank=True, null=True)
+    from_event = models.ForeignKey('PartyDivider', on_delete=models.CASCADE,)
+    role_descr = models.CharField(max_length=600, blank=True, null=True)
+    # Czy zwolniony ze składek?
+    tax_free = models.BooleanField(default=False)
+    # Czy koordynator pomocniczy?
+    aux_coordinator = models.BooleanField(default=False)
