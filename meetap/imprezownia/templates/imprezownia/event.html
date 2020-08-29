@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>{{ menu.maintitle }}</title>
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+{% block css2 %}
+{% endblock %}
+
+<!--Zwraca oryginalną kompozycję menu z bazy. Potem podstawiasz zmienne,-->
+{% block aside %}
+ {{ block.super }}
+{% endblock aside %}
+
+{% block menu %}
+  {% include 'menus/eventsmenu.html' %} <!-- Menu z opcjami -->
+{% endblock menu %}
+
+{% block body %}
+br>
+<br>
+<br>
+    <main role="main">
+      <div class="row">
+        <div class="col-md-7 event-main">
+          <div class="container">
+            <h1 class="text-center pt-3 ">{{ event.title }}</h1>
+            <h4 class="pt-2">{{ event.pubdate_short }}</h4>
+            <hr />
+            {% if event.video %}<!--jeśli jest link to go wyświetl -->
+                <br />
+                {% with event as b %}
+                <iframe width="560" height="315" src="{{ b.video }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                {% endwith %}
+            {% endif %}
+            {% if event.image %}<!--jeśli jest link to go wyświetl -->
+                <br/>
+                {% with event as b %}
+                <img class="img-fluid" src="{{ b.image.url }}" width=50% height=auto />
+                {% endwith %}
+            {% endif %}
+            <br />
+            <br />
+            {{ event.body|linebreaksbr }}
+          </div>
+        </div>
+      </div><!-- /.row -->
+
+    </main>
+    <!-- empty div -->
+      <div class="top-content">
+        <div class="container">
+      <div class="row">	<div class="col-sm-12 text wow fadeInLeft"></div></div>
+
+
+    </div>
+    </div>
+    <!-- end of empty div -->
+{% endblock body %}
+
+
+{% block scripts %}
+{% endblock %}
+{% block scripts2 %}
+{% endblock %}

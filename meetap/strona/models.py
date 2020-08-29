@@ -74,6 +74,8 @@ class PageSkin(models.Model):
      upload_to='skins', blank=True, null=True)
     meetaplogo_main = models.ImageField(
      upload_to='skins', blank=True, null=True)
+    eventimagedefault = models.ImageField(
+     upload_to='skins', blank=True, null=True)
 
     class Meta:
         ordering = ['position']

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>{{ menu.maintitle }}</title>
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+{% block css2 %}
+{% endblock %}
+
+<!--Zwraca oryginalną kompozycję menu z bazy. Potem podstawiasz zmienne,-->
+{% block aside %}
+ {{ block.super }}
+{% endblock aside %}
+
+{% block menu %}
+  {% include 'menus/eventsmenu.html' %} <!-- Menu z opcjami -->
+{% endblock menu %}
+
+{% block body %}
+
+    <main role="main kol">
+      <div class="row kol">
+        <div class="container kol">
+        {% for event in events %}
+          <hr class="featurette-divider">
+           <div class="row featurette kol">
+             <div class="col-md-5 kol">
+               {% if event.image %}
+               <!-- Jeśli nie ma obrazka zwróć default ze skórki Usera -->
+               <a href="{% url 'event' event.id %}"><img class="img-fluid allimg" src="{{ event.image.url }}" /></a>
+               {% else %}
+               <a href="{% url 'event' event.id %}"><img class="img-fluid allimg" src="{{ skin.eventimagedefault.url }}" /></a>
+               {% endif %}
+             </div>
+             <div class="col-md-7 kol">
+               <a href="{% url 'event' event.id %}"><h2 class="featurette-heading title">{{ event.title }}</h2></a> <h5 class="text-muted">{{ event.pubdate_short }}</h5>
+               <p class="lead">{{ event.summary }}</p> <a href="{% url 'event' event.id %}">Czytaj dalej...-roboczy</a>
+             </div>
+           </div>
+        {% endfor %}
+        </div>
+      </div><!-- /.row -->
+    </main>
+    <!-- empty div -->
+      <div class="top-content">
+        <div class="container">
+      <div class="row">	<div class="col-sm-12 text wow fadeInLeft"></div></div>
+
+
+    </div>
+    </div>
+{% endblock body %}
+
+
+{% block scripts %}
+{% endblock %}
+{% block scripts2 %}
+{% endblock %}

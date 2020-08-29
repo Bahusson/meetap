@@ -40,6 +40,8 @@ class Event(models.Model):
     is_for_dominant = models.BooleanField(default=False)
     # Jakie inne orientacje? Oddzielone przecinkami.
     other_preferences = models.CharField(max_length=300, blank=True, null=True)
+    pubdate = models.DateTimeField(blank=True, null=True)  # Data publikacji
+
 
     class Meta:
         ordering = ['-datefrom']
