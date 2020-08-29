@@ -13,7 +13,7 @@ translator.register(EventsMenuNames, EventsMenuNamesTranslate)
 
 
 class EventTranslate(TranslationOptions):
-    fields = ("title", "body", "other_preferences")
+    fields = ("title", "body", "other_preferences", "other_drugs")
 
 
 translator.register(Event, EventTranslate)

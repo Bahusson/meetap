@@ -4,49 +4,9 @@ from meetap.settings import AUTH_USER_MODEL
 
 # Klasa główna wydarzenia.
 # Najwyższy "Rodzic" spośród klas podległych "wydarzeniom".
+# Może zamiast robić listę z PSIField dla orientacji itp lepiej zrobić
+# dla każdej możliwej opcji po BooleanField?
 class Event(models.Model):
-    NONE = 0
-    STRAIGHT = 1
-    GAY = 2
-    BI = 3
-    TRANS = 4
-    OTHER = 5
-    SEX_CHOICES = (
-        (NONE, "Brak"),
-        (STRAIGHT, "Straight"),
-        (GAY, "Gay"),
-        (BI, "Bi"),
-        (TRANS, "Trans"),
-        (OTHER, "Other"),
-        )
-    NONE = 0
-    PASSIVE = 1
-    R_PASSIVE = 2
-    SWITCH = 3
-    R_ACTIVE = 4
-    ACTIVE = 5
-    ACTIVE_CHOICES = (
-        (NONE, "Brak"),
-        (PASSIVE, "Pasywny"),
-        (R_ACTIVE, "Raczej Pasywny"),
-        (SWITCH, "Zmienny"),
-        (R_ACTIVE, "Raczej Aktywny"),
-        (ACTIVE, "Aktywny"),
-    )
-    NONE = 0
-    SUBMISSIVE = 1
-    R_SUBMISSIVE = 2
-    NEUTRAL = 3
-    R_DOMINANT = 4
-    DOMINANT = 5
-    DOMINANCE_CHOICES = (
-        (NONE, "Brak"),
-        (SUBMISSIVE, "Uległy"),
-        (R_SUBMISSIVE, "Raczej Uległy"),
-        (NEUTRAL, "Neutralny"),
-        (R_DOMINANT, "Raczej Dominujący"),
-        (DOMINANT, "Dominujący"),
-        )
     title = models.CharField(max_length=150)
     body = models.CharField(max_length=1500, blank=True, null=True)
     image = models.ImageField(upload_to='images', blank=True, null=True)
@@ -59,15 +19,25 @@ class Event(models.Model):
     is_adult_only = models.BooleanField(default=False)  # Dla dorosłych?
     is_alcohol = models.BooleanField(default=False)  # Z alkoholem?
     is_tobacco = models.BooleanField(default=False)  # Dla palących?
-    other_drugs = models.CharField(max_length=300)  # Jakie inne używki?
+    other_drugs = models.CharField(max_length=300, blank=True, null=True)  # Jakie inne używki?
     is_sex_party = models.BooleanField(default=False)  # Seksimpreza?
     is_paid = models.BooleanField(default=False)  # czy jest składka w $
-    sex_preference = models.PositiveSmallIntegerField(
-        choices=SEX_CHOICES, default=0)
-    sex_role_activity = models.PositiveSmallIntegerField(
-        choices=ACTIVE_CHOICES, default=0)
-    sex_role_dominance = models.PositiveSmallIntegerField(
-        choices=DOMINANCE_CHOICES, default=0)
+    # Opcje czy dla danej orientacji/dominacji/roli:
+    is_for_straight = models.BooleanField(default=False)
+    is_for_gay = models.BooleanField(default=False)
+    is_for_bi = models.BooleanField(default=False)
+    is_for_trans = models.BooleanField(default=False)
+    is_for_other = models.BooleanField(default=False)
+    is_for_passive = models.BooleanField(default=False)
+    is_for_r_passive = models.BooleanField(default=False)
+    is_for_switch = models.BooleanField(default=False)
+    is_for_r_active = models.BooleanField(default=False)
+    is_for_active = models.BooleanField(default=False)
+    is_for_submisive = models.BooleanField(default=False)
+    is_for_r_submissive = models.BooleanField(default=False)
+    is_for_neutral = models.BooleanField(default=False)
+    is_for_r_dominant = models.BooleanField(default=False)
+    is_for_dominant = models.BooleanField(default=False)
     # Jakie inne orientacje? Oddzielone przecinkami.
     other_preferences = models.CharField(max_length=300, blank=True, null=True)
 
@@ -105,6 +75,9 @@ class PartyDivider(models.Model):
     image = models.ImageField(upload_to='images', blank=True, null=True)
     from_event = models.ForeignKey('Event', on_delete=models.CASCADE,)
 
+    def __str__(self):
+        return self.title
+
 
 # Klasa Roli usera na wydarzeniu.
 class UserRole(models.Model):
@@ -123,6 +96,8 @@ class UserRole(models.Model):
     # Czy koordynator pomocniczy?
     aux_coordinator = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.title
 
 # Klasa panelu składki. Rodzic "Składek"
 class TaxPanel(models.Model):
@@ -142,6 +117,9 @@ class TaxPanel(models.Model):
             choices=TAX_CHOICES, default=0)
     from_event = models.ForeignKey('Event', on_delete=models.CASCADE,)
 
+    def __str__(self):
+        return self.title
+
 
 # Klasa składki. Dziecko "Panelu składki"
 class Tax(models.Model):
@@ -150,3 +128,6 @@ class Tax(models.Model):
     descr = models.CharField(max_length=500, blank=True, null=True)
     image = models.ImageField(upload_to='images', blank=True, null=True)
     from_event = models.ForeignKey('TaxPanel', on_delete=models.CASCADE,)
+
+    def __str__(self):
+        return self.title
