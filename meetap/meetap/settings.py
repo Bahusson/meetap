@@ -125,7 +125,7 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
         'LOCATION': 'cache_table',
-        'TIMEOUT': 10,
+        'TIMEOUT': 1, # Ustaw więcej w produkcji. Obczaj źródło na górze.
         'OPTIONS': {
             'MAX_ENTRIES': 2000,
             'CULL_FREQUENCY': 2
