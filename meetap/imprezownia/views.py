@@ -19,10 +19,12 @@ def events_panel(request):
 
 
 def events(request):
-    page_event = pe(E)
-    pe_elements = page_event.allelements
+    userdata = User.objects.get(
+     id=request.user.id)
+    # Widzi tylko własne wpisy
+    efilter = E.objects.filter(owner=userdata)
     context = {
-     'events': pe_elements, }
+     'events': efilter, }
     pl = PortalLoad(P, L, EMN)
     context_lazy = pl.lazy_context(
      skins=S, context=context)
