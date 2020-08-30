@@ -110,8 +110,8 @@ class PageElement(object):
     def by_id(self, **kwargs):
         G404 = kwargs['G404']
         x_id = kwargs['id']
-        self.one_by_id = G404(self.x, pk=x_id)
-        return self.one_by_id
+        one_by_id = G404(self.x, pk=x_id)
+        return one_by_id
 
     # lista integerów.
     def listedint(self):
