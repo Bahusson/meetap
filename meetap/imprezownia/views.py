@@ -18,15 +18,15 @@ def events_panel(request):
     return render(request, template, context_lazy)
 
 
-def my_events(request):
+def events(request):
     page_event = pe(E)
-    pe_elements = page_event.elements
+    pe_elements = page_event.allelements
     context = {
      'events': pe_elements, }
     pl = PortalLoad(P, L, EMN)
     context_lazy = pl.lazy_context(
      skins=S, context=context)
-    template = 'imprezownia/myevents.html'
+    template = 'imprezownia/user_events.html'
     return render(request, template, context_lazy)
 
 

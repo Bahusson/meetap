@@ -60,6 +60,7 @@ class PageElement(object):
     def __init__(self, *args, **kwargs):
         self.x = args[0]
         self.listed = list(self.x.objects.all())  # Lista obiektów
+        self.allelements = self.x.objects.all() # Wszystkie obiekty
         self.elements = self.x.objects  # Obiekty
         self.baseattrs = self.listed[0]  # Pierwsze obiekty na liście
 
