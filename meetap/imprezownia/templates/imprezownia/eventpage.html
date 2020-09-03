@@ -20,36 +20,37 @@
 {% endblock menu %}
 
 {% block body %}
-    <br>
-    <br>
-    <br>
         <main role="main">
+          <h3 class="text-center pt-3 ">{{ event.title }}</h3>
           <div class="row">
             <div class="col-md-7 event-main">
               <div class="container">
-                <h3 class="text-center pt-3 ">{{ event.title }}</h3>
                 <p>$Dodano: {{ event.pubdate_short }}<br>
                 $Przez: {{ event.owner.first_name }}<p>
-
-                <hr />
-                {% if event.image %}<!--jeśli jest link to go wyświetl -->
-                    <br/>
-                  {% with event as e %}
-                    <img class="img-fluid" src="{{ e.image.url }}" width=100% height=auto />
-                  {% endwith %}
-                {% else %}
-                    <img class="img-fluid allimg" src="{{ skin.eventimagedefault.url }}" />
-                {% endif %}
-                <br />
-                <br />
-                <p>$Zaczyna się: {{ event.datefrom }}</p>
-                <p>$Kończy się: {{ event.dateto }}</p>
-                <p>$O wydarzeniu: <br>{{ event.body|linebreaksbr }}</p>
-
+                <p>$Zaczyna się: {{ event.datefrom }}<br>
+                $Kończy się: {{ event.dateto }}</p>
               </div>
+            </div>
+            <div class="col-md-5 event-main">
+              {% if event.image %}<!--jeśli jest link to go wyświetl -->
+                {% with event as e %}
+                  <img class="img-fluid" src="{{ e.image.url }}" width=100% height=auto />
+                {% endwith %}
+              {% else %}
+                  <img class="img-fluid allimg" src="{{ skin.eventimagedefault.url }}" />
+              {% endif %}
             </div>
           </div><!-- /.row -->
 
+          <div class="row">
+            <div class="col-md-12 event-main">
+<!--TO DO--> <!--Tutaj mogą iść ikonki z opisem onhover jakiego typu jest impreza-->
+              <hr/>
+              <div class="container">
+               <p>$O wydarzeniu: {{ event.body|linebreaksbr }}</p>
+              </div>
+            </div>
+          </div><!-- /.row -->
       </main>
       <!-- empty div -->
         <div class="top-content">
