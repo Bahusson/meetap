@@ -27,20 +27,25 @@
           <div class="row">
             <div class="col-md-7 event-main">
               <div class="container">
-                <h1 class="text-center pt-3 ">{{ event.title }}</h1>
-                <h4 class="pt-2">{{ event.pubdate_short }}</h4>
+                <h3 class="text-center pt-3 ">{{ event.title }}</h3>
+                <p>$Dodano: {{ event.pubdate_short }}<br>
+                $Przez: {{ event.owner.first_name }}<p>
+
                 <hr />
                 {% if event.image %}<!--jeśli jest link to go wyświetl -->
                     <br/>
                   {% with event as e %}
-                    <img class="img-fluid" src="{{ e.image.url }}" width=50% height=auto />
+                    <img class="img-fluid" src="{{ e.image.url }}" width=100% height=auto />
                   {% endwith %}
                 {% else %}
                     <img class="img-fluid allimg" src="{{ skin.eventimagedefault.url }}" />
                 {% endif %}
                 <br />
                 <br />
-                {{ event.body|linebreaksbr }}
+                <p>$Zaczyna się: {{ event.datefrom }}</p>
+                <p>$Kończy się: {{ event.dateto }}</p>
+                <p>$O wydarzeniu: <br>{{ event.body|linebreaksbr }}</p>
+
               </div>
             </div>
           </div><!-- /.row -->
