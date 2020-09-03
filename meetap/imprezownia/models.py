@@ -80,6 +80,9 @@ class PartyDivider(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        ordering = ['id']
+
 
 # Klasa Roli usera na wydarzeniu.
 class UserRole(models.Model):
@@ -100,6 +103,9 @@ class UserRole(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ['id']
 
 # Klasa panelu składki. Rodzic "Składek"
 class TaxPanel(models.Model):

@@ -1,7 +1,8 @@
 from django.shortcuts import (render, redirect, get_object_or_404 as G404)
 from rekruter.models import User
 from strona.models import PageNames as P, PageSkin as S
-from .models import (EventsMenuNames as EMN, Event as E)
+from .models import (
+ EventsMenuNames as EMN, Event as E, PartyDivider as PD, UserRole as UR)
 from meetap.settings import LANGUAGES as L
 from meetap.core.classes import (
  PageElement as pe, PortalLoad, ActivePageItems)
@@ -35,7 +36,13 @@ def events(request):
 def event(request, event_id):
     pe_e = pe(E)
     pe_e_id = pe_e.by_id(G404=G404, id=event_id)
-    context = {'event': pe_e_id,}
+    pe_pd = PD.objects.filter(from_event=event_id)
+    pe_ur = UR.objects.filter(from_event__from_event=event_id)
+    context = {'event': pe_e_id,
+               'dividers': pe_pd,
+               'userroles': pe_ur,
+               }
+    print(context)
     pl = PortalLoad(P, L, EMN)
     context_lazy = pl.lazy_context(skins=S, context=context)
     template = 'imprezownia/eventpage.html'
