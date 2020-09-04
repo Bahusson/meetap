@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load xfilters %}
 
 {% block title %}
 <title>{{ event.title }}</title>
@@ -57,13 +56,13 @@
               <hr/>
               <div class="container">
                 <h3>{{ divider.title }}</h3>
-                <p>{{ divider.id }}</p>
-                {% if userroles1 %}
+                {% if userroles %}
                  <h4>$Uczestnicy: (jeśli są)</h4>
-                 {% for userrole in x|riselookup %}
-
+                 {% for userrole in userroles %}
+                  {% if userrole.from_event.id == divider.id %}
                   <h4>{{ userrole.title }}<h4>
-                  <p>{{ userrole.from_event }}<p>
+                  
+                  {% endif %}
                  {% endfor %}
                 {% endif %}
              </div>
