@@ -50,10 +50,14 @@
               </div>
             </div>
           </div><!-- /.row -->
-
-          {% include 'elements/divisions.html' %} <!-- W opcji z działami -->
-          {% include 'elements/taxes.html'%} <!-- W opcji ze składkami -->
-
+          <button><a href="{% url 'event' event.id True False %}">Pokaż Działy</a></button>
+          <button><a href="{% url 'event' event.id False True %}">Pokaż Składki</a></button>
+          {% if show_divisions %}
+           {% include 'elements/divisions.html' %} <!-- W opcji z działami -->
+          {% endif %}
+          {% if show_taxes %}
+           {% include 'elements/taxes.html'%} <!-- W opcji ze składkami -->
+          {% endif %}
       </main>
       <!-- empty div -->
         <div class="top-content">

@@ -128,6 +128,9 @@ class TaxPanel(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        ordering = ['id']
+
 
 # Klasa składki. Dziecko "Panelu składki"
 class Tax(models.Model):
@@ -139,3 +142,7 @@ class Tax(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name_plural = 'Taxes'
+        ordering = ['id']

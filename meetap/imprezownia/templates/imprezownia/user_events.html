@@ -30,14 +30,14 @@
              <div class="col-md-5 kol">
                {% if event.image %}
                <!-- Jeśli nie ma obrazka zwróć default ze skórki Usera -->
-               <a href="{% url 'event' event.id %}"><img class="img-fluid allimg" src="{{ event.image.url }}" /></a>
+               <a href="{% url 'event' event.id False False %}"><img class="img-fluid allimg" src="{{ event.image.url }}" /></a>
                {% else %}
-               <a href="{% url 'event' event.id %}"><img class="img-fluid allimg" src="{{ skin.eventimagedefault.url }}" /></a>
+               <a href="{% url 'event' event.id False False %}"><img class="img-fluid allimg" src="{{ skin.eventimagedefault.url }}" /></a>
                {% endif %}
              </div>
              <div class="col-md-7 kol">
-               <a href="{% url 'event' event.id %}"><h2 class="featurette-heading title">{{ event.title }}</h2></a> <h5 class="text-muted">{{ event.pubdate_short }}</h5>
-               <p class="lead">{{ event.summary }}</p> <a href="{% url 'event' event.id %}">Czytaj dalej...-roboczy</a>
+               <a href="{% url 'event' event.id False False %}"><h2 class="featurette-heading title">{{ event.title }}</h2></a> <h5 class="text-muted">{{ event.pubdate_short }}</h5>
+               <p class="lead">{{ event.summary }}</p> <a href="{% url 'event' event.id False False %}">Czytaj dalej...-roboczy</a>
              </div>
            </div>
         {% endfor %}

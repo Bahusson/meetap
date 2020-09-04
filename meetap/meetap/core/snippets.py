@@ -64,3 +64,13 @@ def calculateAge(born):
         return today.year - born.year - 1
     else:
         return today.year - born.year
+
+
+# Zmienia Stringi True/False w Booleany
+def booleanate(mystring):
+    print(mystring)
+    if mystring == 'True':
+        mystring = True
+    else:
+        mystring = False
+    return mystring
