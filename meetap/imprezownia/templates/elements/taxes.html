@@ -1,0 +1,17 @@
+{% for tax_panel in tax_panels %}
+  <div class="row">
+    <div class="col-md-12 event-main">
+      <hr/>
+      <div class="container">
+        <h3>{{ tax_panel.title }}</h3>
+         {% for tax in taxes %}
+          {% if tax.from_event.id == tax_panel.id %}
+          <h4>{{ tax.title }}<h4>
+<!--TO DO-->      <!--Tutaj daj kolejne dane składki-->
+          {% endif %}
+         {% endfor %}
+        {% endif %}
+     </div>
+    </div>
+  </div><!-- /.row -->
+{% endfor %}

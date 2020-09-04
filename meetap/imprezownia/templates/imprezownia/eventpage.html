@@ -50,25 +50,10 @@
               </div>
             </div>
           </div><!-- /.row -->
-        {% for divider in dividers %}
-          <div class="row">
-            <div class="col-md-12 event-main">
-              <hr/>
-              <div class="container">
-                <h3>{{ divider.title }}</h3>
-                {% if userroles %}
-                 <h4>$Uczestnicy: (jeśli są)</h4>
-                 {% for userrole in userroles %}
-                  {% if userrole.from_event.id == divider.id %}
-                  <h4>{{ userrole.title }}<h4>
-                  
-                  {% endif %}
-                 {% endfor %}
-                {% endif %}
-             </div>
-            </div>
-          </div><!-- /.row -->
-        {% endfor %}
+
+          {% include 'elements/divisions.html' %} <!-- W opcji z działami -->
+          {% include 'elements/taxes.html'%} <!-- W opcji ze składkami -->
+
       </main>
       <!-- empty div -->
         <div class="top-content">
