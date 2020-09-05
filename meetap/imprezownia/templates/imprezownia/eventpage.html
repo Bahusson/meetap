@@ -50,8 +50,16 @@
               </div>
             </div>
           </div><!-- /.row -->
-          <button><a href="{% url 'event' event.id True False %}">Pokaż Działy</a></button>
-          <button><a href="{% url 'event' event.id False True %}">Pokaż Składki</a></button>
+          {% if not show_divisions %}
+           {% if dividers %}
+            <button><a href="{% url 'event' event.id True False %}">$Pokaż Uczestników</a></button>
+           {% endif %}
+          {% endif %}
+          {% if not show_taxes %}
+           {% if tax_panels %}
+            <button><a href="{% url 'event' event.id False True %}">Pokaż Składki</a></button>
+           {% endif %}
+          {% endif %}
           {% if show_divisions %}
            {% include 'elements/divisions.html' %} <!-- W opcji z działami -->
           {% endif %}
