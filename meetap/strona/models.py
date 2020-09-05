@@ -76,6 +76,8 @@ class PageSkin(models.Model):
      upload_to='skins', blank=True, null=True)
     eventimagedefault = models.ImageField(
      upload_to='skins', blank=True, null=True)
+    userimagedefault = models.ImageField(
+     upload_to='skins', blank=True, null=True)
 
     class Meta:
         ordering = ['position']

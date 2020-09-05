@@ -6,11 +6,44 @@
         <h3>{{ divider.title }}</h3>
          {% for userrole in userroles %}
           {% if userrole.from_event.id == divider.id %}
-          <h4>{{ userrole.title }}<h4>
+          <br>
+           <div class="row">
+            <div class="col-md-7">
+             <h4>
+               {{ userrole.title }}
+               {% if userrole.aux_coordinator %}
+               $(tu daj badzik koordynatora pomocniczego onhover z opisem, że to koordynator pomocniczy)
+               {% endif %}
+             </h4>
+             {% if userrole.role_descr %}
+              <p>{{ userrole.role_descr }}</p>
+             {% endif %}
+
+
+
 <!--TO DO-->      <!--Tutaj daj kolejne dane usera-->
+            </div>
+            <div class="col-md-5">
+              {% if userrole.assigned_user %}
+               <p>{{ userrole.assigned_user.first_name }}</p>
+              {% elif userrole.alt_user %}
+               <p>{{ userrole.alt_user }}</p>
+              {% else %}
+               <p>$Nieprzypisany<p>
+              {% endif %}
+             {% if userrole.assigned_user.avatar1 %}
+              {% with userrole.assigned_user.avatar1 as avatar %}
+               <img class="img-fluid" src="{{ avatar.url }}" width=100% height=auto />
+              {% endwith %}
+             {% else %}
+               <img class="img-fluid allimg" src="{{ skin.userimagedefault.url }}" />
+             {% endif %}
+            </div>
+           </div>
           {% endif %}
          {% endfor %}
-     </div>
+
+    </div>
     </div>
   </div><!-- /.row -->
 {% endfor %}
