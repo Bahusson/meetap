@@ -45,12 +45,9 @@
           <li class="nav-item active ">
             <a class="nav-link " href="{% url 'home' %}">{{ items.mainpage }}<span class="sr-only">(current)</span></a>
           </li>
-          {% if user.is_adult > 0 %}
           {% if user.role_council > 2 %}
           <!-- Warunkowy dostęp do panelu użytkownika lub admina -->
              <li class="nav-item active"><a class="nav-link" href="">{{ items.panel_council }}</a></li>
-          {% endif %}
-             <li class="nav-item active"><a class="nav-link" href="">{{ items.panel_user }}</a></li>
           {% endif %}
     <!-- Koniec warunkowania dostępu do panelu użytkownika lub admina -->
              <li class="nav-item active"><a class="nav-link" href="">{{ items.faq }}</a></li>

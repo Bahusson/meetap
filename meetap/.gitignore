@@ -106,7 +106,7 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-meetap/media/
+media/
 
 local_settings.py
 
