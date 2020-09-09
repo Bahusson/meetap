@@ -70,7 +70,6 @@ def make_event(request):
             form.save(userdata)
             return redirect('events')
     else:
-        print(userdata)
         form = EventForm()
         context = {
          "form": form,

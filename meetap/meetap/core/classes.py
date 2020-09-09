@@ -275,5 +275,7 @@ class ActivePageItems(object):
 def checkifnull(x, y):
     if x == '':
         return y
+    elif x is None:
+        return y
     else:
         return x
