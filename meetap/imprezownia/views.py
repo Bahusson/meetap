@@ -8,6 +8,7 @@ from meetap.settings import LANGUAGES as L
 from meetap.core.classes import (
  PageElement as pe, PortalLoad, ActivePageItems)
 from meetap.core.snippets import booleanate as bot
+from .forms import EventForm
 import pytz
 import datetime
 
@@ -58,3 +59,23 @@ def event(request, event_id, show_divisions, show_taxes):
     context_lazy = pl.lazy_context(skins=S, context=context)
     template = 'imprezownia/eventpage.html'
     return render(request, template, context_lazy)
+
+
+def make_event(request):
+    userdata = User.objects.get(
+     id=request.user.id)
+    if request.method == 'POST':
+        form = EventForm(request.POST)
+        if form.is_valid():
+            form.save(userdata)
+            return redirect('events')
+    else:
+        print(userdata)
+        form = EventForm()
+        context = {
+         "form": form,
+        }
+        pl = PortalLoad(P, L, EMN)
+        context_lazy = pl.lazy_context(skins=S, context=context)
+        template = 'imprezownia/make_event.html'
+        return render(request, template, context_lazy)
