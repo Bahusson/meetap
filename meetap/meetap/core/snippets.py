@@ -74,3 +74,14 @@ def booleanate(mystring):
     else:
         mystring = False
     return mystring
+
+
+# Flara debugująca
+def flare(keyword):
+    print("")
+    print("")
+    print("")
+    print("THIS IS A DEBUGGING FLARE " + str(keyword))
+    print("")
+    print("")
+    print("")

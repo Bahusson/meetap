@@ -1,12 +1,12 @@
 from django import forms
 from .models import Event
-# from rekruter.models import User
 from meetap.core.classes import checkifnull as cn
+# from meetap.core.snippets import flare
 import datetime
 
 
 class EventForm(forms.ModelForm):
-    title = forms.CharField(max_length=30)
+    title = forms.CharField(max_length=150)
     body = forms.CharField(max_length=1500, required=False)
     image = forms.ImageField(required=False)
     datefrom = forms.DateTimeField(input_formats=['%d.%m.%Y %H:%M:%S'])
@@ -38,14 +38,21 @@ class EventForm(forms.ModelForm):
 
     class Meta:
         model = Event
-        fields = ()  # "__all__"
+        fields = (
+         "title", "body", "image", "datefrom", "dateto", "is_commercial",
+         "is_mass_event", "is_adult_only", "is_alcohol", "is_tobacco",
+         "other_drugs", "is_sex_party", "is_paid", "is_for_straight",
+         "is_for_gay", "is_for_bi", "is_for_trans", "is_for_other",
+         "is_for_passive", "is_for_r_passive", "is_for_switch",
+         "is_for_r_active", "is_for_active", "is_for_submisive",
+         "is_for_r_submissive", "is_for_neutral", "is_for_r_dominant",
+         "is_for_dominant", "other_preferences")
 
     def save(self, user_id, commit=True):
-        event = (EventForm, self).save(commit=False)
-        print("string testowy!!!")
+        event = super(EventForm, self).save(commit=False)
         event.title = cn(self.cleaned_data["title"], "Debugtitle")
         event.body = cn(self.cleaned_data["body"], False)
-        event.image = cn(self.cleaned_data["image"], False)
+        event.image = self.cleaned_data["image"]
         event.datefrom = cn(self.cleaned_data["datefrom"], False)
         event.dateto = cn(self.cleaned_data["dateto"], False)
         event.owner = user_id
@@ -54,7 +61,7 @@ class EventForm(forms.ModelForm):
         event.is_adult_only = cn(self.cleaned_data["is_adult_only"], False)
         event.is_alcohol = cn(self.cleaned_data["is_alcohol"], False)
         event.is_tobacco = cn(self.cleaned_data["is_tobacco"], False)
-        event.other_drugs = cn(self.cleaned_data["other_drugs"], False)
+        event.other_drugs = self.cleaned_data["other_drugs"]
         event.is_sex_party = cn(self.cleaned_data["is_sex_party"], False)
         event.is_paid = cn(self.cleaned_data["is_paid"], False)
         event.is_for_straight = cn(self.cleaned_data["is_for_straight"], False)
@@ -72,7 +79,7 @@ class EventForm(forms.ModelForm):
         event.is_for_neutral = cn(self.cleaned_data["is_for_neutral"], False)
         event.is_for_r_dominant = cn(self.cleaned_data["is_for_r_dominant"], False)
         event.is_for_dominant = cn(self.cleaned_data["is_for_dominant"], False)
-        event.other_preferences = cn(self.cleaned_data["other_preferences"], False)
+        event.other_preferences = self.cleaned_data["other_preferences"]
         event.pubdate = datetime.datetime.now()
 
         if commit:
