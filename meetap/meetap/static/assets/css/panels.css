@@ -30,6 +30,9 @@
   font: 'Ubuntu', sans-serif;
   font-size: 16px;
 }
+.toggle{
+  display: none;
+}
 .allbutton {
   font: 'Ubuntu', sans-serif;
   font-size: 16px;
