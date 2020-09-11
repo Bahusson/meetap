@@ -40,14 +40,17 @@
           {% endif %}
           {% if user.role_council > 1 %} <!-- Opcje dla Członków -->
            {% if user.showme_adultcontent %}
-           <p class="wnioski2">$Seksimpreza? : {{ form.is_sex_party }}</p>
-           <p class="wnioski2">$Z alkoholem? : {{ form.is_alcohol }}</p>
-           <p class="wnioski2">$Dla palących? : {{ form.is_tobacco }}</p>
-           <p class="wnioski2">$Inne używki (jakie?) : {{ form.other_drugs }}</p>
-           <!--Tutaj zrób Javascript ukrywający i pokazujący dodatkowe opcje jak ktoś zaznaczy seksimprezę -->
-           <p class="wnioski2 toggle" id="id_is_sex_party_row1">$Dla hetero : {{ form.is_for_straight }}</p>
-           <p class="wnioski2 toggle" id="id_is_sex_party_row2">$Dla homo : {{ form.is_for_gay }}</p>
-
+           <p class="wnioski2">$Tylko dla dorosłych? : {{ form.is_adult_only }}</p>
+           <div class="toggle" id="id_is_adult_only_row"> <!-- div ukrywający opcje dla dorosłych -->
+            <p class="wnioski2">$Seksimpreza? : {{ form.is_sex_party }}</p>
+            <p class="wnioski2">$Z alkoholem? : {{ form.is_alcohol }}</p>
+            <p class="wnioski2">$Dla palących? : {{ form.is_tobacco }}</p>
+            <p class="wnioski2">$Inne używki (jakie?) : {{ form.other_drugs }}</p>
+           </div>
+           <div class="toggle" id="id_is_sex_party_row"> <!-- div ukrywający opcje dla dorosłych -->
+            <p class="wnioski2">$Dla hetero : {{ form.is_for_straight }}</p>
+            <p class="wnioski2">$Dla homo : {{ form.is_for_gay }}</p>
+           </div>
            {% endif %}
           {% endif %}
 

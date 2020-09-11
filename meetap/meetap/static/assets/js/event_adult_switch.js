@@ -6,10 +6,10 @@ function hop()
   $('html, body').stop().animate({scrollTop: SH-WH}, 1000);
 }
 
-function toggleelement(class_name)
+function toggleelement(class_name, row_name)
 {
  var x = document.getElementById(class_name);
- var y = document.getElementById("id_is_sex_party").checked;
+ var y = document.getElementById(row_name).checked;
   if (x.style.display === 'none', y === true) {
     x.style.display = 'block';
   }
@@ -20,10 +20,14 @@ function toggleelement(class_name)
 
 $(document).ready(function()
 {
+ $('#id_is_adult_only').click(function() // Po zaznaczeniu zgody udostępnij przycisk wyślij.
+ {
+   toggleelement("id_is_adult_only_row", "id_is_adult_only");
+   hop();
+});
  $('#id_is_sex_party').click(function() // Po zaznaczeniu zgody udostępnij przycisk wyślij.
 {
-  toggleelement("id_is_sex_party_row1");
-  toggleelement("id_is_sex_party_row2");  
+  toggleelement("id_is_sex_party_row", "id_is_sex_party");
   hop();
 });
 });
