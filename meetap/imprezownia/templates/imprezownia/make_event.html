@@ -48,8 +48,8 @@
             <p class="wnioski2">$Inne używki (jakie?) : {{ form.other_drugs }}</p>
            </div>
            <div class="toggle" id="id_is_sex_party_row"> <!-- div ukrywający opcje dla dorosłych -->
-            <p class="wnioski2">$Dla hetero : {{ form.is_for_straight }}</p>
-            <p class="wnioski2">$Dla homo : {{ form.is_for_gay }}</p>
+            <p class="wnioski2">$Dla hetero : <input class="rollback" type="checkbox" name="is_for_straight" id="id_is_for_straight"></p>
+            <p class="wnioski2">$Dla homo : <input class="rollback" type="checkbox" name="is_for_gay" id="id_is_for_gay"></p>
            </div>
            {% endif %}
           {% endif %}
