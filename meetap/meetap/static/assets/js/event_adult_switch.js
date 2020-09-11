@@ -40,19 +40,25 @@ function child_uncheck(parent_id, child_id)
   }
 }
 
+function uncheck_all_children(parent_id)
+{
+  child_uncheck(parent_id, "id_is_for_straight");
+  child_uncheck(parent_id, "id_is_for_gay");
+}
+
 $(document).ready(function()
 {
  $('#id_is_adult_only').click(function() // Po zaznaczeniu zgody udostępnij przycisk wyślij.
  {
    toggleelement("id_is_adult_only_row", "id_is_adult_only");
    rollbackelement("id_is_sex_party_row", "id_is_adult_only", "id_is_sex_party")
-   child_uncheck("id_is_adult_only", "id_is_for_straight")
-   child_uncheck("id_is_adult_only", "id_is_for_gay")
+   uncheck_all_children("id_is_adult_only")
    hop();
 });
  $('#id_is_sex_party').click(function() // Po zaznaczeniu zgody udostępnij przycisk wyślij.
 {
   toggleelement("id_is_sex_party_row", "id_is_sex_party");
+  uncheck_all_children("id_is_sex_party")
   hop();
 });
 });
