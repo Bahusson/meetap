@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block css %}
+
 {% endblock %}
 {% block css2 %}
 {% endblock %}
@@ -44,8 +45,8 @@
            <p class="wnioski2">$Dla palących? : {{ form.is_tobacco }}</p>
            <p class="wnioski2">$Inne używki (jakie?) : {{ form.other_drugs }}</p>
            <!--Tutaj zrób Javascript ukrywający i pokazujący dodatkowe opcje jak ktoś zaznaczy seksimprezę -->
-           <p class="wnioski2 toggle">$Dla hetero : {{ form.is_for_straight }}</p>
-           <p class="wnioski2 toggle">$Dla homo : {{ form.is_for_gay }}</p>
+           <p class="wnioski2 toggle" id="id_is_sex_party_row1">$Dla hetero : {{ form.is_for_straight }}</p>
+           <p class="wnioski2 toggle" id="id_is_sex_party_row2">$Dla homo : {{ form.is_for_gay }}</p>
 
            {% endif %}
           {% endif %}
@@ -67,8 +68,8 @@
 
 
 {% block scripts %}
-  <script src="/static/assets/js/event_adult_switch.js"></script>
   {% include 'widgets/date_period.html' %}
 {% endblock %}
 {% block scripts2 %}
+  <script src="/static/assets/js/event_adult_switch.js"></script>
 {% endblock %}

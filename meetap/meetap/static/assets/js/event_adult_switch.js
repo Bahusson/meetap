@@ -8,21 +8,22 @@ function hop()
 
 function toggleelement(class_name)
 {
-  var x = document.getElementById(class_name);
-  alert("test");
-  if (x.style.display === 'none') {
+ var x = document.getElementById(class_name);
+ var y = document.getElementById("id_is_sex_party").checked;
+  if (x.style.display === 'none', y === true) {
     x.style.display = 'block';
   }
   else {
     x.style.display = 'none';
-  }
+}
 }
 
 $(document).ready(function()
 {
  $('#id_is_sex_party').click(function() // Po zaznaczeniu zgody udostępnij przycisk wyślij.
 {
-  toggleelement("id_is_for_straight");
+  toggleelement("id_is_sex_party_row1");
+  toggleelement("id_is_sex_party_row2");  
   hop();
 });
 });
