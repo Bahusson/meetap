@@ -38,18 +38,19 @@ def events(request):
 
 def event(request, event_id, show_divisions, show_taxes):
     # Tutaj będzie słownik z formularzami.
+    pe_e = pe(E)
+    pe_e_id = pe_e.by_id(G404=G404, id=event_id)
+    print("show_divisions is " + show_divisions)
     formdict = {
-        "True": PartyDividerForm(),
-        "False": TaxPanelForm(),
+        "True": PartyDividerForm,
+        "False": TaxPanelForm,
     }
     if request.method == 'POST':
-        form = formdict(show_divisions)(request.POST, request.FILES)
-    if form.is_valid():
-        form.save(event_id)
-        return redirect(
-         'event/<int:' + str(event_id) + ">/"
-         + show_divisions + "/" + show_taxes
-         )
+        form = formdict[show_divisions](request.POST, request.FILES)
+        print(form)
+        if form.is_valid():
+            form.save(pe_e_id)
+            return redirect(request.META.get('HTTP_REFERER'))
     pe_e = pe(E)
     pe_e_id = pe_e.by_id(G404=G404, id=event_id)
     pe_pd = PD.objects.filter(from_event=event_id)
@@ -58,7 +59,7 @@ def event(request, event_id, show_divisions, show_taxes):
     pe_tax = Tax.objects.filter(from_event__from_event=event_id)
     sh_dv = bot(show_divisions)
     sh_tx = bot(show_taxes)
-    form = formdict(show_divisions)
+    form = formdict[show_divisions]
 
     context = {'event': pe_e_id,
                'dividers': pe_pd,

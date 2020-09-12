@@ -1,5 +1,5 @@
 from django import forms
-from .models import Event, PartyDivider
+from .models import Event, PartyDivider, TaxPanel
 from meetap.core.classes import checkifnull as cn
 # from meetap.core.snippets import flare
 import datetime
@@ -89,18 +89,17 @@ class EventForm(forms.ModelForm):
 
 class PartyDividerForm(forms.ModelForm):
     title = forms.CharField(max_length=150)
-    body = forms.CharField(max_length=1500, required=False)
+    descr = forms.CharField(max_length=1500, required=False)
     image = forms.ImageField(required=False)
 
     class Meta:
         model = PartyDivider
-        fields = (
-         "title", "body", "image",)
+        fields = ("title", "descr", "image",)
 
     def save(self, event_id, commit=True):
-        event = super(EventForm, self).save(commit=False)
+        event = super(PartyDividerForm, self).save(commit=False)
         event.title = self.cleaned_data["title"]
-        event.body = self.cleaned_data["body"]
+        event.descr = self.cleaned_data["descr"]
         event.image = self.cleaned_data["image"]
         event.from_event = event_id
 
@@ -111,19 +110,18 @@ class PartyDividerForm(forms.ModelForm):
 
 class TaxPanelForm(forms.ModelForm):
     title = forms.CharField(max_length=150)
-    body = forms.CharField(max_length=1500, required=False)
+    descr = forms.CharField(max_length=1500, required=False)
     image = forms.ImageField(required=False)
     tax_type = forms.CharField(widget=forms.HiddenInput())
 
     class Meta:
-        model = PartyDivider
-        fields = (
-         "title", "body", "image",)
+        model = TaxPanel
+        fields = ("title", "descr", "image", 'tax_type')
 
     def save(self, event_id, commit=True):
-        event = super(EventForm, self).save(commit=False)
+        event = super(TaxPanelForm, self).save(commit=False)
         event.title = self.cleaned_data["title"]
-        event.body = self.cleaned_data["body"]
+        event.descr = self.cleaned_data["descr"]
         event.image = self.cleaned_data["image"]
         event.tax_type = self.cleaned_data["tax_type"]
         event.from_event = event_id

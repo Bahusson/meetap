@@ -1,0 +1,18 @@
+<!-- Dodawanie nowego działu -->
+<div class="row">
+  <button id="add_remove_div">+</button>
+  <div class="toggle" id="hidden_row_div"> <!-- Domyślnie ukryty -->
+  <!-- Tutaj wrzucaj elementy nowego działu -->
+  <!-- Zrób jakiś plusik, który rozwija tę część, czy coś... -->
+   <div class="container kol">
+    <form enctype="multipart/form-data" method="post"> <!-- Do wysyłania plików -->
+    {% csrf_token %}
+
+    <p class="wnioski2">$Tytuł/Nazwa : {{ form.title }}</p>
+    <p class="wnioski2">$Opis : {{ form.descr }}</p>
+    <p class="wnioski2">$Obrazek : {{ form.image }}</p>
+
+    <button id="send" class="button btn btn-dark btn-sm" name="subbutton2" value="send_div" type="submit">$Dodaj nowy dział.</button>
+  </div>
+ </div>
+</div>
