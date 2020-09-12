@@ -8,7 +8,7 @@ from meetap.settings import LANGUAGES as L
 from meetap.core.classes import (
  PageElement as pe, PortalLoad, ActivePageItems)
 from meetap.core.snippets import (booleanate as bot, flare)
-from .forms import EventForm
+from .forms import EventForm, PartyDividerForm
 import pytz
 import datetime
 
@@ -54,7 +54,6 @@ def event(request, event_id, show_divisions, show_taxes):
                'show_divisions': sh_dv,
                'show_taxes': sh_tx,
                }
-    print(context)
     pl = PortalLoad(P, L, EMN)
     context_lazy = pl.lazy_context(skins=S, context=context)
     template = 'imprezownia/eventpage.html'

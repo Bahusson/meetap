@@ -1,5 +1,5 @@
 from django import forms
-from .models import Event
+from .models import Event, PartyDivider
 from meetap.core.classes import checkifnull as cn
 # from meetap.core.snippets import flare
 import datetime
@@ -81,6 +81,28 @@ class EventForm(forms.ModelForm):
         event.is_for_dominant = cn(self.cleaned_data["is_for_dominant"], False)
         event.other_preferences = self.cleaned_data["other_preferences"]
         event.pubdate = datetime.datetime.now()
+
+        if commit:
+            event.save()
+        return event
+
+
+class PartyDividerForm(forms.ModelForm):
+    title = forms.CharField(max_length=150)
+    body = forms.CharField(max_length=1500, required=False)
+    image = forms.ImageField(required=False)
+
+    class Meta:
+        model = PartyDivider
+        fields = (
+         "title", "body", "image",)
+
+    def save(self, event_id, commit=True):
+        event = super(EventForm, self).save(commit=False)
+        event.title = cn(self.cleaned_data["title"], "Debugtitle")
+        event.body = cn(self.cleaned_data["body"], False)
+        event.image = self.cleaned_data["image"]
+        event.from_event = event_id
 
         if commit:
             event.save()
