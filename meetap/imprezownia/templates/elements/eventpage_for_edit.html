@@ -1,0 +1,12 @@
+{% if not show_divisions %}
+  <button><a href="{% url 'event' event.id True False %}">$Pokaż Uczestników</a></button>
+{% endif %}
+{% if not show_taxes %}
+  <button><a href="{% url 'event' event.id False True %}">Pokaż Składki</a></button>
+{% endif %}
+{% if show_divisions %}
+ {% include 'elements/divisions.html' %} <!-- W opcji z działami -->
+{% endif %}
+{% if show_taxes %}
+ {% include 'elements/taxes.html'%} <!-- W opcji ze składkami -->
+{% endif %}

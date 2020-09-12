@@ -50,22 +50,7 @@
               </div>
             </div>
           </div><!-- /.row -->
-          {% if not show_divisions %}
-           {% if dividers %}
-            <button><a href="{% url 'event' event.id True False %}">$Pokaż Uczestników</a></button>
-           {% endif %}
-          {% endif %}
-          {% if not show_taxes %}
-           {% if tax_panels %}
-            <button><a href="{% url 'event' event.id False True %}">Pokaż Składki</a></button>
-           {% endif %}
-          {% endif %}
-          {% if show_divisions %}
-           {% include 'elements/divisions.html' %} <!-- W opcji z działami -->
-          {% endif %}
-          {% if show_taxes %}
-           {% include 'elements/taxes.html'%} <!-- W opcji ze składkami -->
-          {% endif %}
+          {% include 'elements/eventpage_for_edit.html' %}
       </main>
       <!-- empty div -->
         <div class="top-content">
@@ -80,6 +65,7 @@
 
 
 {% block scripts %}
+ <script src="/static/assets/js/event_elements_switch.js"></script>
 {% endblock %}
 {% block scripts2 %}
 {% endblock %}
