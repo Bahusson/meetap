@@ -112,7 +112,7 @@ class TaxPanelForm(forms.ModelForm):
     title = forms.CharField(max_length=150)
     descr = forms.CharField(max_length=1500, required=False)
     image = forms.ImageField(required=False)
-    tax_type = forms.CharField(widget=forms.HiddenInput())
+    tax_type = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
         model = TaxPanel
@@ -123,7 +123,7 @@ class TaxPanelForm(forms.ModelForm):
         event.title = self.cleaned_data["title"]
         event.descr = self.cleaned_data["descr"]
         event.image = self.cleaned_data["image"]
-        event.tax_type = self.cleaned_data["tax_type"]
+        event.tax_type = cn(self.cleaned_data["tax_type"], False)
         event.from_event = event_id
 
         if commit:
