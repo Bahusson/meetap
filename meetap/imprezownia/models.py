@@ -124,6 +124,7 @@ class TaxPanel(models.Model):
     tax_type = models.PositiveSmallIntegerField(
             choices=TAX_CHOICES, default=0)
     from_event = models.ForeignKey('Event', on_delete=models.CASCADE,)
+    image = models.ImageField(upload_to='images', blank=True, null=True)
 
     def __str__(self):
         return self.title

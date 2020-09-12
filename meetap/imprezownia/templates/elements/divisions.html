@@ -8,7 +8,9 @@
             <p>{{ divider.descr }}</p>
           </div>
           <div class="col-md-5">
+            {% if divider.image %}
             <img class="img-fluid" src="{{ divider.image.url }}" width=100% height=auto />
+            {% endif %}
           </div
         </div>
          {% for userrole in userroles %}
@@ -49,7 +51,6 @@
           {% endif %}
          {% endfor %}
     </div>
-   </div>
-  </div><!-- /.row -->
+   </div><!-- /.row -->
 {% endfor %}
 {% include 'elements/taxdivisionfooter.html' %}
