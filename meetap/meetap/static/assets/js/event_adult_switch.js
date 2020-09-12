@@ -44,6 +44,19 @@ function uncheck_all_children(parent_id)
 {
   child_uncheck(parent_id, "id_is_for_straight");
   child_uncheck(parent_id, "id_is_for_gay");
+  child_uncheck(parent_id, "id_is_for_bi");
+  child_uncheck(parent_id, "id_is_for_trans");
+  child_uncheck(parent_id, "id_is_for_other");
+  child_uncheck(parent_id, "id_is_for_passive");
+  child_uncheck(parent_id, "id_is_for_r_passive");
+  child_uncheck(parent_id, "id_is_for_switch");
+  child_uncheck(parent_id, "id_is_for_r_active");
+  child_uncheck(parent_id, "id_is_for_active");
+  child_uncheck(parent_id, "id_is_for_submisive");
+  child_uncheck(parent_id, "id_is_for_r_submissive");
+  child_uncheck(parent_id, "id_is_for_neutral");
+  child_uncheck(parent_id, "id_is_for_r_dominant");
+  child_uncheck(parent_id, "id_is_for_dominant");
 }
 
 $(document).ready(function()

@@ -48,8 +48,29 @@
             <p class="wnioski2">$Inne używki (jakie?) : {{ form.other_drugs }}</p>
            </div>
            <div class="toggle" id="id_is_sex_party_row"> <!-- div ukrywający opcje dla dorosłych -->
-            <p class="wnioski2">$Dla hetero : <input class="rollback" type="checkbox" name="is_for_straight" id="id_is_for_straight"></p>
-            <p class="wnioski2">$Dla homo : <input class="rollback" type="checkbox" name="is_for_gay" id="id_is_for_gay"></p>
+            <br>
+            <p class="wnioski2">Orientacja:</p>
+            <p class="wnioski2">$Dla hetero : {{ form.is_for_straight }}</p>
+            <p class="wnioski2">$Dla homo : {{ form.is_for_gay }}</p>
+            <p class="wnioski2">$Dla bi : {{ form.is_for_bi }}</p>
+            <p class="wnioski2">$Dla trans : {{ form.is_for_trans }}</p>
+            <p class="wnioski2">$Dla innych orientacji : {{ form.is_for_other }}</p>
+            <p class="wnioski2">$Inne preferencje (Jakie): {{ form.other_preferences }}</p>
+            <br>
+            <p class="wnioski2">$Rola/Aktywność:</p>
+            <p class="wnioski2">$Dla pasywnych : {{ form.is_for_passive }}</p>
+            <p class="wnioski2">$Dla raczej pasywnych : {{ form.is_for_r_passive }}</p>
+            <p class="wnioski2">$Dla switchy : {{ form.is_for_switch }}</p>
+            <p class="wnioski2">$Dla raczej aktywnych : {{ form.is_for_r_active }}</p>
+            <p class="wnioski2">$Dla aktywnych : {{ form.is_for_active }}</p>
+            <br>
+            <p class="wnioski2">$Dominacja:</p>
+            <p class="wnioski2">$Dla uległych: {{ form.is_for_submisive }}</p>
+            <p class="wnioski2">$Dla raczej uległych : {{ form.is_for_r_submissive }}</p>
+            <p class="wnioski2">$Dla neutralnych : {{ form.is_for_neutral }}</p>
+            <p class="wnioski2">$Dla raczej dominujących : {{ form.is_for_r_dominant }}</p>
+            <p class="wnioski2">$Dla dominujących : {{ form.is_for_dominant }}</p>
+
            </div>
            {% endif %}
           {% endif %}
