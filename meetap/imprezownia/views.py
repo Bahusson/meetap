@@ -8,7 +8,7 @@ from meetap.settings import LANGUAGES as L
 from meetap.core.classes import (
  PageElement as pe, PortalLoad, ActivePageItems)
 from meetap.core.snippets import (booleanate as bot, flare)
-from .forms import EventForm, PartyDividerForm
+from .forms import EventForm, PartyDividerForm, TaxPanelForm
 import pytz
 import datetime
 
@@ -37,6 +37,19 @@ def events(request):
 
 
 def event(request, event_id, show_divisions, show_taxes):
+    # Tutaj będzie słownik z formularzami.
+    formdict = {
+        "True": PartyDividerForm(),
+        "False": TaxPanelForm(),
+    }
+    if request.method == 'POST':
+        form = formdict(show_divisions)(request.POST, request.FILES)
+    if form.is_valid():
+        form.save(event_id)
+        return redirect(
+         'event/<int:' + str(event_id) + ">/"
+         + show_divisions + "/" + show_taxes
+         )
     pe_e = pe(E)
     pe_e_id = pe_e.by_id(G404=G404, id=event_id)
     pe_pd = PD.objects.filter(from_event=event_id)
@@ -45,6 +58,7 @@ def event(request, event_id, show_divisions, show_taxes):
     pe_tax = Tax.objects.filter(from_event__from_event=event_id)
     sh_dv = bot(show_divisions)
     sh_tx = bot(show_taxes)
+    form = formdict(show_divisions)
 
     context = {'event': pe_e_id,
                'dividers': pe_pd,
@@ -53,6 +67,7 @@ def event(request, event_id, show_divisions, show_taxes):
                'taxes': pe_tax,
                'show_divisions': sh_dv,
                'show_taxes': sh_tx,
+               "form": form,
                }
     pl = PortalLoad(P, L, EMN)
     context_lazy = pl.lazy_context(skins=S, context=context)

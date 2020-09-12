@@ -50,8 +50,8 @@ class EventForm(forms.ModelForm):
 
     def save(self, user_id, commit=True):
         event = super(EventForm, self).save(commit=False)
-        event.title = cn(self.cleaned_data["title"], "Debugtitle")
-        event.body = cn(self.cleaned_data["body"], False)
+        event.title = self.cleaned_data["title"]
+        event.body = self.cleaned_data["body"]
         event.image = self.cleaned_data["image"]
         event.datefrom = cn(self.cleaned_data["datefrom"], False)
         event.dateto = cn(self.cleaned_data["dateto"], False)
@@ -99,9 +99,33 @@ class PartyDividerForm(forms.ModelForm):
 
     def save(self, event_id, commit=True):
         event = super(EventForm, self).save(commit=False)
-        event.title = cn(self.cleaned_data["title"], "Debugtitle")
-        event.body = cn(self.cleaned_data["body"], False)
+        event.title = self.cleaned_data["title"]
+        event.body = self.cleaned_data["body"]
         event.image = self.cleaned_data["image"]
+        event.from_event = event_id
+
+        if commit:
+            event.save()
+        return event
+
+
+class TaxPanelForm(forms.ModelForm):
+    title = forms.CharField(max_length=150)
+    body = forms.CharField(max_length=1500, required=False)
+    image = forms.ImageField(required=False)
+    tax_type = forms.CharField(widget=forms.HiddenInput())
+
+    class Meta:
+        model = PartyDivider
+        fields = (
+         "title", "body", "image",)
+
+    def save(self, event_id, commit=True):
+        event = super(EventForm, self).save(commit=False)
+        event.title = self.cleaned_data["title"]
+        event.body = self.cleaned_data["body"]
+        event.image = self.cleaned_data["image"]
+        event.tax_type = self.cleaned_data["tax_type"]
         event.from_event = event_id
 
         if commit:
