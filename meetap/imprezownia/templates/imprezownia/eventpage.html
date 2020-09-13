@@ -25,8 +25,9 @@
           <div class="row">
             <div class="col-md-7 event-main">
               <div class="container">
-                <form name="delete_event" method="post">
-                  <button id="send" class="button btn btn-dark btn-sm" name="remove_event" value="send_div" type="submit">$Usuń wydarzenie</button>
+                <form name="EventDeleteForm" method="post" class="form form-inline">
+                  {% csrf_token %}
+                <button class="btn btn-link-3 btn-light" name="delete_event" type="submit">$Usuń wydarzenie</button>
                 </form>
                 <p>$Dodano: {{ event.pubdate_short }}<br>
                 $Przez: {{ event.owner.first_name }}<p>

@@ -51,7 +51,9 @@ def event(request, event_id, show_divisions, show_taxes):
         if form.is_valid():
             form.save(pe_e_id)
             return redirect(request.META.get('HTTP_REFERER'))
-    
+    if "delete_event" in request.POST:
+        pe_e_id.delete()
+        return redirect('events')
     pe_e = pe(E)
     pe_e_id = pe_e.by_id(G404=G404, id=event_id)
     pe_pd = PD.objects.filter(from_event=event_id)
