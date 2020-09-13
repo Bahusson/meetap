@@ -1,8 +1,8 @@
+<button name="safety_valve" class="btn btn-link-3 btn-light" value = "{{ forloop.counter0 }}">$Usuń dział</button>
+
 <form name="EventChildDeleteForm" method="post" class="form form-inline">
   {% csrf_token %}
-
-<button class="btn btn-link-3 btn-light untoggle" value = "{{ forloop.counter0 }}">$Usuń dział</button>
- <div class="toggle">
+ <div name="ButtonHiddenDiv" class="toggle">
    <p class="wnioski2">Na pewno chcesz usunąć ten dział?</p>
   <button class="btn btn-link-3 btn-light" name="delete_division"
    {% if show_divisions %}

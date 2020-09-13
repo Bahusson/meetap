@@ -33,6 +33,9 @@
 .toggle{
   display: none;
 }
+.untoggle{
+  display: block;
+}
 .allbutton {
   font: 'Ubuntu', sans-serif;
   font-size: 16px;
