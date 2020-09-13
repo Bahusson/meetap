@@ -24,7 +24,7 @@ def events_panel(request):
 
 def events(request):
     userdata = User.objects.get(
-     id=request.user.id)
+     mnemo_login=request.user.mnemo_login)
     # Widzi tylko własne wpisy
     efilter = E.objects.filter(owner=userdata)
     context = {
@@ -78,7 +78,7 @@ def event(request, event_id, show_divisions, show_taxes):
 
 def make_event(request):
     userdata = User.objects.get(
-     id=request.user.id)
+     mnemo_login=request.user.mnemo_login)
     if request.method == 'POST':
         form = EventForm(request.POST, request.FILES)
         if form.is_valid():
