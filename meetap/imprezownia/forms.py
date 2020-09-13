@@ -1,6 +1,6 @@
 from django import forms
-from .models import Event, PartyDivider, TaxPanel
-from meetap.core.classes import checkifnull as cn
+from .models import Event, PartyDivider, TaxPanel, UserRole, Tax
+from meetap.core.classes import (checkifnull as cn, user_by_unique_id as u_qid)
 # from meetap.core.snippets import flare
 import datetime
 
@@ -125,6 +125,34 @@ class TaxPanelForm(forms.ModelForm):
         event.image = self.cleaned_data["image"]
         event.tax_type = cn(self.cleaned_data["tax_type"], False)
         event.from_event = event_id
+
+        if commit:
+            event.save()
+        return event
+
+
+class UserRoleForm(forms.ModelForm):
+    title = forms.CharField(max_length=150)
+    role_descr = forms.CharField(max_length=600, required=False)
+    assigned_user = forms.CharField(max_length=11, required=False)
+    alt_user = forms.CharField(max_length=150, required=False)
+    tax_free = forms.BooleanField(required=False)
+    aux_coordinator = forms.BooleanField(required=False)
+
+    class Meta:
+        model = UserRole
+        fields = (
+         "title", "role_descr", "assigned_user", "alt_user", "tax_free",
+         "aux_coordinator",
+         )
+
+    def save(self, divider_id, commit=True):
+        event = super(UserRoleForm, self).save(commit=False)
+        event.title = self.cleaned_data["title"]
+        event.role_descr = self.cleaned_data["role_descr"]
+        event.assigned_user = 1
+        event.tax_type = cn(self.cleaned_data["tax_type"], False)
+        event.from_event = divider_id
 
         if commit:
             event.save()

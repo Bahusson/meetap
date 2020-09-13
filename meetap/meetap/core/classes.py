@@ -279,3 +279,6 @@ def checkifnull(x, y):
         return y
     else:
         return x
+
+def user_by_unique_id(user_unique_id):
+    pass
