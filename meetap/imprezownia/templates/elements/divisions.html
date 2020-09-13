@@ -12,10 +12,7 @@
             <img class="img-fluid" src="{{ divider.image.url }}" width=100% height=auto />
             {% endif %}
           </div>
-          <form name="EventDeleteForm" method="post" class="form form-inline">
-            {% csrf_token %}
-          <button class="btn btn-link-3 btn-light" name="delete_division" value="divider.id" type="submit">$Usuń dział</button>
-          </form>
+        {% include 'elements/delete_event_child.html' %}
         </div>
          {% for userrole in userroles %}
           {% if userrole.from_event.id == divider.id %}

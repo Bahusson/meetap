@@ -61,7 +61,8 @@ def event(request, event_id, show_divisions, show_taxes):
         pe_e_id.delete()
         return redirect('events')
     if "delete_division" in request.POST:
-        div_value = request.POST['delete_event']
+        div_value = request.POST['delete_division']
+        print(type(div_value))
         div_for_deletion = pe(PD).by_id(G404=G404, id=div_value)
         div_for_deletion.delete()
         return redirect(request.META.get('HTTP_REFERER'))
