@@ -40,7 +40,13 @@ def event(request, event_id, show_divisions, show_taxes):
     # Tutaj będzie słownik z formularzami.
     pe_e = pe(E)
     pe_e_id = pe_e.by_id(G404=G404, id=event_id)
-    print("show_divisions is " + show_divisions)
+    pe_e = pe(E)
+    pe_e_id = pe_e.by_id(G404=G404, id=event_id)
+    pe_pd = PD.objects.filter(from_event=event_id)
+    pe_ur = UR.objects.filter(from_event__from_event=event_id)
+    pe_tp = TP.objects.filter(from_event=event_id)
+    pe_tax = Tax.objects.filter(from_event__from_event=event_id)
+
     formdict = {
         "True": PartyDividerForm,
         "False": TaxPanelForm,
@@ -54,12 +60,12 @@ def event(request, event_id, show_divisions, show_taxes):
     if "delete_event" in request.POST:
         pe_e_id.delete()
         return redirect('events')
-    pe_e = pe(E)
-    pe_e_id = pe_e.by_id(G404=G404, id=event_id)
-    pe_pd = PD.objects.filter(from_event=event_id)
-    pe_ur = UR.objects.filter(from_event__from_event=event_id)
-    pe_tp = TP.objects.filter(from_event=event_id)
-    pe_tax = Tax.objects.filter(from_event__from_event=event_id)
+    if "delete_division" in request.POST:
+        div_value = request.POST['delete_event']
+        div_for_deletion = pe(PD).by_id(G404=G404, id=div_value)
+        div_for_deletion.delete()
+        return redirect(request.META.get('HTTP_REFERER'))
+
     sh_dv = bot(show_divisions)
     sh_tx = bot(show_taxes)
     form = formdict[show_divisions]
