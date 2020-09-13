@@ -45,12 +45,13 @@ def event(request, event_id, show_divisions, show_taxes):
         "True": PartyDividerForm,
         "False": TaxPanelForm,
     }
-    if request.method == 'POST':
+    if 'make_event_child' in request.POST:
         form = formdict[show_divisions](request.POST, request.FILES)
         print(form)
         if form.is_valid():
             form.save(pe_e_id)
             return redirect(request.META.get('HTTP_REFERER'))
+    
     pe_e = pe(E)
     pe_e_id = pe_e.by_id(G404=G404, id=event_id)
     pe_pd = PD.objects.filter(from_event=event_id)
