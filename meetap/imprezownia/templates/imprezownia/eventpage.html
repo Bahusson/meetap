@@ -31,6 +31,7 @@
                   {% csrf_token %}
                   <p class="wnioski2">Na pewno chcesz usunąć to wydarzenie?</p>
                   <button class="btn btn-link-3 btn-light" name="delete_event" type="submit">$Tak usuń trwale!</button>
+                  <button name="dont_delete_event" class="btn btn-link-3 btn-light" value="0">$Nie usuwaj!</button>
                  </form>
                 </div>
                 <p>$Dodano: {{ event.pubdate_short }}<br>

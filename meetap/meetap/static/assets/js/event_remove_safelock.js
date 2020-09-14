@@ -31,7 +31,22 @@ $(document).ready(function()
     toggleshort("safety_valve", value);
 
 });
+
+$("button[name='dont_delete']").click(function() // Udostępnij przycisk usunięcia
+ {
+   var value = $(event.target).val();
+   toggleshort2("ButtonHiddenDiv", value);
+   toggleshort("safety_valve", value);
+});
+
 $("button[name='safety_valve_event']").click(function() // Udostępnij przycisk usunięcia
+ {
+   var value = $(event.target).val();
+   toggleshort2("EventButtonHiddenDiv", value);
+   toggleshort("safety_valve_event", value);
+});
+
+$("button[name='dont_delete_event']").click(function() // Udostępnij przycisk usunięcia
  {
    var value = $(event.target).val();
    toggleshort2("EventButtonHiddenDiv", value);
