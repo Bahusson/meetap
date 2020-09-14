@@ -1,38 +1,40 @@
-/*function toggleelement(class_name, element_value, form_name)
+// Te dwie poniższe funkcje razem powodują, że guziki "zamieniają się miejscami"
+function toggleshort(name, value)
 {
- var x = document.getElementsByName(form_name)[element_value]
- x.document.getElementsByClassName(class_name)[element_value];
-
-  if (x.style.display === 'none') {
+ var x = document.getElementsByName(name)[value];
+ if (x.style.display === 'none') {
     x.style.display = 'block';
-  }
-  else {
-    x.style.display = 'none';
-}
-}*/
-
-function toggleshort(class_name, element_value)
-{
- var x = document.getElementsByName(class_name[element_value]
-
-  if (x.style.display === 'none') {
-    x.style.display = 'block';
-  }
-  else {
+ }
+ else {
     x.style.display = 'none';
 }
 }
+
+function toggleshort2(name, value)
+{
+ var x = document.getElementsByName(name)[value].style;
+ if (x.display == 'none' || x.display == '') {
+    x.display = 'block';
+ }
+ else {
+    x.display = 'none';
+}
+}
+
 
 $(document).ready(function()
 {
-var safety_valve = $("[name='safety_valve']");
-safety_valve.click(function(event); // Po zaznaczeniu zgody udostępnij przycisk wyślij.
- {
-   var element_value = $(event.target).val();
-   alert(element_value);
-   toggleshort("untoggle", element_value);
-   toggleshort("toggle", element_value);
+ $("button[name='safety_valve']").click(function() // Udostępnij przycisk usunięcia
+  {
+    var value = $(event.target).val();
+    toggleshort2("ButtonHiddenDiv", value);
+    toggleshort("safety_valve", value);
 
 });
-
+$("button[name='safety_valve_event']").click(function() // Udostępnij przycisk usunięcia
+ {
+   var value = $(event.target).val();
+   toggleshort2("EventButtonHiddenDiv", value);
+   toggleshort("safety_valve_event", value);
+});
 });

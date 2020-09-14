@@ -25,10 +25,14 @@
           <div class="row">
             <div class="col-md-7 event-main">
               <div class="container">
-                <form name="EventDeleteForm" method="post" class="form form-inline">
+                <button class="btn btn-link-3 btn-light untoggle" value="0" name="safety_valve_event">$Usuń wydarzenie</button>
+                <div name="EventButtonHiddenDiv" class="toggle" value="0">
+                 <form name="EventDeleteForm" method="post" class="form form-inline">
                   {% csrf_token %}
-                <button class="btn btn-link-3 btn-light" name="delete_event" type="submit">$Usuń wydarzenie</button>
-                </form>
+                  <p class="wnioski2">Na pewno chcesz usunąć to wydarzenie?</p>
+                  <button class="btn btn-link-3 btn-light" name="delete_event" type="submit">$Tak usuń trwale!</button>
+                 </form>
+                </div>
                 <p>$Dodano: {{ event.pubdate_short }}<br>
                 $Przez: {{ event.owner.first_name }}<p>
                 <p>$Zaczyna się: {{ event.datefrom }}<br>
