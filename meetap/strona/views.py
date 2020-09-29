@@ -8,7 +8,9 @@ from meetap.core.classes import (
  PageElement as pe, PageLoad, ActivePageItems)
 import pytz
 import datetime
-
+from django.http import HttpResponseRedirect
+from django.views import View
+from meetap.core.snippets import flare
 
 # Strona główna.
 def home(request):
@@ -53,8 +55,44 @@ def blog(request, blog_id):
 
 
 # Login Required
-# Strona ustawień profilu
-def myprofile(request):
+# Strona ustawień profilu  widok oparty na klasiee :D.
+class Myprofile(View):
+    formclass = ProfileForm
+    template = 'forms/myprofile.html'
+    regitem = pe(RegNames).baseattrs
+    profileitem = pe(ProfileNames).baseattrs
+
+    # Specjalna funkcja zastępująca __init_ ,
+    # któremu nie można przesłać parametru request.
+    def dispatch(self, request, *args, **kwargs):
+        # parse the request here ie.
+        self.userdata = User.objects.get(
+         mnemo_login=request.user.mnemo_login)
+        self.context = {
+         'udata': self.userdata,
+         'regitem': self.regitem,
+         'profileitem': self.profileitem,
+              }
+        # call the view
+        return super(Myprofile, self).dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        form = self.formclass(
+         request.POST, request.FILES, instance=self.userdata)
+        if form.is_valid():
+            form.save()
+            return redirect('Myprofile')
+
+    def get(self, request, *args, **kwargs):
+        form = self.formclass(instance=self.userdata)
+        pl = PageLoad(P, L)
+        new_context = {"form": form,}
+        self.context.update(new_context)
+        context_lazy = pl.lazy_context(skins=S, context=self.context)
+        return render(request, self.template, context_lazy)
+
+
+def myprofile_bak(request):
     userdata = User.objects.get(
      mnemo_login=request.user.mnemo_login)
     if request.method == 'POST':
