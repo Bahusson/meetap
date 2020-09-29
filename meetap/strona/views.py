@@ -56,7 +56,7 @@ def blog(request, blog_id):
 # Strona ustawień profilu
 def myprofile(request):
     userdata = User.objects.get(
-     id=request.user.id)
+     mnemo_login=request.user.mnemo_login)
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=userdata)
         if form.is_valid():
@@ -80,7 +80,7 @@ def myprofile(request):
 
 def myprofiledelete(request):
     userdata = User.objects.get(
-     id=request.user.id)
+     mnemo_login=request.user.mnemo_login)
     if request.method == 'POST':
         userdata.delete()
         return redirect('home')
