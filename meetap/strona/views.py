@@ -8,9 +8,7 @@ from meetap.core.classes import (
  PageElement as pe, PageLoad, ActivePageItems)
 import pytz
 import datetime
-from django.http import HttpResponseRedirect
 from django.views import View
-from meetap.core.snippets import flare
 
 
 # Strona główna.
@@ -82,7 +80,7 @@ class Myprofile(View):
          request.POST, request.FILES, instance=self.userdata)
         if form.is_valid():
             form.save()
-            return redirect('Myprofile')
+            return redirect('myprofile')
 
     def get(self, request, *args, **kwargs):
         form = self.formclass(instance=self.userdata)
@@ -93,31 +91,7 @@ class Myprofile(View):
         return render(request, self.template, context_lazy)
 
 
-def myprofile_bak(request):
-    userdata = User.objects.get(
-     mnemo_login=request.user.mnemo_login)
-    if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=userdata)
-        if form.is_valid():
-            form.save()
-            flare(2)
-            return redirect('myprofile')
-    else:
-        form = ProfileForm(instance=userdata)
-        regitem = pe(RegNames).baseattrs
-        profileitem = pe(ProfileNames).baseattrs
-        context = {
-         'udata': userdata,
-         'form': form,
-         'regitem': regitem,
-         'profileitem': profileitem,
-         }
-        pl = PageLoad(P, L)
-        context_lazy = pl.lazy_context(skins=S, context=context)
-        template = 'forms/myprofile.html'
-        return render(request, template, context_lazy)
-
-
+# Usuwacz profilu
 def myprofiledelete(request):
     userdata = User.objects.get(
      mnemo_login=request.user.mnemo_login)

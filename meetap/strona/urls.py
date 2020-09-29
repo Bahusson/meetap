@@ -7,6 +7,5 @@ urlpatterns = [
     path('aktualnosci', views.allblogs, name='allblogs'),
     path('aktualnosc/<int:blog_id>/', views.blog, name='blog'),
     path('myprofile', Myprofile.as_view(), name='myprofile'),
-    #path('myprofile', views.myprofile_bak, name='myprofile'),
     path('myprofiledelete', views.myprofiledelete, name='myprofiledelete'),
 ]
