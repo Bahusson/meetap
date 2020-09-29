@@ -13,7 +13,7 @@ class Event(models.Model):
     datefrom = models.DateTimeField(blank=True, null=True)  # Początek
     dateto = models.DateTimeField(blank=True, null=True)  # Zakończenie
     owner = models.ForeignKey(
-     AUTH_USER_MODEL, on_delete=models.CASCADE)  # Twórca wydarzenia
+     AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)  # Twórca wydarzenia
     is_commercial = models.BooleanField(default=False)  # Komercyjne?
     is_mass_event = models.BooleanField(default=False)  # Masowe?
     is_adult_only = models.BooleanField(default=False)  # Dla dorosłych?
@@ -75,7 +75,8 @@ class PartyDivider(models.Model):
     title = models.CharField(max_length=150)
     descr = models.CharField(max_length=500, blank=True, null=True)
     image = models.ImageField(upload_to='images', blank=True, null=True)
-    from_event = models.ForeignKey('Event', on_delete=models.CASCADE,)
+    from_event = models.ForeignKey(
+     'Event', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -89,7 +90,8 @@ class UserRole(models.Model):
     title = models.CharField(max_length=150)
     role_descr = models.CharField(max_length=600, blank=True, null=True)
     # "Dziecko" klasy dzielącej wydarzenie na strefy.
-    from_event = models.ForeignKey('PartyDivider', on_delete=models.CASCADE,)
+    from_event = models.ForeignKey(
+     'PartyDivider', on_delete=models.CASCADE, blank=True, null=True)
     # Użytkownik może być przydzielony z bazy danych lub nie.
     assigned_user = models.ForeignKey(
      AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
@@ -107,6 +109,7 @@ class UserRole(models.Model):
     class Meta:
         ordering = ['id']
 
+
 # Klasa panelu składki. Rodzic "Składek"
 class TaxPanel(models.Model):
     AND = 0
@@ -123,7 +126,8 @@ class TaxPanel(models.Model):
     descr = models.CharField(max_length=200, blank=True, null=True)
     tax_type = models.PositiveSmallIntegerField(
             choices=TAX_CHOICES, default=0)
-    from_event = models.ForeignKey('Event', on_delete=models.CASCADE,)
+    from_event = models.ForeignKey(
+     'Event', on_delete=models.CASCADE, blank=True, null=True)
     image = models.ImageField(upload_to='images', blank=True, null=True)
 
     def __str__(self):
@@ -139,7 +143,8 @@ class Tax(models.Model):
     # Opis składki pojawiający się jako onhover ikony "informacja".
     descr = models.CharField(max_length=500, blank=True, null=True)
     image = models.ImageField(upload_to='images', blank=True, null=True)
-    from_event = models.ForeignKey('TaxPanel', on_delete=models.CASCADE,)
+    from_event = models.ForeignKey(
+     'TaxPanel', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.title

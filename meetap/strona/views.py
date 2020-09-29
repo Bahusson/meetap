@@ -12,6 +12,7 @@ from django.http import HttpResponseRedirect
 from django.views import View
 from meetap.core.snippets import flare
 
+
 # Strona główna.
 def home(request):
     api = ActivePageItems(request, B, pytz, datetime)
@@ -86,7 +87,7 @@ class Myprofile(View):
     def get(self, request, *args, **kwargs):
         form = self.formclass(instance=self.userdata)
         pl = PageLoad(P, L)
-        new_context = {"form": form,}
+        new_context = {"form": form, }
         self.context.update(new_context)
         context_lazy = pl.lazy_context(skins=S, context=self.context)
         return render(request, self.template, context_lazy)
@@ -99,6 +100,7 @@ def myprofile_bak(request):
         form = ProfileForm(request.POST, request.FILES, instance=userdata)
         if form.is_valid():
             form.save()
+            flare(2)
             return redirect('myprofile')
     else:
         form = ProfileForm(instance=userdata)

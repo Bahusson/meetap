@@ -1,7 +1,7 @@
 from django import forms
 from rekruter.models import User
 from meetap.core.classes import checkifnull as cn
-from meetap.core.snippets import calculateAge as ca
+from meetap.core.snippets import calculateAge as ca, flare
 
 
 # Zmienia ustawienia profilu użytkownika.
@@ -13,7 +13,7 @@ class ProfileForm(forms.ModelForm):
     # avatar2 = forms.ImageField(required=False)
     # avatar3 = forms.ImageField(required=False)
     gender = forms.CharField(widget=forms.HiddenInput(), required=False)
-    age = forms.DateField(input_formats=['%Y-%m-%d'])
+    age = forms.DateField(input_formats=['%d.%m.%Y'])
     telephone = forms.CharField(max_length=30, required=False)
     other_contact = forms.CharField(max_length=300, required=False)
     sex_preference = forms.CharField(
@@ -55,6 +55,7 @@ class ProfileForm(forms.ModelForm):
          )
 
     def save(self, commit=True):
+        flare("xxx")
         user = super(ProfileForm, self).save(commit=False)
         user.first_name = self.cleaned_data["first_name"]
         user.avatar1 = self.cleaned_data["avatar1"]
