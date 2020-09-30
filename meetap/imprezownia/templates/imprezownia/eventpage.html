@@ -20,31 +20,11 @@
 {% endblock menu %}
 
 {% block body %}
-        <main role="main">
-          <h3 class="text-center pt-3 ">{{ event.title }}</h3>
+      <main role="main">
+        <h3 class="text-center pt-3 ">{{ event.title }}</h3>
           <div class="row">
-            <div class="col-md-7 event-main">
              {% include 'elements/base_event_edit.html' %}
-            </div>
-            <div class="col-md-5 event-main">
-              {% if event.image %}<!--jeśli jest link to go wyświetl -->
-                {% with event as e %}
-                  <img class="img-fluid" src="{{ e.image.url }}" width=100% height=auto />
-                {% endwith %}
-              {% else %}
-                  <img class="img-fluid allimg" src="{{ skin.eventimagedefault.url }}" />
-              {% endif %}
-            </div>
-          </div><!-- /.row -->
 
-          <div class="row">
-            <div class="col-md-12 event-main">
-<!--TO DO--> <!--Tutaj mogą iść ikonki z opisem onhover jakiego typu jest impreza-->
-              <div class="container">
-               <p>$O wydarzeniu: {{ event.body|linebreaksbr }}</p>
-              </div>
-            </div>
-          </div><!-- /.row -->
       </main>
       {% include 'elements/eventpage_for_edit.html' %}
       <!-- empty div -->
@@ -64,4 +44,5 @@
  <script src="/static/assets/js/event_remove_safelock.js"></script>
 {% endblock %}
 {% block scripts2 %}
+  {% include 'widgets/date_period.html' %}
 {% endblock %}

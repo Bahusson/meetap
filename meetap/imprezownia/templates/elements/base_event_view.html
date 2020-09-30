@@ -1,7 +1,27 @@
 <!--Ten kawałek kodu widzi osoba z "zewnątrz" - nie do edycji -->
+
+<div class="col-md-7 event-main">
 <div class="container">
   <p>$Dodano: {{ event.pubdate_short }}<br>
   $Przez: {{ event.owner.first_name }}<p>
   <p>$Zaczyna się: {{ event.datefrom }}<br>
   $Kończy się: {{ event.dateto }}</p>
+</div>
+</div>
+<div class="col-md-5 event-main">
+  {% if event.image %}<!--jeśli jest link to go wyświetl -->
+    {% with event as e %}
+      <img class="img-fluid" src="{{ e.image.url }}" width=100% height=auto />
+    {% endwith %}
+  {% else %}
+      <img class="img-fluid allimg" src="{{ skin.eventimagedefault.url }}" />
+  {% endif %}
+</div>
+<div class="row">
+<div class="col-md-12 event-main">
+  <!--TO DO--> <!--Tutaj mogą iść ikonki z opisem onhover jakiego typu jest impreza-->
+  <div class="container">
+   <p>$O wydarzeniu: {{ event.body|linebreaksbr }}</p>
+  </div>
+</div>
 </div>

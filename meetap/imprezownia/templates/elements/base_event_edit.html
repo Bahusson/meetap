@@ -1,16 +1,43 @@
 <!--Ten kawałek kodu widzi osoba z uprwnieniami do edycji wydarzenia -->
-<div class="container">
+
+<div class="col-md-7 event-main">
+  <div class="container">
   <button class="btn btn-link-3 btn-light untoggle" value="0" name="safety_valve_event">$Usuń wydarzenie</button>
   <div name="EventButtonHiddenDiv" class="toggle" value="0">
-   <form name="EventDeleteForm" method="post" class="form form-inline">
+   <form name="EventDeleteForm" method="post" class="form form-inline"> <!-- Formularz usuwa wydarzenie -->
     {% csrf_token %}
     <p class="wnioski2">Na pewno chcesz usunąć to wydarzenie?</p>
     <button class="btn btn-link-3 btn-light" name="delete_event" type="submit">$Tak usuń trwale!</button>
     <button name="dont_delete_event" class="btn btn-link-3 btn-light" value="0">$Nie usuwaj!</button>
-   </form>
+   </form> <!-- Koniec formularz usuwającego wydarzenie -->
   </div>
+
+<form name=EventEditForm enctype="multipart/form-data" method="post"> <!-- Formularz edytujący wydarzenie -->
+    <button class="btn btn-link-3 btn-light" name="update_event" type="submit">$Zapisz zmiany</button>
+     {% csrf_token %}
   <p>$Dodano: {{ event.pubdate_short }}<br>
   $Przez: {{ event.owner.first_name }}<p>
-  <p>$Zaczyna się: {{ event.datefrom }}<br>
-  $Kończy się: {{ event.dateto }}</p>
+  <p>$Zaczyna się: {{ baseform.datefrom }}<br>
+  $Kończy się: {{ baseform.dateto }}</p>
+  </div>
+  </div>
+  <div class="col-md-5 event-main">
+    {% if event.image %}<!--jeśli jest link to go wyświetl -->
+      {% with event as e %}
+        <img class="img-fluid" src="{{ e.image.url }}" width=100% height=auto />
+      {% endwith %}
+    {% else %}
+        <img class="img-fluid allimg" src="{{ skin.eventimagedefault.url }}" />
+    {% endif %}
+    <p>$Zmień obrazek: {{ baseform.image }}</p>
+  </div>
+<div class="row">
+  <div class="col-md-12 event-main">
+    <!--TO DO--> <!--Tutaj mogą iść ikonki z opisem onhover jakiego typu jest impreza-->
+    <div class="container">
+     <p>$O wydarzeniu: {{ baseform.body}}</p>
+</form> <!-- Koniec formularza edutującego wydarzenie -->
+    </div>
+  </div>
 </div>
+</div><!-- /.row -->

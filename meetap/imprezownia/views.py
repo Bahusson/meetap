@@ -35,6 +35,8 @@ def events(request):
 
 def event(request, event_id, show_divisions, show_taxes):
     # Tutaj będzie słownik z formularzami.
+    userdata = User.objects.get(
+     mnemo_login=request.user.mnemo_login)
     pe_e = pe(E)
     pe_e_id = pe_e.by_id(G404=G404, id=event_id)
     pe_e = pe(E)
@@ -43,7 +45,7 @@ def event(request, event_id, show_divisions, show_taxes):
     pe_ur = UR.objects.filter(from_event__from_event=event_id)
     pe_tp = TP.objects.filter(from_event=event_id)
     pe_tax = Tax.objects.filter(from_event__from_event=event_id)
-
+    baseform = EventForm(instance=userdata)
     formdict = {
         "True": PartyDividerForm,
         "False": TaxPanelForm,
@@ -67,9 +69,9 @@ def event(request, event_id, show_divisions, show_taxes):
         div_for_deletion.delete()
         return redirect(request.META.get('HTTP_REFERER'))
     if "update_event" in request.POST:
-        baseform = EventForm(request.POST, request.FILES, instance=event_id)
-        if form.is_valid():
-            form.save(pe_e_id)
+        baseform = EventForm(request.POST, request.FILES, instance=userdata)
+        if form.is_valid(userdata):
+            form.save()
             return redirect(request.META.get('HTTP_REFERER'))
 
     sh_dv = bot(show_divisions)
