@@ -5,12 +5,9 @@ from .models import (
  EventsMenuNames as EMN, Event as E, PartyDivider as PD, UserRole as UR,
  TaxPanel as TP, Tax)
 from meetap.settings import LANGUAGES as L
-from meetap.core.classes import (
- PageElement as pe, PortalLoad, ActivePageItems)
-from meetap.core.snippets import (booleanate as bot, flare)
+from meetap.core.classes import (PageElement as pe, PortalLoad)
+from meetap.core.snippets import booleanate as bot
 from .forms import EventForm, PartyDividerForm, TaxPanelForm
-import pytz
-import datetime
 
 
 # Panel Wydarzeń
@@ -57,7 +54,6 @@ def event(request, event_id, show_divisions, show_taxes):
     }
     if 'make_event_child' in request.POST:
         form = formdict[show_divisions](request.POST, request.FILES)
-        print(form)
         if form.is_valid():
             form.save(pe_e_id)
             return redirect(request.META.get('HTTP_REFERER'))
@@ -66,9 +62,15 @@ def event(request, event_id, show_divisions, show_taxes):
         return redirect('events')
     if "delete_division" in request.POST:
         div_value = request.POST['delete_division']
-        div_for_deletion = pe(deletiondict[show_divisions]).by_id(G404=G404, id=div_value)
+        div_for_deletion = pe(deletiondict[show_divisions]).by_id(
+         G404=G404, id=div_value)
         div_for_deletion.delete()
         return redirect(request.META.get('HTTP_REFERER'))
+    if "update_event" in request.POST:
+        baseform = EventForm(request.POST, request.FILES, instance=event_id)
+        if form.is_valid():
+            form.save(pe_e_id)
+            return redirect(request.META.get('HTTP_REFERER'))
 
     sh_dv = bot(show_divisions)
     sh_tx = bot(show_taxes)
@@ -82,6 +84,7 @@ def event(request, event_id, show_divisions, show_taxes):
                'show_divisions': sh_dv,
                'show_taxes': sh_tx,
                "form": form,
+               "baseform": baseform,
                }
     pl = PortalLoad(P, L, EMN)
     context_lazy = pl.lazy_context(skins=S, context=context)

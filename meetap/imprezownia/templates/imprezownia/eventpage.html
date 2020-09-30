@@ -24,21 +24,7 @@
           <h3 class="text-center pt-3 ">{{ event.title }}</h3>
           <div class="row">
             <div class="col-md-7 event-main">
-              <div class="container">
-                <button class="btn btn-link-3 btn-light untoggle" value="0" name="safety_valve_event">$Usuń wydarzenie</button>
-                <div name="EventButtonHiddenDiv" class="toggle" value="0">
-                 <form name="EventDeleteForm" method="post" class="form form-inline">
-                  {% csrf_token %}
-                  <p class="wnioski2">Na pewno chcesz usunąć to wydarzenie?</p>
-                  <button class="btn btn-link-3 btn-light" name="delete_event" type="submit">$Tak usuń trwale!</button>
-                  <button name="dont_delete_event" class="btn btn-link-3 btn-light" value="0">$Nie usuwaj!</button>
-                 </form>
-                </div>
-                <p>$Dodano: {{ event.pubdate_short }}<br>
-                $Przez: {{ event.owner.first_name }}<p>
-                <p>$Zaczyna się: {{ event.datefrom }}<br>
-                $Kończy się: {{ event.dateto }}</p>
-              </div>
+             {% include 'elements/base_event_edit.html' %}
             </div>
             <div class="col-md-5 event-main">
               {% if event.image %}<!--jeśli jest link to go wyświetl -->
