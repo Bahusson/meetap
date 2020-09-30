@@ -45,7 +45,7 @@ def event(request, event_id, show_divisions, show_taxes):
     pe_ur = UR.objects.filter(from_event__from_event=event_id)
     pe_tp = TP.objects.filter(from_event=event_id)
     pe_tax = Tax.objects.filter(from_event__from_event=event_id)
-    baseform = EventForm(instance=userdata)
+    baseform = EventForm(instance=pe_e_id)
     formdict = {
         "True": PartyDividerForm,
         "False": TaxPanelForm,
@@ -69,9 +69,9 @@ def event(request, event_id, show_divisions, show_taxes):
         div_for_deletion.delete()
         return redirect(request.META.get('HTTP_REFERER'))
     if "update_event" in request.POST:
-        baseform = EventForm(request.POST, request.FILES, instance=userdata)
-        if form.is_valid(userdata):
-            form.save()
+        baseform = EventForm(request.POST, request.FILES, instance=pe_e_id)
+        if baseform.is_valid():
+            baseform.save(userdata)
             return redirect(request.META.get('HTTP_REFERER'))
 
     sh_dv = bot(show_divisions)

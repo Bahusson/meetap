@@ -6,11 +6,11 @@ import datetime
 
 
 class EventForm(forms.ModelForm):
-    title = forms.CharField(max_length=150)
+    title = forms.CharField(max_length=150, required=False)
     body = forms.CharField(max_length=1500, required=False)
     image = forms.ImageField(required=False)
-    datefrom = forms.DateTimeField(input_formats=['%d.%m.%Y %H:%M:%S'])
-    dateto = forms.DateTimeField(input_formats=['%d.%m.%Y %H:%M:%S'])
+    datefrom = forms.DateTimeField(input_formats=['%Y-%m-%d %H:%M:%S'])
+    dateto = forms.DateTimeField(input_formats=['%Y-%m-%d %H:%M:%S'])
     is_commercial = forms.BooleanField(required=False)  # Komercyjne?
     is_mass_event = forms.BooleanField(required=False)   # Masowe?
     is_adult_only = forms.BooleanField(required=False)  # Dla dorosłych?
