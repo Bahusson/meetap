@@ -13,7 +13,7 @@ class ProfileForm(forms.ModelForm):
     # avatar2 = forms.ImageField(required=False)
     # avatar3 = forms.ImageField(required=False)
     gender = forms.CharField(widget=forms.HiddenInput(), required=False)
-    age = forms.DateField(input_formats=['%d.%m.%Y'])
+    age = forms.DateField(input_formats=['%Y-%m-%d'])
     telephone = forms.CharField(max_length=30, required=False)
     other_contact = forms.CharField(max_length=300, required=False)
     sex_preference = forms.CharField(
