@@ -1,7 +1,7 @@
 from django import forms
 from .models import Event, PartyDivider, TaxPanel, UserRole, Tax
 from meetap.core.classes import checkifnull as cn
-# from meetap.core.snippets import flare
+#  from meetap.core.snippets import flare
 import datetime
 
 
@@ -35,6 +35,7 @@ class EventForm(forms.ModelForm):
     is_for_r_dominant = forms.BooleanField(required=False)
     is_for_dominant = forms.BooleanField(required=False)
     other_preferences = forms.CharField(max_length=300, required=False)
+    delete_image = forms.BooleanField(required=False)
 
     class Meta:
         model = Event
@@ -52,7 +53,6 @@ class EventForm(forms.ModelForm):
         event = super(EventForm, self).save(commit=False)
         event.title = self.cleaned_data["title"]
         event.body = self.cleaned_data["body"]
-        event.image = self.cleaned_data["image"]
         event.datefrom = cn(self.cleaned_data["datefrom"], False)
         event.dateto = cn(self.cleaned_data["dateto"], False)
         event.owner = user_id
@@ -86,6 +86,11 @@ class EventForm(forms.ModelForm):
         event.other_preferences = self.cleaned_data["other_preferences"]
         if event.pubdate is None:
             event.pubdate = datetime.datetime.now()
+        imgdelete = self.cleaned_data["delete_image"]
+        if imgdelete is True:
+            event.image = None
+        else:
+            event.image = self.cleaned_data["image"]
 
         if commit:
             event.save()

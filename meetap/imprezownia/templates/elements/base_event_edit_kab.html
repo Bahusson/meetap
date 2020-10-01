@@ -30,11 +30,7 @@
     {% else %}
         <img class="img-fluid allimg" src="{{ skin.eventimagedefault.url }}" />
     {% endif %}
-    <div>$Zmień obrazek:
-
-<p class="file-upload">{% if event.image %} $Teraz: <a href="{{ event.image.url }}">{{ event.image.url }}</a>
-Usuń:{{ baseform.delete_image }}{% endif %}
-<input type="file" name="image" accept="image/*" id="id_image"></p></div>
+    <p>$Zmień obrazek: {{ baseform.image }}</p>
   </div>
 <div class="row">
   <div class="col-md-12 event-main">
