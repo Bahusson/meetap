@@ -60,7 +60,7 @@ class PageElement(object):
     def __init__(self, *args, **kwargs):
         self.x = args[0]
         self.listed = list(self.x.objects.all())  # Lista obiektów
-        self.allelements = self.x.objects.all() # Wszystkie obiekty
+        self.allelements = self.x.objects.all()  # Wszystkie obiekty
         self.elements = self.x.objects  # Obiekty
         self.baseattrs = self.listed[0]  # Pierwsze obiekty na liście
 
@@ -279,6 +279,3 @@ def checkifnull(x, y):
         return y
     else:
         return x
-
-def user_by_unique_id(user_unique_id):
-    pass

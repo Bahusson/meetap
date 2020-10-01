@@ -1,6 +1,6 @@
 from django import forms
 from .models import Event, PartyDivider, TaxPanel, UserRole, Tax
-from meetap.core.classes import (checkifnull as cn, user_by_unique_id as u_qid)
+from meetap.core.classes import checkifnull as cn
 # from meetap.core.snippets import flare
 import datetime
 
@@ -70,17 +70,22 @@ class EventForm(forms.ModelForm):
         event.is_for_trans = cn(self.cleaned_data["is_for_trans"], False)
         event.is_for_other = cn(self.cleaned_data["is_for_other"], False)
         event.is_for_passive = cn(self.cleaned_data["is_for_passive"], False)
-        event.is_for_r_passive = cn(self.cleaned_data["is_for_r_passive"], False)
+        event.is_for_r_passive = cn(
+         self.cleaned_data["is_for_r_passive"], False)
         event.is_for_switch = cn(self.cleaned_data["is_for_switch"], False)
         event.is_for_r_active = cn(self.cleaned_data["is_for_r_active"], False)
         event.is_for_active = cn(self.cleaned_data["is_for_active"], False)
-        event.is_for_submisive = cn(self.cleaned_data["is_for_submisive"], False)
-        event.is_for_r_submissive = cn(self.cleaned_data["is_for_r_submissive"], False)
+        event.is_for_submisive = cn(
+         self.cleaned_data["is_for_submisive"], False)
+        event.is_for_r_submissive = cn(
+         self.cleaned_data["is_for_r_submissive"], False)
         event.is_for_neutral = cn(self.cleaned_data["is_for_neutral"], False)
-        event.is_for_r_dominant = cn(self.cleaned_data["is_for_r_dominant"], False)
+        event.is_for_r_dominant = cn(
+         self.cleaned_data["is_for_r_dominant"], False)
         event.is_for_dominant = cn(self.cleaned_data["is_for_dominant"], False)
         event.other_preferences = self.cleaned_data["other_preferences"]
-        event.pubdate = datetime.datetime.now()
+        if event.pubdate is None:
+            event.pubdate = datetime.datetime.now()
 
         if commit:
             event.save()
