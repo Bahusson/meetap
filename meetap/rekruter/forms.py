@@ -9,7 +9,7 @@ class ExtendedCreationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30)
     email = forms.EmailField(max_length=75)
     gender = forms.CharField(widget=forms.HiddenInput(), required=False)
-    age = forms.DateField(input_formats=['%Y-%m-%d'])
+    age = forms.DateField(input_formats=['%d.%m.%Y'])
 
     class Meta:
         model = User
