@@ -16,25 +16,25 @@
 <div class="card-body">
 <div class="maintitle">{{ profileitem.general_settings }}</div>
 <form enctype="multipart/form-data" name="ProfileForm" method="post" class="form form-inline">
-  <p class ="userdata"><span title="{{ profileitem.mnemo_explanation }}"><b class="bolder">{{ profileitem.mnemo_login }}: </b> <b class="bolder2">{{ udata.mnemo_login }}</b></span></p>
-  <p class ="userdata"><b class="bolder">{{ regitem.name }}: </b> <b class="bolder2"> {{ form.first_name }} </b></p>
-  <p class ="userdata"><span title="{{ profileitem.age_explanation }}"><b class="bolder">{{ regitem.age }}: </b> <b class="bolder2"> {{ form.age }} </b></span></p>
+  <ul>
+  <li><p class ="userdata"><span title="{{ profileitem.mnemo_explanation }}"><b class="bolder">{{ profileitem.mnemo_login }}: </b> <b class="bolder2">{{ udata.mnemo_login }}</b></span></p></li>
+  <li><p class ="userdata"><b class="bolder">{{ regitem.name }}: </b> <b class="bolder2"> {{ form.first_name }} </b></p></li>
+  <li><p class ="userdata"><span title="{{ profileitem.age_explanation }}"><b class="bolder">{{ regitem.age }}: </b> <b class="bolder2"> {{ form.age }} </b></span></p></li>
+
 {% if udata.is_adult > 0 %} <!-- Start blokada małoletnich -->
-  {% if udata.avatar1 %}
-  <img class="imgshdw float-left img-fluid" src="{{ udata.avatar1.url }}" />
-  {% endif %}
-  <p class ="userdata"><b class="bolder">{{ profileitem.avatar1 }}:
-  </b><b class="bolder2">
+  <li><p class ="userdata"><b class="bolder">{{ profileitem.avatar1 }}:
+  </b>
     {% if udata.avatar1 %}<!--jeśli jest link to go wyświetl -->
-          <img class="img-fluid" src="{{ profileite.avatar1.url }}" width=100% height=auto />
+          <img src="{{ udata.avatar1.url }}" width="150" height=auto />
       {% else %}
           <img class="img-fluid allimg" src="{{ skin.userimagedefault.url }}" />
       {% endif %}
-      <div>$Zmień obrazek:
+      <p class ="userdata"><b class="bolder">$Zmień obrazek:</b></p>
 
-  <p class="file-upload">{% if udata.avatar1 %} $Teraz: <a href="{{ udata.avatar1.url }}">{{ udata.avatar1.url }}</a>
-  Usuń:{{ form.delete_image }}{% endif %}
-  <input type="file" name="avatar1" accept="image/*" id="id_avatar1"></p></div>  </b></p>
+  <p class="userdata">{% if udata.avatar1 %} <b class="bolder">$Teraz: <a href="{{ udata.avatar1.url }}">{{ udata.avatar1.url }}</a></b></p>
+  <p class="userdata"><b class="bolder">Usuń:{{ form.delete_image }}{% endif %}</b></p>
+  <p><input type="file" name="avatar1" accept="image/*" id="id_avatar1"></p>
+  </li>
   {% if user.role_council > 2 %}
    <!-- Dodatkowe dwa awatary dla patronów -->
    {% if udata.avatar2 %}
@@ -46,18 +46,22 @@
    {% endif %}
    <p class ="userdata"><b class="bolder">{{ profileitem.avatar }} #3:  </b><b class="bolder2"> {{ form.avatar3 }}  </b></p>
   {% endif %}
-  <p class ="userdata"><b class="bolder">{{ regitem.gender }}:  <select id="Genderselector">
-    <option {% if user.gender == 0 %} selected="selected" {% endif %} value ="0">{{ regitem.other }}</option>
-    <option {% if user.gender == 1 %} selected="selected" {% endif %} value ="1">{{ regitem.male }}</option>
-    <option {% if user.gender == 2 %} selected="selected" {% endif %} value ="2">{{ regitem.female }}</option>
-  </select></p>
-  <p>{{ form.gender }}</p>
+  <li><p class ="userdata"><b class="bolder">{{ regitem.gender }}:</b>
+   <b class="bolder2">
+    <select id="Genderselector">
+     <option {% if user.gender == 0 %} selected="selected" {% endif %} value ="0">{{ regitem.other }}</option>
+     <option {% if user.gender == 1 %} selected="selected" {% endif %} value ="1">{{ regitem.male }}</option>
+     <option {% if user.gender == 2 %} selected="selected" {% endif %} value ="2">{{ regitem.female }}</option>
+    </select>
+   </b>
+  </p>
+  <p>{{ form.gender }}</p></li>
 
   <p class ="userdata"><span title="{{ profileitem.contact_explanation }}"><b class="bolder">{{ profileitem.telephone }}: </b><b class="bolder2"> {{ form.telephone }}</b></span></p>
   <p class ="userdata"><span title="{{ profileitem.contact_explanation }}"><b class="bolder">{{ profileitem.other_contact }}: </b><b class="bolder2"> {{ form.other_contact }}</b></span></p>
   <p class ="userdata"><b class="bolder">{{ profileitem.about_me }}:  </b><b class="bolder2"> {{ form.about_me }}  </b></p>
   <p class ="userdata"><b class="bolder">{{ profileitem.interests }}:  </b><b class="bolder2"> {{ form.interests }}  </b></p>
-
+  </ul>
 
 <!-- START DOROSŁE OPCJE -->
   {% if user.is_adult == 2 %}
@@ -141,8 +145,8 @@
     <button id="send" class="btn btn-dark btn-sm btn-block" name="subbutton" type="submit" value="{{ regitem.send_me }}">{{ regitem.send_me }}</button>
 </form>
 <a class="btn btn-link-3 btn-light" href="{% url 'myprofiledelete' %}">{{ profileitem.myprofiledelete }}</a>
-  </div>
-</div>
+</div> <!-- END Card Body -->
+</div> <!-- END Card Cardio -->
 
 
 {% endblock body %}

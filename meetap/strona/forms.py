@@ -89,7 +89,6 @@ class ProfileForm(forms.ModelForm):
         user.sendme_friend_events = self.cleaned_data['sendme_friend_events']
         user.sendme_join_request = self.cleaned_data['sendme_join_request']
         imgdelete = self.cleaned_data["delete_image"]
-        flare(imgdelete)
         if imgdelete is True:
             user.avatar1 = None
         else:
