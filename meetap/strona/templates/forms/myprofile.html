@@ -14,6 +14,8 @@
 <div class="card cardio">
 <div class="maintitle">{{ profileitem.profile_settings }}</div>
 <div class="card-body">
+<div class="row">
+<div class="col-md-6 event-main">
 <div class="maintitle">{{ profileitem.general_settings }}</div>
 <form enctype="multipart/form-data" name="ProfileForm" method="post" class="form form-inline">
   <ul>
@@ -22,18 +24,17 @@
   <li><p class ="userdata"><span title="{{ profileitem.age_explanation }}"><b class="bolder">{{ regitem.age }}: </b> <b class="bolder2"> {{ form.age }} </b></span></p></li>
 
 {% if udata.is_adult > 0 %} <!-- Start blokada małoletnich -->
-  <li><p class ="userdata"><b class="bolder">{{ profileitem.avatar1 }}:
+  <li><p class ="userdata"><b class="bolder">{{ profileitem.avatar }}:
   </b>
     {% if udata.avatar1 %}<!--jeśli jest link to go wyświetl -->
-          <img src="{{ udata.avatar1.url }}" width="150" height=auto />
+          <a href="{{ udata.avatar1.url }}"><img src="{{ udata.avatar1.url }}" width="150" height=auto /></a>
       {% else %}
-          <img class="img-fluid allimg" src="{{ skin.userimagedefault.url }}" />
+          <img src="{{ skin.userimagedefault.url }}" width="150" height=auto />
       {% endif %}
-      <p class ="userdata"><b class="bolder">$Zmień obrazek:</b></p>
+  <p class ="userdata"><b class="bolder">$Zmień awatar: </b>
+  <input type="file" name="avatar1" accept="image/*" id="id_avatar1"></p>
+  <p class="userdata"><b class="bolder">Usuń awatar:{{ form.delete_image }}{% endif %}</b></p>
 
-  <p class="userdata">{% if udata.avatar1 %} <b class="bolder">$Teraz: <a href="{{ udata.avatar1.url }}">{{ udata.avatar1.url }}</a></b></p>
-  <p class="userdata"><b class="bolder">Usuń:{{ form.delete_image }}{% endif %}</b></p>
-  <p><input type="file" name="avatar1" accept="image/*" id="id_avatar1"></p>
   </li>
   {% if user.role_council > 2 %}
    <!-- Dodatkowe dwa awatary dla patronów -->
@@ -62,8 +63,23 @@
   <p class ="userdata"><b class="bolder">{{ profileitem.about_me }}:  </b><b class="bolder2"> {{ form.about_me }}  </b></p>
   <p class ="userdata"><b class="bolder">{{ profileitem.interests }}:  </b><b class="bolder2"> {{ form.interests }}  </b></p>
   </ul>
-
+  </div>
+  <div class="col-md-6 event-main">
+  <!-- Start Mailing -->
+  <div class="maintitle">{{ profileitem.mailing_settings }}</div>
+  <p class ="userdata"><b class="bolder">{{ profileitem.showme_commercial }}: </b> <b class="bolder2"> {{ form.showme_commercial }} </b></p>
+  <p class ="userdata"><b class="bolder">{{ profileitem.showme_massevents }}: </b> <b class="bolder2"> {{ form.showme_massevents }} </b></p>
+  <p class ="userdata"><b class="bolder">{{ profileitem.sendme_inv_status_me }}: </b> <b class="bolder2"> {{ form.sendme_inv_status_me }} </b></p>
+  <p class ="userdata"><b class="bolder">{{ profileitem.sendme_inv_status_others }}: </b> <b class="bolder2"> {{ form.sendme_inv_status_others }} </b></p>
+  <p class ="userdata"><b class="bolder">{{ profileitem.sendme_invitations }}: </b> <b class="bolder2"> {{ form.sendme_invitations }} </b></p>
+  <p class ="userdata"><b class="bolder">{{ profileitem.sendme_friend_events }}: </b> <b class="bolder2"> {{ form.sendme_friend_events }} </b></p>
+  <p class ="userdata"><b class="bolder">{{ profileitem.sendme_join_request }}: </b> <b class="bolder2"> {{ form.sendme_join_request }} </b></p>
+  <!-- Koniec Mailing -->
+  </div>
+  </div>
 <!-- START DOROSŁE OPCJE -->
+<div class="row">
+<div class="col-md-12 event-main">
   {% if user.is_adult == 2 %}
   <div class="maintitle">{{ profileitem.adult_settings }}</div>
    <p class ="userdata"><b class="bolder">{{ profileitem.showme_adultcontent }}:  </b><b class="bolder2"> {{ form.showme_adultcontent }}  </b></p>
@@ -123,20 +139,11 @@
     <p class ="userdata"><b class="bolder">{{ profileitem.other_drugs }}:  </b><b class="bolder2"> {{ form.other_drugs }}  </b></p>
     <!--Koniec Używki-->
   {% endif %}
-  {% endif %}
+  </div>
+</div>
   <!-- KONIEC DOROSŁE OPCJE -->
-  <!-- Start Mailing -->
-  <div class="maintitle">{{ profileitem.mailing_settings }}</div>
-  <p class ="userdata"><b class="bolder">{{ profileitem.showme_commercial }}: </b> <b class="bolder2"> {{ form.showme_commercial }} </b></p>
-  <p class ="userdata"><b class="bolder">{{ profileitem.showme_massevents }}: </b> <b class="bolder2"> {{ form.showme_massevents }} </b></p>
-  <p class ="userdata"><b class="bolder">{{ profileitem.sendme_inv_status_me }}: </b> <b class="bolder2"> {{ form.sendme_inv_status_me }} </b></p>
-  <p class ="userdata"><b class="bolder">{{ profileitem.sendme_inv_status_others }}: </b> <b class="bolder2"> {{ form.sendme_inv_status_others }} </b></p>
-  <p class ="userdata"><b class="bolder">{{ profileitem.sendme_invitations }}: </b> <b class="bolder2"> {{ form.sendme_invitations }} </b></p>
-  <p class ="userdata"><b class="bolder">{{ profileitem.sendme_friend_events }}: </b> <b class="bolder2"> {{ form.sendme_friend_events }} </b></p>
-  <p class ="userdata"><b class="bolder">{{ profileitem.sendme_join_request }}: </b> <b class="bolder2"> {{ form.sendme_join_request }} </b></p>
 
 
-  <!-- Koniec Mailing -->
 {% else %}
 <p>{{ profileitem.underage_warning }}</p>
 {% endif %} <!-- Koniec blokady małoletnich-->
@@ -144,7 +151,8 @@
   {% csrf_token %}
     <button id="send" class="btn btn-dark btn-sm btn-block" name="subbutton" type="submit" value="{{ regitem.send_me }}">{{ regitem.send_me }}</button>
 </form>
-<a class="btn btn-link-3 btn-light" href="{% url 'myprofiledelete' %}">{{ profileitem.myprofiledelete }}</a>
+    <button class="btn btn-dark btn-sm btn-block"><a href="{% url 'myprofiledelete' %}">{{ profileitem.myprofiledelete }}</a></button>
+
 </div> <!-- END Card Body -->
 </div> <!-- END Card Cardio -->
 
