@@ -1,4 +1,4 @@
-
+from .snippets import flare
 
 class PageLoad(object):
     ''' Zwraca tyle języków ile mamy zainstalowane
@@ -125,8 +125,12 @@ class PortalLoad(PageLoad):
     def __init__(self, *args):
         super().__init__(*args)
         menus = args[2]
+        advert = args[3]
+        self.adverts = advert.objects.all()
+        self.adverts_listed = list(advert.objects.all())
         self.menu = list(menus.objects.all())[0]
-
+        if len(self.adverts_listed) == 0:
+            self.adverts = False
     def page_dress(self, **kwargs):
         super().page_dress(**kwargs)
 
@@ -135,6 +139,7 @@ class PortalLoad(PageLoad):
          'items': self.items,
          'langs': self.langs,
          'menu': self.menu,
+         'adverts': self.adverts,
          }
         if 'skins' in kwargs:
             self.page_dress(**kwargs)

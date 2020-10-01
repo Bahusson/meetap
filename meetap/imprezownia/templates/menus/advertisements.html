@@ -1,5 +1,14 @@
 <!--Tutaj idą reklamy -->
 <div class="container">
-<p class="userdata">siemka lorem ipsum Twoja stara je ziemniaki i to niemyte!</p>
-
+{% if adverts %}
+{% for advert in adverts %}
+{% if advert.is_active and advert.is_under_menu %}
+<div class="row">
+  <p>{{ advert.title }}</p>
+  <img class="img-fluid" src="{{ advert.image.url }}" width=100% height=auto />
+<div><!-- END row -->
+{% endif %}
+{% endfor %}
+{% endif %}
 </div> <!-- END CONTAINER -->
+<p>test</p>
