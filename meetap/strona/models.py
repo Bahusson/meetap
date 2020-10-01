@@ -81,6 +81,7 @@ class PageSkin(models.Model):
 
     class Meta:
         ordering = ['position']
+        verbose_name_plural = 'Page Skins'
 
     def __str__(self):
         return self.themetitle
@@ -100,7 +101,7 @@ class BlogNames(models.Model):
     change = models.CharField(max_length=200)
 
     class Meta:
-        verbose_name_plural = 'BlogNames'
+        verbose_name_plural = 'Blog Names'
 
 
 # Klasa tłumaczeniowa dla Login/Register i myprofile.
@@ -118,7 +119,7 @@ class RegNames(models.Model):
     send_me = models.CharField(max_length=50)
 
     class Meta:
-        verbose_name_plural = 'RegNames'
+        verbose_name_plural = 'Registry Names'
 
 
 # Klasa tłumaczeniowa dla myprofile.
@@ -181,4 +182,22 @@ class ProfileNames(models.Model):
     showme_sexevents = models.CharField(max_length=50, null=True)
 
     class Meta:
-        verbose_name_plural = 'ProfileNames'
+        verbose_name_plural = 'Profile Names'
+
+# Klasa ogłoszeń społecznych pod menu.
+class P_S_A(models.Model):
+    title = models.CharField(max_length=50, null=True)
+    position = models.IntegerField(auto_created=True)
+    is_active = models.BooleanField(default=True) # Można zdezaktywować nadmiarowe ogłoszenia bez ich usuwania.
+    is_under_menu = models.BooleanField(default=True) # Pojawia się jako baner pod menu
+    is_on_list = models.BooleanField(default=True) # Jest na specjalnej liście ogłoszeń społecznych.
+    link_external = models.TextField(blank=True, null=True) # posiada link do zasobów zewnętrznych.
+    image = models.ImageField(upload_to='images', blank=True, null=True)
+    body = models.TextField(blank=True, null=True) # Jeśli ma dedykowaną stronę, to tutaj jest opis ocb.
+
+    class Meta:
+        ordering = ['position']
+        verbose_name_plural = 'Public Service Announcements'
+
+    def __str__(self):
+        return self.title

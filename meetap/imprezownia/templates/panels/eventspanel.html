@@ -16,8 +16,9 @@
  {{ block.super }}
 {% endblock aside %}
 
-{% block menu %}
+{% block menu %} <!--Tutaj też idą "reklamy"-->
   {% include 'menus/eventsmenu.html' %} <!-- Menu z opcjami -->
+  {% include 'menus/advertisements.html' %} <!-- Zestaw reklam do wyświetlenia -->
 {% endblock menu %}
 
 {% block body %}
