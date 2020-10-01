@@ -21,9 +21,11 @@
 
 {% block body %}
       <main role="main">
-
-             {% include 'elements/base_event_edit.html' %}
-
+       {% if editor_view %} <!-- Zależnie czy twórca, czy ktoś z zewnątrz, to pojawia się inny widok -->
+          {% include 'elements/base_event_edit.html' %}
+       {% else %}
+          {% include 'elements/base_event_view.html' %}
+       {% endif %}
       </main>
       {% include 'elements/eventpage_for_edit.html' %}
       <!-- empty div -->

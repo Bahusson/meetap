@@ -34,6 +34,7 @@ def events(request):
 
 
 def event(request, event_id, show_divisions, show_taxes):
+    editor_view = True  # Ten formularz pozwala na edycję wydarzenia
     # Tutaj będzie słownik z formularzami.
     userdata = User.objects.get(
      mnemo_login=request.user.mnemo_login)
@@ -87,6 +88,7 @@ def event(request, event_id, show_divisions, show_taxes):
                'show_taxes': sh_tx,
                "form": form,
                "baseform": baseform,
+               "editor_view": editor_view,
                }
     pl = PortalLoad(P, L, EMN)
     context_lazy = pl.lazy_context(skins=S, context=context)
