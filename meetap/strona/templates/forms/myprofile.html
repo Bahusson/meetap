@@ -23,7 +23,18 @@
   {% if udata.avatar1 %}
   <img class="imgshdw float-left img-fluid" src="{{ udata.avatar1.url }}" />
   {% endif %}
-  <p class ="userdata"><b class="bolder">{{ profileitem.avatar }}:  </b><b class="bolder2"> {{ form.avatar1 }}  </b></p>
+  <p class ="userdata"><b class="bolder">{{ profileitem.avatar1 }}:
+  </b><b class="bolder2">
+    {% if udata.avatar1 %}<!--jeśli jest link to go wyświetl -->
+          <img class="img-fluid" src="{{ profileite.avatar1.url }}" width=100% height=auto />
+      {% else %}
+          <img class="img-fluid allimg" src="{{ skin.userimagedefault.url }}" />
+      {% endif %}
+      <div>$Zmień obrazek:
+
+  <p class="file-upload">{% if udata.avatar1 %} $Teraz: <a href="{{ udata.avatar1.url }}">{{ udata.avatar1.url }}</a>
+  Usuń:{{ form.delete_image }}{% endif %}
+  <input type="file" name="avatar1" accept="image/*" id="id_avatar1"></p></div>  </b></p>
   {% if user.role_council > 2 %}
    <!-- Dodatkowe dwa awatary dla patronów -->
    {% if udata.avatar2 %}

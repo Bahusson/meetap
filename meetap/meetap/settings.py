@@ -44,13 +44,14 @@ INSTALLED_APPS = [
     'login_required',
     # Poniżej dwa typy cleanupu. Zobaczymy, który się sprawdzi,
     # żeby nam bardziej oszczędzić danych.
-    # Testowo - autodelecja zdjęć przy usuwaniu wydarzenia.
-    # https://github.com/un1t/django-cleanup
-    # 'django_cleanup.apps.CleanupConfig',
+
     # Testowo - manualna (lup przez demona) delecja zdjęć nieużywanych.
     # https://github.com/akolpakov/django-unused-media
     'django_unused_media',
     'storages',
+    # Testowo - autodelecja zdjęć przy usuwaniu wydarzenia.
+    # https://github.com/un1t/django-cleanup
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 # Kolejność tego draństwa jest ważna.

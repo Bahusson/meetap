@@ -39,6 +39,7 @@ class ProfileForm(forms.ModelForm):
     sendme_invitations = forms.BooleanField(required=False)
     sendme_friend_events = forms.BooleanField(required=False)
     sendme_join_request = forms.BooleanField(required=False)
+    delete_image = forms.BooleanField(required=False)
 
     class Meta:
         model = User
@@ -55,10 +56,8 @@ class ProfileForm(forms.ModelForm):
          )
 
     def save(self, commit=True):
-        flare("xxx")
         user = super(ProfileForm, self).save(commit=False)
         user.first_name = self.cleaned_data["first_name"]
-        user.avatar1 = self.cleaned_data["avatar1"]
         # user.avatar2 = cn(self.cleaned_data["avatar1"], "")
         # user.avatar3 = cn(self.cleaned_data["avatar1"], "")
         user.gender = cn(self.cleaned_data["gender"], 5)
@@ -89,6 +88,12 @@ class ProfileForm(forms.ModelForm):
         user.sendme_invitations = self.cleaned_data['sendme_invitations']
         user.sendme_friend_events = self.cleaned_data['sendme_friend_events']
         user.sendme_join_request = self.cleaned_data['sendme_join_request']
+        imgdelete = self.cleaned_data["delete_image"]
+        flare(imgdelete)
+        if imgdelete is True:
+            user.avatar1 = None
+        else:
+            user.avatar1 = self.cleaned_data["avatar1"]
         userage = ca(user.age)
         if userage >= 18:
             user.is_adult = 2
