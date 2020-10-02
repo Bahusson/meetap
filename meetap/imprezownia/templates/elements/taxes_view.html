@@ -1,0 +1,35 @@
+{% for tax_panel in tax_panels %}
+  <div class="row">
+    <div class="col-md-12">
+      <hr/>
+        <h3>{{ tax_panel.title }}</h3>
+        <div class="row">
+          <div class="col-md-7">
+            <p>{{ tax_panel.descr }}</p>
+          </div>
+          <div class="col-md-5">
+            {% if tax_panel.image %}
+            <img class="img-fluid" src="{{ tax_panel.image.url }}" width=100% height=auto />
+            {% endif %}
+          </div>
+          {% include 'elements/delete_event_child.html' %}
+        </div>
+         {% for tax in taxes %}
+          {% if tax.from_event.id == tax_panel.id %}
+          <div class="row">
+           <div class="col-md-7">
+            <h4>{{ tax.title }}</h4>
+<!--TO DO-->      <!--Tutaj daj kolejne dane składki-->
+           </div>
+           <div class="col-md-5">
+             <!--jakaś fota?-->
+          </div>
+          </div>
+      {% endif %}
+      {% endfor %}
+
+   </div>
+  </div><!-- /.row -->
+{% endfor %}
+
+{% include 'elements/taxdivisionfooter.html' %}

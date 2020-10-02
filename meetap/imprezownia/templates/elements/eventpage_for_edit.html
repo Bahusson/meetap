@@ -1,3 +1,4 @@
+<!-- Dwa guziki pokazują się w zależności od tego czy wyświetlasz składki, czy uczestników -->
 {% if not show_divisions %}
   <button><a href="{% url 'event' event.id True False %}">$Pokaż Uczestników</a></button>
 {% endif %}
@@ -5,8 +6,18 @@
   <button><a href="{% url 'event' event.id False True %}">Pokaż Składki</a></button>
 {% endif %}
 {% if show_divisions %}
- {% include 'elements/divisions.html' %} <!-- W opcji z działami -->
+  {% if editor_view %} <!-- Zależnie czy twórca, czy ktoś z zewnątrz, to pojawia się inny widok -->
+    {% include 'elements/divisions_edit.html' %}
+  {% else %}
+    {% include 'elements/divisions_view.html' %}
+  {% endif %}
+ <!-- W opcji z działami -->
 {% endif %}
 {% if show_taxes %}
- {% include 'elements/taxes.html'%} <!-- W opcji ze składkami -->
+  {% if editor_view %} <!-- Zależnie czy twórca, czy ktoś z zewnątrz, to pojawia się inny widok -->
+    {% include 'elements/taxes_edit.html'%}
+  {% else %}
+    {% include 'elements/taxes_view.html' %}
+  {% endif %}
+  <!-- W opcji ze składkami -->
 {% endif %}
