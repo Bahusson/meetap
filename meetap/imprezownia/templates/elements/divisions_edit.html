@@ -3,16 +3,22 @@
   <div class="row">
     <div class="col-md-12">
       <hr/>
-        <h3>{{ divider.title }}</h3>
+      <form id=PanelEditForm enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <h3>{{ dividerform.title }}</h3>
         <div class="row">
           <div class="col-md-7">
-            <p>{{ divider.descr }}</p>
+            <p>{{ dividerform.descr }}</p>
           </div>
           <div class="col-md-5">
             {% if divider.image %}
-            <img class="img-fluid" src="{{ divider.image.url }}" width=100% height=auto />
+            <img class="img-fluid" src="{{ divider.image.url }}" width=150 height=auto />
+            {% else %}
+            <img class="img-fluid" src="{{ skin.dividerimagedefault.url }}" width=150 height=auto />
             {% endif %}
-          </div>
+          <!-- Zmiana obrazka będzie cięższa, ale coś wykminimy-->
+         <button class="btn btn-link-3 btn-light" name="update_panel" type="submit">$Zapisz zmiany</button>
+        </form>
         {% include 'elements/delete_event_child.html' %}
         </div>
          {% for userrole in userroles %}

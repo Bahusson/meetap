@@ -78,6 +78,10 @@ class PageSkin(models.Model):
      upload_to='skins', blank=True, null=True)
     userimagedefault = models.ImageField(
      upload_to='skins', blank=True, null=True)
+    dividerimagedefault = models.ImageField(
+     upload_to='skins', blank=True, null=True)
+    taxpanelimagedefault = models.ImageField(
+     upload_to='skins', blank=True, null=True)
 
     class Meta:
         ordering = ['position']
