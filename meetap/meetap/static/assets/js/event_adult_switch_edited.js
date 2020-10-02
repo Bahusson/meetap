@@ -12,7 +12,7 @@ function hop()
 }
 
 // Zmień wyświetlanie elementu
-function toggleelement(class_name, row_name)
+function toggleelements(class_name, row_name)
 {
  var x = document.getElementById(class_name);
  var y = document.getElementById(row_name).checked;
@@ -77,7 +77,7 @@ $(document).ready(function()
 {
  if ($('#id_is_adult_only').not(':checked'))
  {
-  toggleelement("id_is_adult_only_row", "id_is_adult_only");
+  toggleelements("id_is_adult_only_row", "id_is_adult_only");
   rollbackelement(
     "id_is_sex_party_row", "id_is_adult_only", "id_is_sex_party",
     "id_is_alcohol", "id_is_tobacco")
@@ -85,12 +85,12 @@ $(document).ready(function()
  };
 if ($('#id_sex_party').not(':checked'))
 {
-  toggleelement("id_is_sex_party_row", "id_is_sex_party");
+  toggleelements("id_is_sex_party_row", "id_is_sex_party");
   uncheck_all_children("id_is_sex_party")
 };
  $('#id_is_adult_only').click(function() // Po zaznaczeniu zgody udostępnij przycisk wyślij.
  {
-   toggleelement("id_is_adult_only_row", "id_is_adult_only");
+   toggleelements("id_is_adult_only_row", "id_is_adult_only");
    rollbackelement(
      "id_is_sex_party_row", "id_is_adult_only", "id_is_sex_party",
      "id_is_alcohol", "id_is_tobacco")
@@ -99,7 +99,7 @@ if ($('#id_sex_party').not(':checked'))
 });
  $('#id_is_sex_party').click(function() // Po zaznaczeniu zgody udostępnij przycisk wyślij.
 {
-  toggleelement("id_is_sex_party_row", "id_is_sex_party");
+  toggleelements("id_is_sex_party_row", "id_is_sex_party");
   uncheck_all_children("id_is_sex_party")
   hop();
 });
