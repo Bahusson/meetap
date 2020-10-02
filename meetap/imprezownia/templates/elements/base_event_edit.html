@@ -20,6 +20,12 @@
   $Przez: {{ event.owner.first_name }}<p>
   <p>$Zaczyna się: {{ baseform.datefrom }}<br>
   $Kończy się: {{ baseform.dateto }}</p>
+  <p>$O wydarzeniu: {{ baseform.body}}</p>
+  <p class="wnioski2">$Czy składka pieniężna? : {{ baseform.is_paid }}</p>
+ {% if user.role_council > 2 %} <!-- Opcje dla Patronów -->
+  <p class="wnioski2">$Czy impreza komercyjna? : {{ baseform.is_commercial }}</p>
+  <p class="wnioski2">$Czy impreza masowa? : {{ baseform.is_mass_event }}</p>
+ {% endif %}
   </div>
   </div>
   <div class="col-md-5 event-main">
@@ -38,12 +44,44 @@ Usuń:{{ baseform.delete_image }}{% endif %}
   </div>
 <div class="row">
   <div class="col-md-12 event-main">
-    <!--TO DO--> <!--Tutaj mogą iść ikonki z opisem onhover jakiego typu jest impreza-->
-    <div class="container">
-     <p>$O wydarzeniu: {{ baseform.body}}</p>
+
+ <!-- Opcje dla Członków -->
+                {% if user.showme_adultcontent and user.role_council > 1 %}
+                <p class="wnioski2">$Tylko dla dorosłych? : {{ baseform.is_adult_only }}</p>
+                <div class="untoggle" id="id_is_adult_only_row"> <!-- div ukrywający opcje dla dorosłych -->
+                 <p class="wnioski2">$Seksimpreza? : {{ baseform.is_sex_party }}</p>
+                 <p class="wnioski2">$Z alkoholem? : {{ baseform.is_alcohol }}</p>
+                 <p class="wnioski2">$Dla palących? : {{ baseform.is_tobacco }}</p>
+                 <p class="wnioski2">$Inne używki (jakie?) : {{ baseform.other_drugs }}</p>
+                </div>
+                <div class="untoggle" id="id_is_sex_party_row"> <!-- div ukrywający opcje dla dorosłych -->
+                 <br>
+                 <p class="wnioski2">Orientacja:</p>
+                 <p class="wnioski2">$Dla hetero : {{ baseform.is_for_straight }}</p>
+                 <p class="wnioski2">$Dla homo : {{ baseform.is_for_gay }}</p>
+                 <p class="wnioski2">$Dla bi : {{ baseform.is_for_bi }}</p>
+                 <p class="wnioski2">$Dla trans : {{ baseform.is_for_trans }}</p>
+                 <p class="wnioski2">$Dla innych orientacji : {{ baseform.is_for_other }}</p>
+                 <p class="wnioski2">$Inne preferencje (Jakie): {{ baseform.other_preferences }}</p>
+                 <br>
+                 <p class="wnioski2">$Rola/Aktywność:</p>
+                 <p class="wnioski2">$Dla pasywnych : {{ baseform.is_for_passive }}</p>
+                 <p class="wnioski2">$Dla raczej pasywnych : {{ baseform.is_for_r_passive }}</p>
+                 <p class="wnioski2">$Dla switchy : {{ baseform.is_for_switch }}</p>
+                 <p class="wnioski2">$Dla raczej aktywnych : {{ baseform.is_for_r_active }}</p>
+                 <p class="wnioski2">$Dla aktywnych : {{ baseform.is_for_active }}</p>
+                 <br>
+                 <p class="wnioski2">$Dominacja:</p>
+                 <p class="wnioski2">$Dla uległych: {{ baseform.is_for_submisive }}</p>
+                 <p class="wnioski2">$Dla raczej uległych : {{ baseform.is_for_r_submissive }}</p>
+                 <p class="wnioski2">$Dla neutralnych : {{ baseform.is_for_neutral }}</p>
+                 <p class="wnioski2">$Dla raczej dominujących : {{ baseform.is_for_r_dominant }}</p>
+                 <p class="wnioski2">$Dla dominujących : {{ baseform.is_for_dominant }}</p>
+                </div>
+                       {% endif %}
+
   <button class="btn btn-link-3 btn-light" name="update_event" type="submit">$Zapisz zmiany</button>
 </form> <!-- Koniec formularza edutującego wydarzenie -->
-</div>
 </div>
 </div>
 </div>

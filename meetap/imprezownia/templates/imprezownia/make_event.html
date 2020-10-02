@@ -39,8 +39,8 @@
            <p class="wnioski2">$Czy impreza komercyjna? : {{ form.is_commercial }}</p>
            <p class="wnioski2">$Czy impreza masowa? : {{ form.is_mass_event }}</p>
           {% endif %}
-          {% if user.role_council > 1 %} <!-- Opcje dla Członków -->
-           {% if user.showme_adultcontent %}
+
+          {% if user.showme_adultcontent and user.role_council > 1 %} <!-- Opcje dla Członków -->
            <p class="wnioski2">$Tylko dla dorosłych? : {{ form.is_adult_only }}</p>
            <div class="toggle" id="id_is_adult_only_row"> <!-- div ukrywający opcje dla dorosłych -->
             <p class="wnioski2">$Seksimpreza? : {{ form.is_sex_party }}</p>
@@ -73,7 +73,6 @@
             <p class="wnioski2">$Dla dominujących : {{ form.is_for_dominant }}</p>
            </div>
            {% endif %}
-          {% endif %}
 
 
           <button id="send" class="button btn btn-dark btn-sm" name="subbutton" value="send" type="submit">$Dodaj nowe wydarzenie</button>
@@ -96,5 +95,5 @@
   {% include 'widgets/date_period.html' %}
 {% endblock %}
 {% block scripts2 %}
-  <script src="/static/assets/js/event_adult_switch.js"></script>
+  <script src="/static/assets/js/event_adult_switch_edited.js"></script>
 {% endblock %}
