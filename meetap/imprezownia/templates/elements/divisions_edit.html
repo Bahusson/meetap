@@ -3,9 +3,12 @@
   <div class="row">
     <div class="col-md-12">
       <hr/>
-      <form id=PanelEditForm enctype="multipart/form-data" method="post">
-        {% csrf_token %}
-        <h3>{{ divider.title }}</h3>
+      <!--Przyciski powinny być zmienione z tekstowych na obrazki z alt-tekstem onhover -->
+        <h3>{{ divider.title }}
+          {% include 'elements/delete_event_child.html' %}
+          <button class="btn btn-link-3 btn-light" name="edit_panel">$Edytuj</button>
+        </h3>
+      <!--Koniec komentarza do przycisków -->
         <div class="row">
           <div class="col-md-7">
             <p>{{ divider.descr }}</p>
@@ -16,10 +19,6 @@
             {% else %}
             <img class="img-fluid" src="{{ skin.dividerimagedefault.url }}" width=150 height=auto />
             {% endif %}
-          <!-- Zmiana obrazka będzie cięższa, ale coś wykminimy-->
-         <button class="btn btn-link-3 btn-light" name="update_panel" type="submit">$Zapisz zmiany</button>
-        </form>
-        {% include 'elements/delete_event_child.html' %}
         </div>
          {% for userrole in userroles %}
           {% if userrole.from_event.id == divider.id %}

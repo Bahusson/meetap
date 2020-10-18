@@ -1,7 +1,8 @@
 <!--Przycisk do usuwania jednego elementu z serii -->
+<br>
 <button name="safety_valve" class="btn btn-link-3 btn-light untoggle" value="{{ forloop.counter0 }}">$Usuń dział</button>
 
-<form name="EventChildDeleteForm" method="post" class="form form-inline">
+<form name="EventChildDeleteForm" method="post">
   {% csrf_token %}
  <div name="ButtonHiddenDiv" value="{{ forloop.counter0 }}" class="toggle">
    <p class="wnioski2">Na pewno chcesz usunąć ten dział?</p>
@@ -15,5 +16,4 @@
    type="submit">$Tak, usuń trwale!</button>
    <button name="dont_delete" class="btn btn-link-3 btn-light" value="{{ forloop.counter0 }}">$Nie usuwaj!</button>
  </div>
-
 </form>
