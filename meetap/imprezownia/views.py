@@ -6,11 +6,11 @@ from .models import (
  TaxPanel as TP, Tax)
 from meetap.settings import LANGUAGES as L
 from meetap.core.classes import (PageElement as pe, PortalLoad)
-from meetap.core.snippets import booleanate as bot, flare
+from meetap.core.snippets import booleanate as bot, check_if_owner, flare
 from .forms import EventForm, PartyDividerForm, TaxPanelForm
 
 
-# Panel Wydarzeń
+# Panel Wydarzeń (pusty widok z panelem bocznym)
 def events_panel(request):
     # zdefiniuj dodatkowe konteksty tutaj.
     pl = PortalLoad(P, L, EMN, PSA)
@@ -18,7 +18,7 @@ def events_panel(request):
     template = 'panels/eventspanel.html'
     return render(request, template, context_lazy)
 
-
+# Zbiorczy widok wydarzeń użytkownika.
 def events(request):
     userdata = User.objects.get(
      mnemo_login=request.user.mnemo_login)
@@ -32,16 +32,17 @@ def events(request):
     template = 'imprezownia/user_events.html'
     return render(request, template, context_lazy)
 
-
+# Widok edycji wydarzenia dla twórcy.
 def event(request, event_id, show_divisions, show_taxes):
+    # Tutaj przetestuj, czy możesz
     editor_view = True  # Ten formularz pozwala na edycję wydarzenia
-    # Tutaj będzie słownik z formularzami.
+    pe_e = pe(E)
+    pe_e_id = pe_e.by_id(G404=G404, id=event_id)
     userdata = User.objects.get(
      mnemo_login=request.user.mnemo_login)
-    pe_e = pe(E)
-    pe_e_id = pe_e.by_id(G404=G404, id=event_id)
-    pe_e = pe(E)
-    pe_e_id = pe_e.by_id(G404=G404, id=event_id)
+    user_id = userdata.mnemo_loginuserdata.mnemo_login
+    flare()
+    check_if_owner(userdata.mnemo_login, pe_e_id.owner.mnemo_login)
     pe_pd = PD.objects.filter(from_event=event_id)
     pe_ur = UR.objects.filter(from_event__from_event=event_id)
     pe_tp = TP.objects.filter(from_event=event_id)
@@ -94,7 +95,7 @@ def event(request, event_id, show_divisions, show_taxes):
     template = 'imprezownia/eventpage.html'
     return render(request, template, context_lazy)
 
-
+# Dodaj nowe wydarzenie.
 def make_event(request):
     userdata = User.objects.get(
      mnemo_login=request.user.mnemo_login)
@@ -112,3 +113,9 @@ def make_event(request):
         context_lazy = pl.lazy_context(skins=S, context=context)
         template = 'imprezownia/make_event.html'
         return render(request, template, context_lazy)
+
+# Edytuj dział wydarzenia.
+def edit_divider(request):
+    editor_view = True  # Ten formularz pozwala na edycję wydarzenia
+    userdata = User.objects.get(
+     mnemo_login=request.user.mnemo_login)

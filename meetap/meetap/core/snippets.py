@@ -1,6 +1,6 @@
 import random
 from datetime import date
-
+from django.shortcuts import render, redirect
 
 def menu_switcher(*args):
     # Podajesz listy argumentów w formacie:
@@ -85,3 +85,12 @@ def flare(keyword):
     print("")
     print("")
     print("")
+
+
+# Sprawdź, czy unikalny login usera jest taki sam jak właściciela eventu.
+# Jeśli nie to przekieruj go do strony logowania.
+def check_if_owner(user_id, owner_id):
+    if user_id == owner_id:
+        pass
+    else:
+        return redirect('login')
