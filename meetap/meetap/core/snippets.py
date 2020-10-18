@@ -1,6 +1,6 @@
 import random
 from datetime import date
-from django.shortcuts import render, redirect
+
 
 def menu_switcher(*args):
     # Podajesz listy argumentów w formacie:
@@ -68,7 +68,6 @@ def calculateAge(born):
 
 # Zmienia Stringi True/False w Booleany
 def booleanate(mystring):
-    print(mystring)
     if mystring == 'True':
         mystring = True
     else:
@@ -91,6 +90,8 @@ def flare(keyword):
 # Jeśli nie to przekieruj go do strony logowania.
 def check_if_owner(user_id, owner_id):
     if user_id == owner_id:
+        flare("True_af")
         pass
     else:
-        return redirect('login')
+        flare("False_af")
+        return redirect('logger')

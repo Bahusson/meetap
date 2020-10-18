@@ -40,9 +40,11 @@ def event(request, event_id, show_divisions, show_taxes):
     pe_e_id = pe_e.by_id(G404=G404, id=event_id)
     userdata = User.objects.get(
      mnemo_login=request.user.mnemo_login)
-    user_id = userdata.mnemo_loginuserdata.mnemo_login
-    flare()
-    check_if_owner(userdata.mnemo_login, pe_e_id.owner.mnemo_login)
+    user_id = userdata.mnemo_login
+    #flare(user_id)
+    owner_id = pe_e_id.owner.mnemo_login
+    #flare(owner_id)
+    check_if_owner(user_id, owner_id)
     pe_pd = PD.objects.filter(from_event=event_id)
     pe_ur = UR.objects.filter(from_event__from_event=event_id)
     pe_tp = TP.objects.filter(from_event=event_id)

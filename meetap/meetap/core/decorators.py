@@ -34,37 +34,6 @@ def user_passes_test(
     return decorator
 
 
-def hotel_staff_only(
- function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url=None):
-    """
-    Decorator for views that checks that the user is hotel staff redirecting
-    to the log-in page if necessary.
-    """
-    actual_decorator = user_passes_test(
-        lambda u: u.is_hotel,
-        login_url=login_url,
-        redirect_field_name=redirect_field_name
-    )
-    if function:
-        return actual_decorator(function)
-    return actual_decorator
-
-
-def translators_only(
- function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url=None):
-    """
-    Decorator for views that checks that the user is translator, redirecting
-    to the log-in page if necessary.
-    """
-    actual_decorator = user_passes_test(
-        lambda u: u.is_translator,
-        login_url=login_url,
-        redirect_field_name=redirect_field_name
-    )
-    if function:
-        return actual_decorator(function)
-    return actual_decorator
-
 
 # Dekorator Rady Studentów - ustal w funkcji power_level jeśli ma być bardziej restrykcyjny.
 def council_only(
@@ -86,16 +55,15 @@ def council_only(
 
 
 # Szybki fix dla zduplikowanych widoków. Do usunięcia w przyszłości.
-def user_only(
+def user_is_owner(
  function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url=None,
- power_level=0
+ owner_id=None
  ):
     """
-    Decorator for views that checks that the user belongs to the council
-    , redirecting  to the log-in page if necessary.
+    Dekorator sprawdza, czy user jest właścicielem danego eventu.
     """
     actual_decorator = user_passes_test(
-        lambda u: u.role_council == power_level,
+        lambda u: u.mnemo_login == owner_id,
         login_url=login_url,
         redirect_field_name=redirect_field_name
     )
