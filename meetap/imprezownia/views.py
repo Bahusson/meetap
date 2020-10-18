@@ -1,5 +1,4 @@
 from django.shortcuts import (render, redirect, get_object_or_404 as G404)
-from django.forms import modelformset_factory
 from rekruter.models import User
 from strona.models import (PageNames as P, PageSkin as S, P_S_A as PSA)
 from .models import (
@@ -48,9 +47,6 @@ def event(request, event_id, show_divisions, show_taxes):
     pe_tp = TP.objects.filter(from_event=event_id)
     pe_tax = Tax.objects.filter(from_event__from_event=event_id)
     baseform = EventForm(instance=pe_e_id)
-    pe_pd_listed = list(pe_pd)
-    divform = modelformset_factory(PD, extra=len(pe_pd_listed), form=PartyDividerForm)
-    div_formset = divform(initial=[f.__dict__ for f in pe_pd_listed])
     formdict = {
         "True": PartyDividerForm,
         "False": TaxPanelForm,
@@ -82,7 +78,6 @@ def event(request, event_id, show_divisions, show_taxes):
     sh_dv = bot(show_divisions)
     sh_tx = bot(show_taxes)
     form = formdict[show_divisions]
-
     context = {'event': pe_e_id,
                'dividers': pe_pd,
                'userroles': pe_ur,
@@ -93,7 +88,6 @@ def event(request, event_id, show_divisions, show_taxes):
                "form": form,
                "baseform": baseform,
                "editor_view": editor_view,
-               "dividerform": div_formset,
                }
     pl = PortalLoad(P, L, EMN, PSA)
     context_lazy = pl.lazy_context(skins=S, context=context)
