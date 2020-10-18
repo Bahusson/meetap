@@ -6,7 +6,7 @@ from .models import (
  TaxPanel as TP, Tax)
 from meetap.settings import LANGUAGES as L
 from meetap.core.classes import (PageElement as pe, PortalLoad)
-from meetap.core.snippets import booleanate as bot, check_if_owner, flare
+from meetap.core.snippets import booleanate as bot, flare
 from .forms import EventForm, PartyDividerForm, TaxPanelForm
 
 
@@ -17,6 +17,7 @@ def events_panel(request):
     context_lazy = pl.lazy_context(skins=S)
     template = 'panels/eventspanel.html'
     return render(request, template, context_lazy)
+
 
 # Zbiorczy widok wydarzeń użytkownika.
 def events(request):
@@ -32,6 +33,7 @@ def events(request):
     template = 'imprezownia/user_events.html'
     return render(request, template, context_lazy)
 
+
 # Widok edycji wydarzenia dla twórcy.
 def event(request, event_id, show_divisions, show_taxes):
     # Tutaj przetestuj, czy możesz
@@ -44,7 +46,12 @@ def event(request, event_id, show_divisions, show_taxes):
     #flare(user_id)
     owner_id = pe_e_id.owner.mnemo_login
     #flare(owner_id)
-    check_if_owner(user_id, owner_id)
+    if user_id == owner_id:
+        flare("True_af")
+        pass
+    else:
+        flare("False_af")
+        return redirect('logger')
     pe_pd = PD.objects.filter(from_event=event_id)
     pe_ur = UR.objects.filter(from_event__from_event=event_id)
     pe_tp = TP.objects.filter(from_event=event_id)
@@ -97,6 +104,7 @@ def event(request, event_id, show_divisions, show_taxes):
     template = 'imprezownia/eventpage.html'
     return render(request, template, context_lazy)
 
+
 # Dodaj nowe wydarzenie.
 def make_event(request):
     userdata = User.objects.get(
@@ -115,6 +123,7 @@ def make_event(request):
         context_lazy = pl.lazy_context(skins=S, context=context)
         template = 'imprezownia/make_event.html'
         return render(request, template, context_lazy)
+
 
 # Edytuj dział wydarzenia.
 def edit_divider(request):

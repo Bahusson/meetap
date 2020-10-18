@@ -84,14 +84,3 @@ def flare(keyword):
     print("")
     print("")
     print("")
-
-
-# Sprawdź, czy unikalny login usera jest taki sam jak właściciela eventu.
-# Jeśli nie to przekieruj go do strony logowania.
-def check_if_owner(user_id, owner_id):
-    if user_id == owner_id:
-        flare("True_af")
-        pass
-    else:
-        flare("False_af")
-        return redirect('logger')
