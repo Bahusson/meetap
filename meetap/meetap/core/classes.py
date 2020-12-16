@@ -1,11 +1,12 @@
-from .snippets import flare
+# from .snippets import flare
+
 
 class PageLoad(object):
-    ''' Zwraca tyle języków ile mamy zainstalowane
+    """Zwraca tyle języków ile mamy zainstalowane
     w ustawieniach w zakładce LANGUAGES w formacie naprzemiennym
     pasującym do wzornika z dwoma wyjściowymi
     (ID_Języka, Ścieżka_Flagi_Języka), oraz
-    Ładuje wszystkie podstawowe elementy w widoku strony. '''
+    Ładuje wszystkie podstawowe elementy w widoku strony."""
 
     def __init__(self, *args):
         lang_id = []
@@ -18,14 +19,14 @@ class PageLoad(object):
         for item in b:
             lang_id.append("lang_flag_" + str(item[0]))
 
-        x = len(lang_id)-1
+        x = len(lang_id) - 1
         y = 0
 
-        while x+1 > 0:
+        while x + 1 > 0:
             z = self.items.__dict__[lang_id[y]]
             langsl.append(z)
-            x = x-1
-            y = y+1
+            x = x - 1
+            y = y + 1
 
         self.langs = zip(lang_id, langsl)
 
@@ -33,25 +34,28 @@ class PageLoad(object):
     # Defaultuje do 0 jeśli nie wybierzesz żadnej.
     def page_dress(self, **kwargs):
         c = 0
-        s = kwargs['skins']
-        if 'choice' in kwargs:
-            c = int(kwargs['choice'])
+        s = kwargs["skins"]
+        if "choice" in kwargs:
+            c = int(kwargs["choice"])
         self.skins = list(s.objects.all())
         self.skin = self.skins[c]
-        self.skinctx = {'skin': self.skin, }
+        self.skinctx = {
+            "skin": self.skin,
+        }
         return self.skinctx
 
     # Funkcja tworzy za nas podstwwowy kontekst,
     # który rozszerza się o dany w funkcji.
     def lazy_context(self, **kwargs):
         self.context = {
-         'items': self.items,
-         'langs': self.langs, }
-        if 'skins' in kwargs:
+            "items": self.items,
+            "langs": self.langs,
+        }
+        if "skins" in kwargs:
             self.page_dress(**kwargs)
             self.context.update(self.skinctx)
-        if 'context' in kwargs:
-            self.context.update(kwargs['context'])
+        if "context" in kwargs:
+            self.context.update(kwargs["context"])
         return self.context
 
 
@@ -71,12 +75,12 @@ class PageElement(object):
 
     # Obcina listę obiektów w konretnych miejscach.
     def list_shorter(self, **kwargs):
-        if 'cut_fr' in kwargs:
-            cut_from = kwargs['cut_fr']
+        if "cut_fr" in kwargs:
+            cut_from = kwargs["cut_fr"]
         else:
             cut_to = None
-        if 'cut_to' in kwargs:
-            cut_to = kwargs['cut_to']
+        if "cut_to" in kwargs:
+            cut_to = kwargs["cut_to"]
         else:
             cut_to = None
         cut_list = self.listed[cut_from:cut_to]
@@ -87,14 +91,14 @@ class PageElement(object):
     def get_attrnames(self, langs, cut_fr=2):
         preqlist = list(self.baseattrs.__dict__.keys())
         preqlist2 = preqlist[cut_fr:]  # Obetnij czołówkę.
-        self.attrnames = preqlist2[0::len(langs)+1]
+        self.attrnames = preqlist2[0 :: len(langs) + 1]
         return self.attrnames
 
     # Zwraca pojedynczy przetłumaczony obiekt.
     def get_setter(self, place, quarter, langs, cut_fr=2):
         attrnames = self.get_attrnames(langs, cut_fr)
         attrobjects = self.list_specific(place)
-        self.setter = attrobjects.__getattribute__(attrnames[int(quarter)-1])
+        self.setter = attrobjects.__getattribute__(attrnames[int(quarter) - 1])
         return self.setter
 
     # Zwraca listę przetłumaczonych atrybutów
@@ -108,8 +112,8 @@ class PageElement(object):
 
     # Elementy po Id.
     def by_id(self, **kwargs):
-        G404 = kwargs['G404']
-        x_id = kwargs['id']
+        G404 = kwargs["G404"]
+        x_id = kwargs["id"]
         one_by_id = G404(self.x, pk=x_id)
         return one_by_id
 
@@ -131,21 +135,22 @@ class PortalLoad(PageLoad):
         self.menu = list(menus.objects.all())[0]
         if len(self.adverts_listed) == 0:
             self.adverts = False
+
     def page_dress(self, **kwargs):
         super().page_dress(**kwargs)
 
     def lazy_context(self, **kwargs):
         self.context = {
-         'items': self.items,
-         'langs': self.langs,
-         'menu': self.menu,
-         'adverts': self.adverts,
-         }
-        if 'skins' in kwargs:
+            "items": self.items,
+            "langs": self.langs,
+            "menu": self.menu,
+            "adverts": self.adverts,
+        }
+        if "skins" in kwargs:
             self.page_dress(**kwargs)
             self.context.update(self.skinctx)
-        if 'context' in kwargs:
-            self.context.update(kwargs['context'])
+        if "context" in kwargs:
+            self.context.update(kwargs["context"])
         return self.context
 
 
@@ -156,31 +161,33 @@ class PartyMaster(object):
         py_tz = args[1]
         dt = args[2]
         self.all_parties = PageElement(H_Party)
-        tz_UTC = py_tz.timezone('Europe/Warsaw')
+        tz_UTC = py_tz.timezone("Europe/Warsaw")
         self.dt_now = dt.datetime.now(tz_UTC)
         self.list_parties = self.all_parties.listed
 
     # Zwraca wszystkie akcje bez względu na czas serwera (atrybuty)
     def full_party(self, **kwargs):
         full_parties = []
-        attrname = kwargs['attrname']
+        attrname = kwargs["attrname"]
         x = 0
         for item in self.list_parties:
-            full_parties.append(
-             str(self.list_parties[x].__dict__[attrname]))
-            x = x+1
+            full_parties.append(str(self.list_parties[x].__dict__[attrname]))
+            x = x + 1
         return full_parties
 
     # Zwraca tylko aktywne akcje względem czasu serwera (atrybuty)
     def active_party(self, **kwargs):
         active_parties = []
-        attrname = kwargs['attrname']
+        attrname = kwargs["attrname"]
         x = 0
         for item in self.list_parties:
-            if self.list_parties[x].__dict__['date_start'] <= self.dt_now <= self.list_parties[x].__dict__['date_end']:
-                active_parties.append(
-                 str(self.list_parties[x].__dict__[attrname]))
-            x = x+1
+            if (
+                self.list_parties[x].__dict__["date_start"]
+                <= self.dt_now
+                <= self.list_parties[x].__dict__["date_end"]
+            ):
+                active_parties.append(str(self.list_parties[x].__dict__[attrname]))
+            x = x + 1
         return active_parties
 
     # Zwraca słownik z kqaterami przyporządkowanymi do ID
@@ -189,43 +196,43 @@ class PartyMaster(object):
         active_ids = []
         x = 0
         for item in self.list_parties:
-            if self.list_parties[x].__dict__['date_start'] <= self.dt_now <= self.list_parties[x].__dict__['date_end']:
-                active_quarters.append(
-                    str(self.list_parties[x].__dict__['quarter']))
-                active_ids.append(
-                    str(self.list_parties[x].__dict__['id']))
-            x = x+1
+            if (
+                self.list_parties[x].__dict__["date_start"]
+                <= self.dt_now
+                <= self.list_parties[x].__dict__["date_end"]
+            ):
+                active_quarters.append(str(self.list_parties[x].__dict__["quarter"]))
+                active_ids.append(str(self.list_parties[x].__dict__["id"]))
+            x = x + 1
         active_parties = dict(zip(active_ids, active_quarters))
         return active_parties
 
     # Tylko nieaktywne akcje względem czasu serwera (atrybuty)
     def past_party(self, **kwargs):
         inactive_parties = []
-        attrname = kwargs['attrname']
-        date_end = 'date_end'
-        if 'date_end' in kwargs:
-            date_end = kwargs['date_end']
+        attrname = kwargs["attrname"]
+        date_end = "date_end"
+        if "date_end" in kwargs:
+            date_end = kwargs["date_end"]
         x = 0
         for item in self.list_parties:
             if self.list_parties[x].__dict__[date_end] < self.dt_now:
-                inactive_parties.append(
-                 str(self.list_parties[x].__dict__[attrname]))
-            x = x+1
+                inactive_parties.append(str(self.list_parties[x].__dict__[attrname]))
+            x = x + 1
         return inactive_parties
 
     # Tylko zaplanowane akcje względem czasu serwera (atrybuty)
     def future_party(self, **kwargs):
         future_parties = []
-        date_start = 'date_start'
-        attrname = kwargs['attrname']
-        if 'date_start' in kwargs:
-            date_start = kwargs['date_start']
+        date_start = "date_start"
+        attrname = kwargs["attrname"]
+        if "date_start" in kwargs:
+            date_start = kwargs["date_start"]
         x = 0
         for item in self.list_parties:
             if self.list_parties[x].__dict__[date_start] > self.dt_now:
-                future_parties.append(
-                 str(self.list_parties[x].__dict__[attrname]))
-            x = x+1
+                future_parties.append(str(self.list_parties[x].__dict__[attrname]))
+            x = x + 1
         return future_parties
 
 
@@ -237,14 +244,14 @@ class AllParties(object):
         FormItems = args[3]
         Hpi = args[4]
         QuarterClassB = args[5]
-        view_filter = kwargs['view_filter']
+        view_filter = kwargs["view_filter"]
         pm = PartyMaster(HParty, pytz, datetime)
         all_parties = pm.all_parties
         range = {
-         "1": pm.full_party(attrname="id"),
-         "2": pm.active_party(attrname="id"),
-         "3": pm.past_party(attrname="id"),
-         "4": pm.future_party(attrname="id"),
+            "1": pm.full_party(attrname="id"),
+            "2": pm.active_party(attrname="id"),
+            "3": pm.past_party(attrname="id"),
+            "4": pm.future_party(attrname="id"),
         }
         active_parties = []
         for item in range[view_filter]:
@@ -255,12 +262,12 @@ class AllParties(object):
         hpi = PageElement(Hpi)
         peqc = PageElement(QuarterClassB)
         self.context = {
-         'formitem': pe_fi.baseattrs,
-         'parties': active_parties,
-         'p_item': hpi.baseattrs,
-         'setter': peqc.listed,
-         'view_filter': view_filter,
-         }
+            "formitem": pe_fi.baseattrs,
+            "parties": active_parties,
+            "p_item": hpi.baseattrs,
+            "setter": peqc.listed,
+            "view_filter": view_filter,
+        }
 
 
 class ActivePageItems(object):
@@ -270,7 +277,7 @@ class ActivePageItems(object):
         datetime = args[2]
         pm = PartyMaster(Item, pytz, datetime)
         all_items = pm.all_parties
-        irange = pm.past_party(attrname="id", date_end='pubdate')
+        irange = pm.past_party(attrname="id", date_end="pubdate")
         self.active_items = []
         for item in irange:
             obj = all_items.elements.get(pk=item)
@@ -278,7 +285,7 @@ class ActivePageItems(object):
 
 
 def checkifnull(x, y):
-    if x == '':
+    if x == "":
         return y
     elif x is None:
         return y

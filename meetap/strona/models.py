@@ -19,7 +19,6 @@ class PageNames(models.Model):
     backtouserpanel = models.CharField(max_length=200)
     see_more = models.CharField(max_length=200)
     editme = models.CharField(max_length=200)
-    faq = models.CharField(max_length=200)
     settings = models.CharField(max_length=200)
     myprofile = models.CharField(max_length=200)
     events = models.CharField(max_length=200)
